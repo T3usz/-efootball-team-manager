@@ -1,0 +1,143 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Estatísticas</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="registerResult()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Estatísticas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Segment para alternar entre Time e Jogadores -->
+  <ion-segment 
+    [(ngModel)]="selectedSegment" 
+    (ionChange)="segmentChanged($event)"
+    class="stats-segment">
+    <ion-segment-button value="team">
+      <ion-label>Time</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="players">
+      <ion-label>Jogadores</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Estatísticas do Time -->
+  <div *ngIf="selectedSegment === 'team'" class="team-stats">
+    <ion-card class="overview-card">
+      <ion-card-header>
+        <ion-card-title>Visão Geral do Time</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="stats-overview">
+          <div class="stat-item">
+            <div class="stat-value">{{ teamStats?.totalMatches || 0 }}</div>
+            <div class="stat-label">Total de Partidas</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value success">{{ teamStats?.victories || 0 }}</div>
+            <div class="stat-label">Vitórias</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value warning">{{ teamStats?.draws || 0 }}</div>
+            <div class="stat-label">Empates</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value danger">{{ teamStats?.defeats || 0 }}</div>
+            <div class="stat-label">Derrotas</div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="performance-card">
+      <ion-card-header>
+        <ion-card-title>Aproveitamento</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="performance-display">
+          <div class="performance-circle">
+            <span class="performance-value">{{ teamStats?.winRate || 0 }}%</span>
+          </div>
+          <div class="performance-breakdown">
+            <div class="breakdown-item">
+              <span class="breakdown-label">Vitórias:</span>
+              <span class="breakdown-value">{{ teamStats?.victories || 0 }}</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-label">Empates:</span>
+              <span class="breakdown-value">{{ teamStats?.draws || 0 }}</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-label">Derrotas:</span>
+              <span class="breakdown-value">{{ teamStats?.defeats || 0 }}</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-label">W.O:</span>
+              <span class="breakdown-value">{{ teamStats?.walkOvers || 0 }}</span>
+            </div>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Estatísticas dos Jogadores -->
+  <div *ngIf="selectedSegment === 'players'" class="players-stats">
+    <ion-card class="ranking-card">
+      <ion-card-header>
+        <ion-card-title>Ranking de Jogadores</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list>
+          <ion-item 
+            *ngFor="let player of players; let i = index" 
+            button 
+            (click)="viewPlayerDetails(player)"
+            class="player-ranking-item">
+            <div slot="start" class="ranking-position">
+              <span class="position-number">{{ i + 1 }}</span>
+            </div>
+            <ion-avatar>
+              <ion-icon name="person" size="large"></ion-icon>
+            </ion-avatar>
+            <ion-label>
+              <h2>{{ player.name }}</h2>
+              <p>{{ player.nickname }} • {{ player.position }}</p>
+              <p class="player-stats">
+                {{ player.stats.victories }}V • 
+                {{ player.stats.draws }}E • 
+                {{ player.stats.defeats }}D
+              </p>
+            </ion-label>
+            <div slot="end" class="player-performance">
+              <ion-badge [color]="getBadgeColor(player.stats.winRate)">
+                {{ player.stats.winRate }}%
+              </ion-badge>
+              <p class="matches-count">{{ player.stats.totalMatches }} jogos</p>
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Botão para registrar resultado -->
+  <div class="action-section">
+    <ion-button 
+      expand="block" 
+      (click)="registerResult()"
+      class="register-button">
+      <ion-icon name="add" slot="start"></ion-icon>
+      Registrar Resultado
+    </ion-button>
+  </div>
+</ion-content>
+

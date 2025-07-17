@@ -1,0 +1,7 @@
+{
+  "name": "efootball-team-manager",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}

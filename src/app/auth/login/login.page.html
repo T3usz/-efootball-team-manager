@@ -1,0 +1,121 @@
+<ion-content class="login-content">
+  <div class="login-container">
+    <!-- Logo and Welcome Section -->
+    <div class="welcome-section">
+      <div class="logo-container">
+        <ion-icon name="person" class="logo-icon"></ion-icon>
+      </div>
+      <h1 class="welcome-title">Bem-vindo de volta!</h1>
+      <p class="welcome-subtitle">Entre na sua conta para gerenciar seu time</p>
+    </div>
+
+    <!-- Login Form -->
+    <ion-card class="login-card">
+      <ion-card-content>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <!-- Email Field -->
+          <ion-item 
+            class="form-item"
+            [class.item-has-error]="isFieldInvalid('email')"
+            lines="none">
+            <ion-icon name="mail" slot="start" class="field-icon"></ion-icon>
+            <ion-label position="stacked">Email</ion-label>
+            <ion-input
+              type="email"
+              formControlName="email"
+              placeholder="seu@email.com"
+              autocomplete="email"
+              [clearInput]="true">
+            </ion-input>
+          </ion-item>
+          <div class="error-message" *ngIf="isFieldInvalid('email')">
+            {{ getFieldError('email') }}
+          </div>
+
+          <!-- Password Field -->
+          <ion-item 
+            class="form-item"
+            [class.item-has-error]="isFieldInvalid('password')"
+            lines="none">
+            <ion-icon name="lock-closed" slot="start" class="field-icon"></ion-icon>
+            <ion-label position="stacked">Senha</ion-label>
+            <ion-input
+              [type]="showPassword ? 'text' : 'password'"
+              formControlName="password"
+              placeholder="Sua senha"
+              autocomplete="current-password">
+            </ion-input>
+            <ion-button 
+              fill="clear" 
+              slot="end" 
+              (click)="togglePasswordVisibility()"
+              class="password-toggle">
+              <ion-icon [name]="showPassword ? 'eye-off' : 'eye'"></ion-icon>
+            </ion-button>
+          </ion-item>
+          <div class="error-message" *ngIf="isFieldInvalid('password')">
+            {{ getFieldError('password') }}
+          </div>
+
+          <!-- Remember Me and Forgot Password -->
+          <div class="form-options">
+            <ion-item lines="none" class="remember-me">
+              <ion-checkbox formControlName="rememberMe" slot="start"></ion-checkbox>
+              <ion-label>Lembrar de mim</ion-label>
+            </ion-item>
+            <ion-button 
+              fill="clear" 
+              size="small" 
+              (click)="navigateToForgotPassword()"
+              class="forgot-password-btn">
+              Esqueceu a senha?
+            </ion-button>
+          </div>
+
+          <!-- Login Button -->
+          <ion-button 
+            expand="block" 
+            type="submit"
+            [disabled]="isLoading"
+            class="login-btn">
+            <ion-spinner *ngIf="isLoading" name="crescent" slot="start"></ion-spinner>
+            <span *ngIf="!isLoading">Entrar</span>
+            <span *ngIf="isLoading">Entrando...</span>
+            <ion-icon *ngIf="!isLoading" name="arrow-forward" slot="end"></ion-icon>
+          </ion-button>
+        </form>
+
+        <!-- Divider -->
+        <div class="divider">
+          <span class="divider-text">ou</span>
+        </div>
+
+        <!-- Google Sign In -->
+        <ion-button 
+          expand="block" 
+          fill="outline" 
+          (click)="signInWithGoogle()"
+          [disabled]="isLoading"
+          class="google-btn">
+          <ion-icon name="logo-google" slot="start"></ion-icon>
+          Continuar com Google
+        </ion-button>
+
+        <!-- Register Link -->
+        <div class="register-section">
+          <p class="register-text">
+            Não tem uma conta?
+            <ion-button 
+              fill="clear" 
+              size="small" 
+              (click)="navigateToRegister()"
+              class="register-btn">
+              Criar conta
+            </ion-button>
+          </p>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+

@@ -1,0 +1,62 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Jogadores</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="search"></ion-icon>
+      </ion-button>
+      <ion-button>
+        <ion-icon name="funnel"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Jogadores</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list *ngIf="players.length > 0; else emptyState">
+    <ion-item 
+      *ngFor="let player of players" 
+      button 
+      (click)="viewPlayer(player)"
+      class="player-item">
+      <ion-avatar slot="start">
+        <ion-icon name="person" size="large"></ion-icon>
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ player.name }}</h2>
+        <p>{{ player.nickname }} • {{ player.position }}</p>
+        <p class="stats-info">{{ player.stats.winRate }}% aproveitamento • {{ player.stats.totalMatches }} jogos</p>
+      </ion-label>
+      <ion-badge 
+        slot="end" 
+        [color]="getBadgeColor(player.stats.winRate)">
+        {{ player.stats.winRate }}%
+      </ion-badge>
+    </ion-item>
+  </ion-list>
+
+  <ng-template #emptyState>
+    <div class="empty-state">
+      <ion-icon name="person" size="large"></ion-icon>
+      <h2>Nenhum jogador cadastrado</h2>
+      <p>Adicione jogadores ao seu time para começar a gerenciar estatísticas</p>
+      <ion-button (click)="addPlayer()" expand="block">
+        <ion-icon name="add" slot="start"></ion-icon>
+        Adicionar Primeiro Jogador
+      </ion-button>
+    </div>
+  </ng-template>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="addPlayer()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
