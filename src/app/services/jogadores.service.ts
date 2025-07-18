@@ -16,7 +16,8 @@ import {
   Unsubscribe
 } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Player, PlayerStats, Position } from '../shared/models/interfaces';
+import { PlayerStats, Position } from '../shared/models/interfaces';
+import { Player } from '../models/players.model';
 import { AuthService } from './auth.service';
 
 export interface JogadoresState {
