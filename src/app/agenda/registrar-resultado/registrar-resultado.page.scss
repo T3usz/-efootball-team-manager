@@ -1,0 +1,479 @@
+ion-content {
+  --background: var(--app-bg-light);
+}
+
+.page-content {
+  padding: 16px;
+}
+
+// Loading and Error States
+.loading-container,
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px;
+  text-align: center;
+  min-height: 50vh;
+  
+  ion-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+  
+  p {
+    color: var(--app-text-placeholder);
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+}
+
+// Selection Cards
+.selection-card {
+  margin-bottom: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(108, 92, 231, 0.1);
+  background: var(--app-bg-light);
+  border: 1px solid rgba(108, 92, 231, 0.1);
+  
+  ion-card-header {
+    padding: 16px 16px 8px;
+    
+    ion-card-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--app-text-primary);
+      
+      ion-icon {
+        font-size: 20px;
+      }
+    }
+  }
+  
+  ion-card-content {
+    padding: 8px 16px 16px;
+  }
+}
+
+// Player Selector
+.player-selector {
+  --background: var(--app-bg-light);
+  --border-radius: 8px;
+  --border-color: rgba(108, 92, 231, 0.2);
+  --color: var(--app-text-primary);
+  --placeholder-color: var(--app-text-placeholder);
+  
+  &::part(icon) {
+    color: var(--app-primary);
+  }
+}
+
+.player-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  
+  ion-avatar {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, var(--app-primary), var(--app-primary-dark));
+    
+    ion-icon {
+      color: white;
+      font-size: 16px;
+    }
+  }
+  
+  .player-info {
+    flex: 1;
+    
+    .player-name {
+      font-weight: 600;
+      color: var(--app-text-primary);
+      margin-bottom: 4px;
+    }
+    
+    .player-details {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+      
+      ion-badge {
+        font-size: 10px;
+        font-weight: 600;
+      }
+      
+      .player-number {
+        font-size: 12px;
+        color: var(--app-text-placeholder);
+        font-weight: 500;
+      }
+    }
+    
+    .player-stats {
+      font-size: 11px;
+      color: var(--app-text-placeholder);
+    }
+  }
+}
+
+.selected-player-preview {
+  margin-top: 16px;
+  border-radius: 8px;
+  background: rgba(108, 92, 231, 0.05);
+  border: 1px solid rgba(108, 92, 231, 0.1);
+  
+  ion-item {
+    --background: transparent;
+    --border-color: transparent;
+    
+    ion-avatar {
+      background: linear-gradient(135deg, var(--app-primary), var(--app-primary-dark));
+      
+      ion-icon {
+        color: white;
+      }
+    }
+    
+    ion-label {
+      h2 {
+        color: var(--app-text-primary);
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      
+      p {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 4px;
+        
+        ion-badge {
+          font-size: 10px;
+          font-weight: 600;
+        }
+        
+        span {
+          font-size: 12px;
+          color: var(--app-text-placeholder);
+        }
+      }
+      
+      .player-stats-text {
+        font-size: 12px;
+        color: var(--app-text-placeholder);
+        margin: 0;
+      }
+    }
+  }
+}
+
+// Result Selector
+.result-selector {
+  --background: var(--app-bg-light);
+  --border-radius: 8px;
+  --border-color: rgba(108, 92, 231, 0.2);
+  --color: var(--app-text-primary);
+  --placeholder-color: var(--app-text-placeholder);
+  
+  &::part(icon) {
+    color: var(--app-primary);
+  }
+}
+
+.result-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  
+  ion-icon {
+    font-size: 18px;
+  }
+  
+  span {
+    font-weight: 500;
+    color: var(--app-text-primary);
+  }
+}
+
+.result-preview {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  
+  .result-chip {
+    font-weight: 600;
+    font-size: 14px;
+    
+    ion-icon {
+      margin-right: 4px;
+    }
+  }
+}
+
+// Match Details
+ion-input,
+ion-textarea {
+  --background: var(--app-bg-light);
+  --border-radius: 8px;
+  --border-color: rgba(108, 92, 231, 0.2);
+  --color: var(--app-text-primary);
+  --placeholder-color: var(--app-text-placeholder);
+  
+  &::part(native) {
+    padding: 12px 16px;
+  }
+}
+
+// Action Buttons
+.action-buttons {
+  margin: 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  
+  .register-button {
+    --background: var(--app-primary);
+    --color: white;
+    --border-radius: 12px;
+    font-weight: 500;
+    --box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+    height: 48px;
+    
+    &:hover {
+      --background: var(--app-primary-dark);
+    }
+    
+    &:disabled {
+      --background: var(--app-text-placeholder);
+      --color: white;
+      opacity: 0.6;
+    }
+  }
+  
+  .cancel-button {
+    --border-color: var(--app-primary);
+    --color: var(--app-primary);
+    --border-radius: 12px;
+    font-weight: 500;
+    height: 48px;
+    
+    &:hover {
+      --background: rgba(108, 92, 231, 0.1);
+    }
+  }
+}
+
+// Stats Card
+.stats-card {
+  margin-top: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(108, 92, 231, 0.1);
+  background: var(--app-bg-light);
+  border: 1px solid rgba(108, 92, 231, 0.1);
+  
+  ion-card-header {
+    padding: 16px 16px 8px;
+    
+    ion-card-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--app-text-primary);
+      
+      ion-icon {
+        font-size: 18px;
+      }
+    }
+  }
+  
+  ion-card-content {
+    padding: 8px 16px 16px;
+  }
+  
+  .stat-item {
+    text-align: center;
+    padding: 16px;
+    background: rgba(108, 92, 231, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(108, 92, 231, 0.1);
+    
+    .stat-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--app-primary);
+      margin-bottom: 4px;
+    }
+    
+    .stat-label {
+      font-size: 12px;
+      color: var(--app-text-placeholder);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+  }
+}
+
+// Dark Mode Styles
+@media (prefers-color-scheme: dark) {
+  ion-content {
+    --background: var(--app-bg-dark);
+  }
+  
+  .selection-card,
+  .stats-card {
+    background: var(--app-bg-dark);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(108, 92, 231, 0.2);
+  }
+  
+  .player-selector,
+  .result-selector,
+  ion-input,
+  ion-textarea {
+    --background: var(--app-bg-dark);
+  }
+  
+  .selected-player-preview {
+    background: rgba(108, 92, 231, 0.1);
+    border: 1px solid rgba(108, 92, 231, 0.2);
+  }
+  
+  .stats-card .stat-item {
+    background: rgba(108, 92, 231, 0.1);
+    border: 1px solid rgba(108, 92, 231, 0.2);
+  }
+}
+
+// Responsive Design
+@media (max-width: 480px) {
+  .page-content {
+    padding: 12px;
+  }
+  
+  .selection-card {
+    margin-bottom: 12px;
+    
+    ion-card-header {
+      padding: 12px 12px 6px;
+      
+      ion-card-title {
+        font-size: 16px;
+        
+        ion-icon {
+          font-size: 18px;
+        }
+      }
+    }
+    
+    ion-card-content {
+      padding: 6px 12px 12px;
+    }
+  }
+  
+  .player-option {
+    gap: 8px;
+    
+    ion-avatar {
+      width: 28px;
+      height: 28px;
+      
+      ion-icon {
+        font-size: 14px;
+      }
+    }
+    
+    .player-info {
+      .player-name {
+        font-size: 14px;
+      }
+      
+      .player-details {
+        gap: 6px;
+        
+        ion-badge {
+          font-size: 9px;
+        }
+        
+        .player-number {
+          font-size: 11px;
+        }
+      }
+      
+      .player-stats {
+        font-size: 10px;
+      }
+    }
+  }
+  
+  .action-buttons {
+    margin: 20px 0;
+    gap: 10px;
+    
+    .register-button,
+    .cancel-button {
+      height: 44px;
+      font-size: 14px;
+    }
+  }
+  
+  .stats-card {
+    .stat-item {
+      padding: 12px;
+      
+      .stat-value {
+        font-size: 20px;
+      }
+      
+      .stat-label {
+        font-size: 11px;
+      }
+    }
+  }
+}
+
+// Animations
+.selection-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(108, 92, 231, 0.15);
+  }
+}
+
+.register-button,
+.cancel-button {
+  transition: all 0.2s ease;
+  
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Focus states for accessibility
+.player-selector:focus-visible,
+.result-selector:focus-visible,
+ion-input:focus-visible,
+ion-textarea:focus-visible {
+  outline: 2px solid var(--app-primary);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+.register-button:focus-visible,
+.cancel-button:focus-visible {
+  outline: 2px solid var(--app-primary);
+  outline-offset: 2px;
+  border-radius: 12px;
+} 

@@ -36,9 +36,6 @@ import { TeamStats, PlayerStats } from '../models/interfaces';
                 [attr.stroke]="getCircleColor()"
                 stroke-width="3"
                 stroke-linecap="round"/>
-              
-              <!-- Percentage text -->
-              <text x="18" y="20.35" class="percentage">{{ getWinRate() }}%</text>
             </svg>
             
             <!-- Center info -->
@@ -125,6 +122,7 @@ import { TeamStats, PlayerStats } from '../models/interfaces';
     
     .circle {
       transition: stroke-dasharray 0.6s ease-in-out;
+      filter: drop-shadow(0 2px 4px rgba(0, 123, 255, 0.3));
     }
     
     .percentage {
@@ -144,22 +142,24 @@ import { TeamStats, PlayerStats } from '../models/interfaces';
       transform: translate(-50%, -50%);
       text-align: center;
       pointer-events: none;
+      z-index: 10;
     }
     
     .win-rate {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 700;
       color: var(--ion-color-primary);
       line-height: 1;
+      margin-bottom: 2px;
     }
     
     .win-rate-label {
-      font-size: 10px;
+      font-size: 9px;
       color: var(--ion-color-medium);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      margin-top: 2px;
+      line-height: 1;
     }
     
     .stats-breakdown {

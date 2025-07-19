@@ -1,30 +1,20 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {
-  IonContent,
   IonHeader,
-  IonTitle,
   IonToolbar,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardTitle,
+  IonTitle,
+  IonContent,
   IonItem,
   IonLabel,
   IonInput,
   IonButton,
-  IonIcon,
-  IonText,
-  IonSpinner,
-  IonToast,
-  IonCheckbox,
-  IonGrid,
-  IonRow,
-  IonCol,
   ToastController,
-  LoadingController
+  LoadingController,
+  IonIcon,
+  IonCheckbox
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { 
@@ -35,9 +25,11 @@ import {
   logoGoogle,
   arrowForward,
   person,
-  checkmarkCircle
+  checkmarkCircle,
+  alertCircle
 } from 'ionicons/icons';
 import { AuthService } from '../../services/auth.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -45,27 +37,18 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.page.scss'],
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
-    IonContent,
     IonHeader,
-    IonTitle,
     IonToolbar,
-    IonCard,
-    IonCardContent,
-    IonCardHeader,
-    IonCardTitle,
+    IonTitle,
+    IonContent,
     IonItem,
     IonLabel,
     IonInput,
     IonButton,
     IonIcon,
-    IonText,
-    IonSpinner,
-    IonToast,
-    IonCheckbox,
-    IonGrid,
-    IonRow,
-    IonCol
+    IonCheckbox
   ]
 })
 export class LoginPage implements OnInit {
@@ -90,7 +73,8 @@ export class LoginPage implements OnInit {
       logoGoogle,
       arrowForward,
       person,
-      checkmarkCircle
+      checkmarkCircle,
+      alertCircle
     });
   }
 

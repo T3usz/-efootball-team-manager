@@ -1,0 +1,96 @@
+ion-tabs {
+  ion-router-outlet {
+    position: relative;
+    z-index: 1;
+  }
+  
+  ion-tab-bar {
+    position: relative;
+    z-index: 2;
+    background: var(--app-bg-light);
+    border-top: 1px solid rgba(108, 92, 231, 0.1);
+    
+    ion-tab-button {
+      --color: var(--app-text-placeholder);
+      --color-selected: var(--app-primary);
+      --ripple-color: var(--app-primary);
+      
+      ion-icon {
+        font-size: 20px;
+        margin-bottom: 4px;
+      }
+      
+      ion-label {
+        font-size: 12px;
+        font-weight: 500;
+        margin-top: 2px;
+      }
+      
+      &.tab-selected {
+        ion-icon {
+          color: var(--app-primary);
+        }
+        
+        ion-label {
+          color: var(--app-primary);
+          font-weight: 600;
+        }
+      }
+      
+      &:hover {
+        --color: var(--app-primary);
+        opacity: 0.8;
+      }
+    }
+  }
+}
+
+ion-content {
+  pointer-events: auto !important;
+}
+
+ion-button {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  position: relative;
+  z-index: 10;
+}
+
+// Dark Mode Styles
+@media (prefers-color-scheme: dark) {
+  ion-tabs ion-tab-bar {
+    background: var(--app-bg-dark);
+    border-top: 1px solid rgba(108, 92, 231, 0.2);
+  }
+}
+
+// Responsive Design
+@media (max-width: 480px) {
+  ion-tabs ion-tab-bar {
+    ion-tab-button {
+      ion-icon {
+        font-size: 18px;
+      }
+      
+      ion-label {
+        font-size: 11px;
+      }
+    }
+  }
+}
+
+// Animation for tab transitions
+ion-tab-button {
+  transition: all 0.2s ease;
+  
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+// Focus states for accessibility
+ion-tab-button:focus-visible {
+  outline: 2px solid var(--app-primary);
+  outline-offset: 2px;
+  border-radius: 8px;
+}

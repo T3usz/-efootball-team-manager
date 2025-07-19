@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { 
   IonHeader, 
@@ -15,8 +15,6 @@ import {
   IonRow,
   IonCol,
   IonButtons,
-  IonRefresher,
-  IonRefresherContent,
   IonSkeletonText
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
@@ -36,13 +34,17 @@ import {
   refreshOutline,
   notificationsOutline,
   trendingUpOutline,
-  trendingDownOutline
+  trendingDownOutline,
+  person
 } from 'ionicons/icons';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Team, TeamStats, Alert, StatsSummary } from '../shared/models/interfaces';
+import { Player } from '../models/players.model';
 import { CardEstatisticaComponent } from '../shared/components/card-estatistica.component';
-import { GraficoAproveitamentoComponent } from '../shared/components/grafico-aproveitamento.component';
 import { AlertCardComponent } from '../shared/components/alert-card.component';
+import { EstatisticasService } from '../services/estatisticas.service';
+import { JogadoresService } from '../services/jogadores.service';
 
 @Component({
   selector: 'app-home',
@@ -64,16 +66,15 @@ import { AlertCardComponent } from '../shared/components/alert-card.component';
     IonRow,
     IonCol,
     IonButtons,
-    IonRefresher,
-    IonRefresherContent,
     IonSkeletonText,
     CardEstatisticaComponent,
-    GraficoAproveitamentoComponent,
     AlertCardComponent
   ],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
   private router = inject(Router);
+  private estatisticasService = inject(EstatisticasService);
+  private jogadoresService = inject(JogadoresService);
   
   team: Team | null = null;
   statsSummary: StatsSummary | null = null;
@@ -86,8 +87,10 @@ export class HomePage implements OnInit {
     { icon: 'trophy', label: 'Ranking', route: '/ranking', color: 'warning' },
     { icon: 'calendar', label: 'Agenda', route: '/agenda', color: 'tertiary' },
     { icon: 'cloud-download', label: 'Backup', route: '/backup', color: 'medium' },
-    { icon: 'settings', label: 'Configurações', route: '/configuracoes', color: 'dark' }
+    { icon: 'add-circle', label: 'Registrar Resultado', route: '/agenda/registrar-resultado', color: 'secondary' }
   ];
+
+  private subscription = new Subscription();
 
   constructor() {
     addIcons({ 
@@ -106,177 +109,90 @@ export class HomePage implements OnInit {
       refreshOutline,
       notificationsOutline,
       trendingUpOutline,
-      trendingDownOutline
+      trendingDownOutline,
+      person
     });
   }
 
   ngOnInit() {
-    this.loadDashboardData();
+    this.loadRealData();
   }
 
-  async loadDashboardData() {
-    this.isLoading = true;
-    
-    try {
-      // Simulate API calls - will be replaced with actual Firebase services
-      await this.loadTeamData();
-      await this.loadStatsSummary();
-      await this.loadAlerts();
-    } catch (error) {
-      console.error('Error loading dashboard data:', error);
-    } finally {
-      this.isLoading = false;
-    }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
-  async loadTeamData() {
-    // Mock data - will be replaced with Firebase service
-    await new Promise(resolve => setTimeout(resolve, 500));
-    
-    this.team = {
-      id: 'team-1',
-      name: 'Team eFootball Pro',
-      adminId: 'admin-1',
-      adminName: 'João Silva',
-      modality: 'eFootball',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      stats: {
-        totalMatches: 28,
-        victories: 20,
-        draws: 5,
-        defeats: 2,
-        walkOvers: 1,
-        winRate: 71.4
-      }
-    };
-  }
-
-  async loadStatsSummary() {
-    // Mock data - will be replaced with Firebase service
-    await new Promise(resolve => setTimeout(resolve, 300));
-    
-    this.statsSummary = {
-      team: this.team!.stats,
-      topPlayer: {
-        id: '1',
-        name: 'Carlos Silva',
-        nickname: 'CarlosGamer',
-        age: 22,
-        position: 'Atacante',
-        observations: '',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        stats: {
-          totalMatches: 18,
-          victories: 15,
-          draws: 2,
-          defeats: 1,
-          walkOvers: 0,
-          winRate: 83.3
+  private loadRealData() {
+    // Subscribe to estatisticas state
+    this.subscription.add(
+      this.estatisticasService.estatisticasState$.subscribe(state => {
+        this.isLoading = state.isLoading;
+        
+        if (state.teamStats) {
+          this.statsSummary = this.estatisticasService.getStatsSummary();
         }
-      },
-      recentMatches: [],
-      upcomingSchedule: [],
-      alerts: []
-    };
+        
+        this.alerts = state.alerts;
+      })
+    );
+
+    // Subscribe to jogadores state for team info
+    this.subscription.add(
+      this.jogadoresService.jogadoresState$.subscribe(state => {
+        if (state.jogadores.length > 0) {
+          // Create team info based on jogadores data
+          this.team = {
+            id: '1',
+            name: 'Time Principal',
+            adminId: 'admin-1',
+            adminName: 'Administrador',
+            modality: 'eFootball',
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            stats: this.estatisticasService.teamStats || {
+              victories: 0,
+              draws: 0,
+              defeats: 0,
+              walkOvers: 0,
+              totalMatches: 0,
+              winRate: 0
+            }
+          };
+        }
+      })
+    );
   }
 
-  async loadAlerts() {
-    // Mock data - will be replaced with Firebase service
-    await new Promise(resolve => setTimeout(resolve, 200));
-    
-    this.alerts = [
-      {
-        id: 'alert-1',
-        type: 'walkover_warning',
-        title: 'Alerta de W.O',
-        message: 'Ana Costa atingiu 3 W.O consecutivos. Considere conversar com a jogadora.',
-        playerId: '2',
-        playerName: 'Ana Costa',
-        severity: 'high',
-        createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2 hours ago
-        dismissed: false
-      },
-      {
-        id: 'alert-2',
-        type: 'performance_alert',
-        title: 'Queda de Performance',
-        message: 'O time teve 3 derrotas nas últimas 5 partidas.',
-        severity: 'medium',
-        createdAt: new Date(Date.now() - 24 * 60 * 60 * 1000), // 1 day ago
-        dismissed: false
-      }
-    ];
+  hasAlerts(): boolean {
+    return this.alerts.length > 0;
   }
 
-  async doRefresh(event: any) {
-    await this.loadDashboardData();
-    event.target.complete();
-  }
-
-  openProfile() {
-    // Navigate to profile or show profile modal
-    console.log('Open profile');
+  getQuickStats() {
+    return this.estatisticasService.getQuickStats();
   }
 
   editTeam() {
-    this.router.navigate(['/team/cadastro-time']);
+    // TODO: Implement team editing
+    console.log('Edit team');
+  }
+
+  openProfile() {
+    // TODO: Implement profile
+    console.log('Open profile');
+  }
+
+  onAlertDismiss(alert: Alert) {
+    // TODO: Implement alert dismissal
+    console.log('Dismiss alert:', alert.id);
+  }
+
+  onAlertAction(alert: Alert) {
+    // TODO: Implement alert action
+    console.log('Alert action:', alert.id);
   }
 
   navigateTo(route: string) {
     this.router.navigate([route]);
-  }
-
-  onAlertDismiss(alert: Alert) {
-    this.alerts = this.alerts.filter(a => a.id !== alert.id);
-    // TODO: Update alert status in Firebase
-  }
-
-  onAlertAction(alert: Alert) {
-    if (alert.type === 'walkover_warning' && alert.playerId) {
-      this.router.navigate(['/jogadores/detalhe', alert.playerId]);
-    } else if (alert.type === 'performance_alert') {
-      this.router.navigate(['/tabs/estatisticas']);
-    }
-  }
-
-  getQuickStats() {
-    if (!this.team?.stats) return [];
-    
-    const stats = this.team.stats;
-    return [
-      {
-        icon: 'trophy',
-        value: stats.victories,
-        label: 'Vitórias',
-        color: 'success',
-        trend: { direction: 'up' as const, value: 12 }
-      },
-      {
-        icon: 'remove-outline',
-        value: stats.draws,
-        label: 'Empates',
-        color: 'warning'
-      },
-      {
-        icon: 'close-outline',
-        value: stats.defeats,
-        label: 'Derrotas',
-        color: 'danger',
-        trend: { direction: 'down' as const, value: 8 }
-      },
-      {
-        icon: 'ban-outline',
-        value: stats.walkOvers,
-        label: 'W.O',
-        color: 'dark'
-      }
-    ];
-  }
-
-  hasAlerts(): boolean {
-    return this.alerts.filter(alert => !alert.dismissed).length > 0;
   }
 }
 

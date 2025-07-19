@@ -1,29 +1,29 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 import {
-  IonContent,
   IonHeader,
-  IonTitle,
   IonToolbar,
-  IonCard,
-  IonCardContent,
+  IonTitle,
+  IonContent,
   IonItem,
   IonLabel,
   IonInput,
   IonButton,
-  IonIcon,
-  IonText,
-  IonSpinner,
   ToastController,
   LoadingController
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { 
   mail, 
+  lockClosed, 
+  eye, 
+  eyeOff, 
   arrowBack,
   checkmarkCircle,
+  alertCircle,
   send
 } from 'ionicons/icons';
 import { AuthService } from '../../services/auth.service';
@@ -34,20 +34,16 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./forgot-password.page.scss'],
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
-    IonContent,
     IonHeader,
-    IonTitle,
     IonToolbar,
-    IonCard,
-    IonCardContent,
+    IonTitle,
+    IonContent,
     IonItem,
     IonLabel,
     IonInput,
-    IonButton,
-    IonIcon,
-    IonText,
-    IonSpinner
+    IonButton
   ]
 })
 export class ForgotPasswordPage implements OnInit {

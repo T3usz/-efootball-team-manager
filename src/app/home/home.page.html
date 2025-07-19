@@ -19,16 +19,6 @@
     </ion-toolbar>
   </ion-header>
 
-  <!-- Pull to refresh -->
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content
-      pullingIcon="refresh-outline"
-      pullingText="Puxe para atualizar"
-      refreshingSpinner="circles"
-      refreshingText="Atualizando...">
-    </ion-refresher-content>
-  </ion-refresher>
-
   <!-- Loading skeleton -->
   <div *ngIf="isLoading" class="loading-container">
     <ion-card class="team-card">
@@ -87,19 +77,11 @@
             [icon]="stat.icon"
             [value]="stat.value"
             [label]="stat.label"
-            [color]="stat.color"
-            [trend]="stat.trend">
+            [color]="stat.color">
           </app-card-estatistica>
         </ion-col>
       </ion-row>
     </ion-grid>
-
-    <!-- Performance chart -->
-    <app-grafico-aproveitamento 
-      *ngIf="team?.stats"
-      [stats]="team?.stats || null"
-      title="Aproveitamento do Time">
-    </app-grafico-aproveitamento>
 
     <!-- Top player highlight -->
     <ion-card *ngIf="statsSummary?.topPlayer" class="top-player-card">
@@ -113,7 +95,6 @@
           </div>
           <div class="player-info">
             <h3>{{ statsSummary?.topPlayer?.name }}</h3>
-            <p class="player-nickname">{{ statsSummary?.topPlayer?.nickname }}</p>
             <p class="player-position">{{ statsSummary?.topPlayer?.position }}</p>
           </div>
           <div class="player-performance">

@@ -1,0 +1,180 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="/tabs/jogadores" text="Voltar"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Editar Estatísticas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="estatisticasForm" (ngSubmit)="onSubmit()">
+    <div class="form-container">
+
+      <!-- Informações do Jogador -->
+      <ion-card class="player-info-card">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="person" color="primary"></ion-icon>
+            {{ jogadorOriginal?.name }}
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p class="player-details">
+            <strong>Posição:</strong> {{ jogadorOriginal?.position }} • 
+            <strong>Número:</strong> {{ jogadorOriginal?.number || 'N/A' }}
+          </p>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Estatísticas Atuais -->
+      <ion-card class="current-stats-card">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="stats-chart" color="primary"></ion-icon>
+            Estatísticas Atuais
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="current-stats-grid">
+            <div class="stat-item">
+              <ion-icon name="checkmark-circle" color="success"></ion-icon>
+              <span class="stat-label">Vitórias</span>
+              <span class="stat-value">{{ estatisticasAtuais?.victories || 0 }}</span>
+            </div>
+            <div class="stat-item">
+              <ion-icon name="close-circle" color="danger"></ion-icon>
+              <span class="stat-label">Derrotas</span>
+              <span class="stat-value">{{ estatisticasAtuais?.defeats || 0 }}</span>
+            </div>
+            <div class="stat-item">
+              <ion-icon name="remove-circle" color="warning"></ion-icon>
+              <span class="stat-label">Empates</span>
+              <span class="stat-value">{{ estatisticasAtuais?.draws || 0 }}</span>
+            </div>
+            <div class="stat-item">
+              <ion-icon name="warning" color="medium"></ion-icon>
+              <span class="stat-label">W.O</span>
+              <span class="stat-value">{{ estatisticasAtuais?.walkOvers || 0 }}</span>
+            </div>
+          </div>
+          <div class="summary-stats">
+            <div class="summary-item">
+              <span class="summary-label">Total de Partidas:</span>
+              <span class="summary-value">{{ estatisticasAtuais?.totalMatches || 0 }}</span>
+            </div>
+            <div class="summary-item">
+              <span class="summary-label">Aproveitamento:</span>
+              <span class="summary-value">{{ estatisticasAtuais?.winRate || 0 }}%</span>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Editar Estatísticas -->
+      <ion-card class="edit-stats-card">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="trophy" color="primary"></ion-icon>
+            Corrigir Estatísticas
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+
+          <ion-item [class.item-has-error]="isFieldInvalid('victories')" class="form-item">
+            <ion-label position="stacked">
+              <ion-icon name="checkmark-circle" color="success"></ion-icon>
+              Vitórias *
+            </ion-label>
+            <ion-input formControlName="victories" type="number" min="0" placeholder="0"></ion-input>
+          </ion-item>
+          <div class="error-message" *ngIf="isFieldInvalid('victories')">
+            {{ getFieldError('victories') }}
+          </div>
+
+          <ion-item [class.item-has-error]="isFieldInvalid('defeats')" class="form-item">
+            <ion-label position="stacked">
+              <ion-icon name="close-circle" color="danger"></ion-icon>
+              Derrotas *
+            </ion-label>
+            <ion-input formControlName="defeats" type="number" min="0" placeholder="0"></ion-input>
+          </ion-item>
+          <div class="error-message" *ngIf="isFieldInvalid('defeats')">
+            {{ getFieldError('defeats') }}
+          </div>
+
+          <ion-item [class.item-has-error]="isFieldInvalid('draws')" class="form-item">
+            <ion-label position="stacked">
+              <ion-icon name="remove-circle" color="warning"></ion-icon>
+              Empates *
+            </ion-label>
+            <ion-input formControlName="draws" type="number" min="0" placeholder="0"></ion-input>
+          </ion-item>
+          <div class="error-message" *ngIf="isFieldInvalid('draws')">
+            {{ getFieldError('draws') }}
+          </div>
+
+          <ion-item [class.item-has-error]="isFieldInvalid('walkOvers')" class="form-item">
+            <ion-label position="stacked">
+              <ion-icon name="warning" color="medium"></ion-icon>
+              Walkovers *
+            </ion-label>
+            <ion-input formControlName="walkOvers" type="number" min="0" placeholder="0"></ion-input>
+          </ion-item>
+          <div class="error-message" *ngIf="isFieldInvalid('walkOvers')">
+            {{ getFieldError('walkOvers') }}
+          </div>
+
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Resumo das Novas Estatísticas -->
+      <ion-card class="preview-stats-card">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="stats-chart" color="primary"></ion-icon>
+            Resumo das Correções
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="preview-stats">
+            <div class="preview-item">
+              <span class="preview-label">Total de Partidas:</span>
+              <span class="preview-value">{{ getTotalMatches() }}</span>
+            </div>
+            <div class="preview-item">
+              <span class="preview-label">Aproveitamento:</span>
+              <span class="preview-value">{{ getWinRate() }}%</span>
+            </div>
+          </div>
+          <p class="preview-note">
+            * Os valores são calculados automaticamente baseados nas estatísticas inseridas.
+          </p>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Botões de Ação -->
+      <div class="action-buttons">
+        <ion-button 
+          expand="block" 
+          type="submit" 
+          [disabled]="isLoading" 
+          class="save-button">
+          <ion-icon name="save" slot="start"></ion-icon>
+          {{ isLoading ? 'Salvando...' : 'Salvar Correções' }}
+        </ion-button>
+
+        <ion-button 
+          expand="block" 
+          fill="outline" 
+          (click)="onCancel()" 
+          [disabled]="isLoading" 
+          class="cancel-button">
+          <ion-icon name="close" slot="start"></ion-icon>
+          Cancelar
+        </ion-button>
+      </div>
+
+    </div>
+  </form>
+</ion-content> 

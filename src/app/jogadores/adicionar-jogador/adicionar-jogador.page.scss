@@ -1,0 +1,277 @@
+ion-content {
+  --background: var(--app-bg-light);
+}
+
+.form-container {
+  padding: 16px;
+}
+
+.form-card {
+  margin-bottom: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(108, 92, 231, 0.1);
+  background: var(--app-bg-light);
+  border: 1px solid rgba(108, 92, 231, 0.1);
+  
+  ion-card-header {
+    padding: 16px 16px 8px;
+    background: rgba(108, 92, 231, 0.05);
+    border-bottom: 1px solid rgba(108, 92, 231, 0.1);
+    
+    ion-card-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--app-text-primary);
+      
+      ion-icon {
+        font-size: 20px;
+        color: var(--app-primary);
+      }
+    }
+  }
+  
+  ion-card-content {
+    padding: 16px;
+  }
+}
+
+.form-item {
+  --border-radius: 8px;
+  --background: var(--app-bg-light);
+  --border-color: rgba(108, 92, 231, 0.2);
+  --border-width: 1px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(108, 92, 231, 0.2);
+  
+  &:focus-within {
+    --border-color: var(--app-primary);
+    border: 2px solid var(--app-primary);
+    box-shadow: 0 0 0 2px rgba(108, 92, 231, 0.1);
+  }
+  
+  &.item-has-error {
+    --background: rgba(214, 48, 49, 0.05);
+    --border-color: var(--app-error);
+    border: 2px solid var(--app-error);
+  }
+}
+
+.toggle-item {
+  --background: transparent;
+  --border-color: transparent;
+  border: none;
+  margin-bottom: 8px;
+  
+  ion-label {
+    color: var(--app-text-primary);
+    font-weight: 500;
+  }
+}
+
+ion-label {
+  font-weight: 500;
+  color: var(--app-text-primary);
+  margin-bottom: 8px;
+}
+
+ion-input, ion-select, ion-textarea {
+  --color: var(--app-text-primary);
+  --placeholder-color: var(--app-text-placeholder);
+  font-size: 16px;
+  font-weight: 500;
+  --background: transparent;
+  
+  &::part(native) {
+    padding: 12px 16px;
+  }
+}
+
+ion-select::part(icon) {
+  color: var(--app-primary);
+}
+
+.error-message {
+  color: var(--app-error);
+  font-size: 13px;
+  margin: 4px 16px 16px;
+  font-weight: 500;
+}
+
+.status-description {
+  color: var(--app-text-placeholder);
+  font-size: 14px;
+  margin-top: 8px;
+  line-height: 1.4;
+  padding: 0 16px;
+}
+
+.action-buttons {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 16px;
+}
+
+.save-button {
+  --border-radius: 12px;
+  --background: var(--app-primary);
+  --color: white;
+  height: 48px;
+  font-weight: 500;
+  font-size: 16px;
+  --box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+  
+  &:hover {
+    --background: var(--app-primary-dark);
+  }
+  
+  &:disabled {
+    --background: var(--app-text-placeholder);
+    --color: white;
+    opacity: 0.6;
+  }
+}
+
+.cancel-button {
+  --border-radius: 12px;
+  --border-color: var(--app-primary);
+  --color: var(--app-primary);
+  height: 48px;
+  font-weight: 500;
+  font-size: 16px;
+  
+  &:hover {
+    --background: rgba(108, 92, 231, 0.1);
+  }
+}
+
+ion-toggle {
+  --handle-background: white;
+  --handle-border-radius: 50%;
+  --handle-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --track-background: var(--app-text-placeholder);
+  --track-background-checked: var(--app-primary);
+  --track-border-radius: 20px;
+}
+
+// Dark Mode Styles
+@media (prefers-color-scheme: dark) {
+  ion-content {
+    --background: var(--app-bg-dark);
+  }
+  
+  .form-card {
+    background: var(--app-bg-dark);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(108, 92, 231, 0.2);
+    
+    ion-card-header {
+      background: rgba(108, 92, 231, 0.1);
+      border-bottom: 1px solid rgba(108, 92, 231, 0.2);
+    }
+  }
+  
+  .form-item {
+    --background: var(--app-bg-dark);
+    --border-color: rgba(108, 92, 231, 0.3);
+    border: 1px solid rgba(108, 92, 231, 0.3);
+  }
+  
+  .toggle-item {
+    ion-label {
+      color: var(--app-text-primary);
+    }
+  }
+  
+  ion-input, ion-select, ion-textarea {
+    --color: var(--app-text-primary);
+    --placeholder-color: var(--app-text-placeholder);
+  }
+  
+  .error-message {
+    color: var(--app-error);
+  }
+  
+  .status-description {
+    color: var(--app-text-placeholder);
+  }
+}
+
+// Responsive Design
+@media (max-width: 480px) {
+  .form-container {
+    padding: 12px;
+  }
+  
+  .form-card {
+    margin-bottom: 12px;
+    
+    ion-card-header {
+      padding: 12px 12px 6px;
+      
+      ion-card-title {
+        font-size: 16px;
+        
+        ion-icon {
+          font-size: 18px;
+        }
+      }
+    }
+    
+    ion-card-content {
+      padding: 12px;
+    }
+  }
+  
+  .form-item {
+    margin-bottom: 12px;
+  }
+  
+  .action-buttons {
+    margin-top: 20px;
+    gap: 10px;
+    
+    .save-button,
+    .cancel-button {
+      height: 44px;
+      font-size: 14px;
+    }
+  }
+}
+
+// Animations
+.form-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(108, 92, 231, 0.15);
+  }
+}
+
+.save-button,
+.cancel-button {
+  transition: all 0.2s ease;
+  
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Focus states for accessibility
+.form-item:focus-visible {
+  outline: 2px solid var(--app-primary);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+.save-button:focus-visible,
+.cancel-button:focus-visible {
+  outline: 2px solid var(--app-primary);
+  outline-offset: 2px;
+  border-radius: 12px;
+}

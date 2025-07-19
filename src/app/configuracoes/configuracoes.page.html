@@ -1,0 +1,232 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Configurações</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Configurações</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Perfil do Usuário -->
+  <ion-card class="profile-card">
+    <ion-card-content>
+      <div class="profile-header">
+        <ion-avatar class="profile-avatar">
+          <ion-icon name="person" size="large"></ion-icon>
+        </ion-avatar>
+        <div class="profile-info">
+          <h2>{{ user?.name || 'Usuário' }}</h2>
+          <p>{{ user?.email || 'email@exemplo.com' }}</p>
+        </div>
+        <ion-button fill="clear" (click)="openProfile()">
+          <ion-icon name="chevron-forward"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Notificações -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="notifications" slot="start"></ion-icon>
+        Notificações
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            <h3>Alertas de W.O</h3>
+            <p>Notificar quando jogadores tiverem W.O consecutivos</p>
+          </ion-label>
+          <ion-toggle 
+            [(ngModel)]="config.notifications.walkoverAlerts"
+            (ionChange)="onNotificationToggle('walkoverAlerts')"
+            slot="end">
+          </ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <h3>Lembretes de Agenda</h3>
+            <p>Notificar sobre partidas agendadas</p>
+          </ion-label>
+          <ion-toggle 
+            [(ngModel)]="config.notifications.scheduleReminders"
+            (ionChange)="onNotificationToggle('scheduleReminders')"
+            slot="end">
+          </ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <h3>Alertas de Performance</h3>
+            <p>Notificar sobre quedas de performance do time</p>
+          </ion-label>
+          <ion-toggle 
+            [(ngModel)]="config.notifications.performanceAlerts"
+            (ionChange)="onNotificationToggle('performanceAlerts')"
+            slot="end">
+          </ion-toggle>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Aparência -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="moon" slot="start"></ion-icon>
+        Aparência
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            <h3>Tema</h3>
+            <p>Escolha o tema do aplicativo</p>
+          </ion-label>
+          <ion-select 
+            [(ngModel)]="config.display.theme"
+            (ionChange)="onThemeChange($event)"
+            slot="end"
+            interface="popover">
+            <ion-select-option value="light">Claro</ion-select-option>
+            <ion-select-option value="dark">Escuro</ion-select-option>
+            <ion-select-option value="auto">Automático</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <h3>Idioma</h3>
+            <p>Escolha o idioma do aplicativo</p>
+          </ion-label>
+          <ion-select 
+            [(ngModel)]="config.display.language"
+            (ionChange)="onLanguageChange($event)"
+            slot="end"
+            interface="popover">
+            <ion-select-option value="pt-BR">Português</ion-select-option>
+            <ion-select-option value="en-US">English</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Backup e Dados -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="cloud-download" slot="start"></ion-icon>
+        Backup e Dados
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            <h3>Backup Automático</h3>
+            <p>Fazer backup automático dos dados</p>
+          </ion-label>
+          <ion-toggle 
+            [(ngModel)]="config.backup.autoBackup"
+            (ionChange)="onBackupToggle()"
+            slot="end">
+          </ion-toggle>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <h3>Frequência de Backup</h3>
+            <p>Com que frequência fazer backup</p>
+          </ion-label>
+          <ion-select 
+            [(ngModel)]="config.backup.backupFrequency"
+            (ionChange)="onBackupFrequencyChange($event)"
+            slot="end"
+            interface="popover">
+            <ion-select-option value="daily">Diário</ion-select-option>
+            <ion-select-option value="weekly">Semanal</ion-select-option>
+            <ion-select-option value="monthly">Mensal</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item button (click)="showDataManagement()">
+          <ion-label>
+            <h3>Gerenciamento de Dados</h3>
+            <p>Exportar, importar ou limpar dados</p>
+          </ion-label>
+          <ion-icon name="chevron-forward" slot="end"></ion-icon>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Suporte e Informações -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="information" slot="start"></ion-icon>
+        Suporte e Informações
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item button (click)="openHelp()">
+          <ion-icon name="help" slot="start"></ion-icon>
+          <ion-label>
+            <h3>Ajuda</h3>
+            <p>Central de ajuda e tutoriais</p>
+          </ion-label>
+          <ion-icon name="chevron-forward" slot="end"></ion-icon>
+        </ion-item>
+
+        <ion-item button (click)="openPrivacy()">
+          <ion-icon name="shield" slot="start"></ion-icon>
+          <ion-label>
+            <h3>Privacidade</h3>
+            <p>Política de privacidade e termos</p>
+          </ion-label>
+          <ion-icon name="chevron-forward" slot="end"></ion-icon>
+        </ion-item>
+
+        <ion-item button (click)="openAbout()">
+          <ion-icon name="information-circle" slot="start"></ion-icon>
+          <ion-label>
+            <h3>Sobre o App</h3>
+            <p>Versão e informações do aplicativo</p>
+          </ion-label>
+          <ion-icon name="chevron-forward" slot="end"></ion-icon>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Logout -->
+  <ion-card class="logout-card">
+    <ion-card-content>
+      <ion-button 
+        expand="block" 
+        fill="outline" 
+        color="danger"
+        (click)="logout()">
+        <ion-icon name="log-out" slot="start"></ion-icon>
+        Sair da Conta
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Versão do App -->
+  <div class="version-info">
+    <p>eFootball Team Manager v1.0.0</p>
+  </div>
+</ion-content> 

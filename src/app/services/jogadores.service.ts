@@ -16,7 +16,7 @@ import {
   Unsubscribe
 } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { PlayerStats, Position } from '../shared/models/interfaces';
+import { PlayerStats, Position } from '../models/interfaces';
 import { Player } from '../models/players.model';
 import { AuthService } from './auth.service';
 
@@ -276,6 +276,12 @@ export class JogadoresService {
 
   private getDefaultStats(): PlayerStats {
     return {
+      speed: 0,
+      shooting: 0,
+      passing: 0,
+      dribbling: 0,
+      defending: 0,
+      physical: 0,
       victories: 0,
       defeats: 0,
       draws: 0,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { 
@@ -24,7 +24,11 @@ import {
 import { addIcons } from 'ionicons';
 import { statsChart, trophy, person, add, barChart } from 'ionicons/icons';
 import { Router } from '@angular/router';
-import { Player, TeamStats } from '../../shared/models/interfaces';
+import { Subscription } from 'rxjs';
+import { TeamStats } from '../../shared/models/interfaces';
+import { Player } from '../../models/players.model';
+import { JogadoresService } from '../../services/jogadores.service';
+import { EstatisticasService } from '../../services/estatisticas.service';
 
 @Component({
   selector: 'app-estatisticas-gerais',
@@ -53,68 +57,46 @@ import { Player, TeamStats } from '../../shared/models/interfaces';
     IonButton
   ],
 })
-export class EstatisticasGeraisPage implements OnInit {
+export class EstatisticasGeraisPage implements OnInit, OnDestroy {
   selectedSegment: string = 'team';
   teamStats: TeamStats | null = null;
   players: Player[] = [];
+  Math = Math; // Adicionar Math para uso no template
+  isLoading = false;
 
-  constructor(private router: Router) {
+  private subscription = new Subscription();
+
+  constructor(
+    private router: Router,
+    private jogadoresService: JogadoresService,
+    private estatisticasService: EstatisticasService
+  ) {
     addIcons({ statsChart, trophy, person, add, barChart });
   }
 
   ngOnInit() {
-    this.loadStatistics();
+    this.loadRealStatistics();
   }
 
-  loadStatistics() {
-    // Mock data
-    this.teamStats = {
-      totalMatches: 25,
-      victories: 18,
-      draws: 4,
-      defeats: 2,
-      walkOvers: 1,
-      winRate: 72.0
-    };
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 
-    this.players = [
-      {
-        id: '1',
-        name: 'Carlos Silva',
-        nickname: 'CarlosGamer',
-        age: 22,
-        position: 'Atacante',
-        observations: '',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        stats: {
-          totalMatches: 15,
-          victories: 12,
-          draws: 2,
-          defeats: 1,
-          walkOvers: 0,
-          winRate: 80.0
-        }
-      },
-      {
-        id: '2',
-        name: 'Ana Costa',
-        nickname: 'AnaFoot',
-        age: 19,
-        position: 'Meio-campo',
-        observations: '',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        stats: {
-          totalMatches: 10,
-          victories: 7,
-          draws: 2,
-          defeats: 1,
-          walkOvers: 0,
-          winRate: 70.0
-        }
-      }
-    ];
+  loadRealStatistics() {
+    // Subscribe to estatisticas state
+    this.subscription.add(
+      this.estatisticasService.estatisticasState$.subscribe(state => {
+        this.isLoading = state.isLoading;
+        this.teamStats = state.teamStats;
+      })
+    );
+
+    // Subscribe to jogadores state
+    this.subscription.add(
+      this.jogadoresService.jogadoresState$.subscribe(state => {
+        this.players = state.jogadores;
+      })
+    );
   }
 
   segmentChanged(event: any) {
@@ -122,7 +104,7 @@ export class EstatisticasGeraisPage implements OnInit {
   }
 
   registerResult() {
-    this.router.navigate(['/estatisticas/registrar']);
+    this.router.navigate(['/agenda/registrar-resultado']);
   }
 
   viewPlayerDetails(player: Player) {
@@ -133,6 +115,23 @@ export class EstatisticasGeraisPage implements OnInit {
     if (winRate >= 80) return 'success';
     if (winRate >= 60) return 'warning';
     return 'danger';
+  }
+
+  getPositionLabel(position: string): string {
+    const labels: Record<string, string> = {
+      GK: 'Goleiro',
+      CB: 'Zagueiro',
+      LB: 'Lateral Esquerdo',
+      RB: 'Lateral Direito',
+      CM: 'Meio-campo',
+      LM: 'Meia Esquerdo',
+      RM: 'Meia Direito',
+      CAM: 'Meia Atacante',
+      ST: 'Atacante',
+      LW: 'Ponta Esquerda',
+      RW: 'Ponta Direita'
+    };
+    return labels[position] || position;
   }
 }
 

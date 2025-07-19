@@ -19,24 +19,24 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-list *ngIf="players.length > 0; else emptyState">
+  <ion-list *ngIf="jogadoresFiltrados.length > 0; else emptyState">
     <ion-item 
-      *ngFor="let player of players" 
+      *ngFor="let jogador of jogadoresFiltrados" 
       button 
-      (click)="viewPlayer(player)"
+      (click)="editarJogador(jogador)"
       class="player-item">
       <ion-avatar slot="start">
         <ion-icon name="person" size="large"></ion-icon>
       </ion-avatar>
       <ion-label>
-        <h2>{{ player.name }}</h2>
-        <p>{{ player.nickname }} • {{ player.position }}</p>
-        <p class="stats-info">{{ player.stats.winRate }}% aproveitamento • {{ player.stats.totalMatches }} jogos</p>
+        <h2>{{ jogador.name }}</h2>
+        <p>{{ jogador.position }}</p>
+        <p class="stats-info">{{ jogador.stats.winRate }}% aproveitamento • {{ jogador.stats.totalMatches }} jogos</p>
       </ion-label>
       <ion-badge 
         slot="end" 
-        [color]="getBadgeColor(player.stats.winRate)">
-        {{ player.stats.winRate }}%
+        [color]="getWinRateColor(jogador.stats.winRate)">
+        {{ jogador.stats.winRate }}%
       </ion-badge>
     </ion-item>
   </ion-list>
@@ -46,7 +46,7 @@
       <ion-icon name="person" size="large"></ion-icon>
       <h2>Nenhum jogador cadastrado</h2>
       <p>Adicione jogadores ao seu time para começar a gerenciar estatísticas</p>
-      <ion-button (click)="addPlayer()" expand="block">
+      <ion-button (click)="adicionarJogador()" expand="block">
         <ion-icon name="add" slot="start"></ion-icon>
         Adicionar Primeiro Jogador
       </ion-button>
@@ -54,7 +54,7 @@
   </ng-template>
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button (click)="addPlayer()">
+    <ion-fab-button (click)="adicionarJogador()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

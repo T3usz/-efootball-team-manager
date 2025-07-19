@@ -189,7 +189,7 @@ export type AlertSeverity = 'low' | 'medium' | 'high';
 // Backup Interface
 export interface BackupData {
   team: Team;
-  players: Player[];
+  players: any[]; // Using any to avoid circular dependency
   matches: Match[];
   schedule: ScheduleEntry[];
   logs: LogEntry[];

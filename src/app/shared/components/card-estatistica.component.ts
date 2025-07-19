@@ -10,7 +10,9 @@ import {
   statsChart,
   people,
   calendar,
-  checkmarkCircle
+  checkmarkCircle,
+  arrowUp,
+  arrowDown
 } from 'ionicons/icons';
 
 @Component({
@@ -210,7 +212,9 @@ export class CardEstatisticaComponent {
       statsChart,
       people,
       calendar,
-      checkmarkCircle
+      checkmarkCircle,
+      arrowUp,
+      arrowDown
     });
   }
 

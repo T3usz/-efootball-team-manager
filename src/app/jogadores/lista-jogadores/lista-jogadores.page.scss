@@ -1,42 +1,60 @@
 ion-content {
-  --background: #f2f2f7;
+  --background: var(--app-bg-light);
 }
 
 .player-item {
   margin: 8px 16px;
   border-radius: 12px;
-  --background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --background: var(--app-bg-light);
+  box-shadow: 0 2px 8px rgba(108, 92, 231, 0.1);
+  border: 1px solid rgba(108, 92, 231, 0.1);
   
   ion-avatar {
     width: 48px;
     height: 48px;
+    background: linear-gradient(135deg, var(--app-primary), var(--app-primary-dark));
     
     ion-icon {
-      color: var(--ion-color-medium);
+      color: white;
     }
   }
   
   ion-label {
     h2 {
       font-weight: 600;
-      color: var(--ion-color-dark);
+      color: var(--app-text-primary);
       margin-bottom: 4px;
     }
     
     p {
       font-size: 14px;
-      color: var(--ion-color-medium);
+      color: var(--app-text-placeholder);
       margin: 2px 0;
       
       &.stats-info {
         font-weight: 500;
+        color: var(--app-text-primary);
       }
     }
   }
   
   ion-badge {
     font-weight: 600;
+    
+    &[color="success"] {
+      --background: var(--app-secondary);
+      --color: white;
+    }
+    
+    &[color="warning"] {
+      --background: #ffa726;
+      --color: white;
+    }
+    
+    &[color="danger"] {
+      --background: var(--app-error);
+      --color: white;
+    }
   }
 }
 
@@ -50,24 +68,157 @@ ion-content {
   min-height: 50vh;
   
   ion-icon {
-    color: var(--ion-color-medium);
+    color: var(--app-primary);
     margin-bottom: 20px;
+    font-size: 64px;
+    opacity: 0.7;
   }
   
   h2 {
-    color: var(--ion-color-dark);
+    color: var(--app-text-primary);
     font-weight: 600;
     margin-bottom: 12px;
   }
   
   p {
-    color: var(--ion-color-medium);
+    color: var(--app-text-placeholder);
     margin-bottom: 24px;
     line-height: 1.5;
   }
   
   ion-button {
     --border-radius: 12px;
+    --background: var(--app-primary);
+    --color: white;
+    font-weight: 500;
+    
+    &:hover {
+      --background: var(--app-primary-dark);
+    }
+  }
+}
+
+// Search and filter styles
+.search-container {
+  margin: 16px;
+  
+  ion-searchbar {
+    --background: var(--app-bg-light);
+    --border-radius: 12px;
+    --box-shadow: 0 2px 8px rgba(108, 92, 231, 0.1);
+    --color: var(--app-text-primary);
+    --placeholder-color: var(--app-text-placeholder);
+    
+    &::part(icon) {
+      color: var(--app-primary);
+    }
+  }
+}
+
+.segment-container {
+  margin: 16px;
+  
+  ion-segment {
+    --background: var(--app-bg-light);
+    --border-radius: 12px;
+    --box-shadow: 0 2px 8px rgba(108, 92, 231, 0.1);
+    
+    ion-segment-button {
+      --color: var(--app-text-placeholder);
+      --color-checked: var(--app-primary);
+      --indicator-color: var(--app-primary);
+      font-weight: 500;
+      
+      &::part(indicator) {
+        background: var(--app-primary);
+      }
+    }
+  }
+}
+
+// FAB styles
+ion-fab {
+  ion-fab-button {
+    --background: var(--app-primary);
+    --color: white;
+    --box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+    
+    &:hover {
+      --background: var(--app-primary-dark);
+    }
+  }
+}
+
+// Dark Mode Styles
+@media (prefers-color-scheme: dark) {
+  ion-content {
+    --background: var(--app-bg-dark);
+  }
+  
+  .player-item {
+    --background: var(--app-bg-dark);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(108, 92, 231, 0.2);
+  }
+  
+  .search-container ion-searchbar {
+    --background: var(--app-bg-dark);
+  }
+  
+  .segment-container ion-segment {
+    --background: var(--app-bg-dark);
+  }
+}
+
+// Responsive Design
+@media (max-width: 480px) {
+  .player-item {
+    margin: 6px 12px;
+    
+    ion-avatar {
+      width: 40px;
+      height: 40px;
+    }
+    
+    ion-label {
+      h2 {
+        font-size: 16px;
+      }
+      
+      p {
+        font-size: 13px;
+      }
+    }
+  }
+  
+  .empty-state {
+    padding: 40px 20px;
+    
+    ion-icon {
+      font-size: 48px;
+    }
+    
+    h2 {
+      font-size: 18px;
+    }
+    
+    p {
+      font-size: 14px;
+    }
+  }
+}
+
+// Animations
+.player-item {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(108, 92, 231, 0.15);
+  }
+  
+  &:active {
+    transform: scale(0.98);
   }
 }
 
@@ -75,10 +226,85 @@ ion-content {
 .ios {
   .player-item {
     --border-radius: 12px;
-    
-    &:active {
-      transform: scale(0.98);
-    }
+  }
+}
+
+// Quick ActionSheet Buttons
+.quick-action-btn {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  margin: 8px 16px !important;
+  border-radius: 10px !important;
+  background: var(--app-bg-light) !important;
+  color: var(--app-primary) !important;
+  font-weight: 600 !important;
+  font-size: 16px !important;
+  box-shadow: 0 2px 8px rgba(108, 92, 231, 0.08);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  border: 1.5px solid var(--app-primary);
+}
+
+.quick-action-btn:hover,
+.quick-action-btn:active {
+  background: var(--app-primary) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 16px rgba(108, 92, 231, 0.15);
+}
+
+.quick-action-btn-danger {
+  color: var(--app-error) !important;
+  border-color: var(--app-error) !important;
+}
+
+.quick-action-btn-danger:hover,
+.quick-action-btn-danger:active {
+  background: var(--app-error) !important;
+  color: #fff !important;
+}
+
+.quick-action-btn-cancel {
+  color: var(--app-text-secondary) !important;
+  border-color: var(--app-text-secondary) !important;
+  background: transparent !important;
+}
+
+.quick-action-btn-cancel:hover,
+.quick-action-btn-cancel:active {
+  background: #f1f1f1 !important;
+  color: var(--app-text-primary) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .quick-action-btn {
+    background: var(--app-bg-dark) !important;
+    color: var(--app-primary) !important;
+    border: 1.5px solid var(--app-primary);
+  }
+  .quick-action-btn:hover,
+  .quick-action-btn:active {
+    background: var(--app-primary) !important;
+    color: #fff !important;
+  }
+  .quick-action-btn-danger {
+    color: var(--app-error) !important;
+    border-color: var(--app-error) !important;
+  }
+  .quick-action-btn-danger:hover,
+  .quick-action-btn-danger:active {
+    background: var(--app-error) !important;
+    color: #fff !important;
+  }
+  .quick-action-btn-cancel {
+    color: var(--app-text-secondary) !important;
+    border-color: var(--app-text-secondary) !important;
+    background: transparent !important;
+  }
+  .quick-action-btn-cancel:hover,
+  .quick-action-btn-cancel:active {
+    background: #232323 !important;
+    color: var(--app-text-primary) !important;
   }
 }
 

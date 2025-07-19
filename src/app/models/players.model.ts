@@ -1,4 +1,5 @@
-import { PlayerStats, Position } from "../shared/models/interfaces";
+import { PlayerStats, Position } from "./interfaces";
+
 
 export interface Player {
   id: string;
@@ -10,3 +11,5 @@ export interface Player {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export { Position } from "./interfaces";

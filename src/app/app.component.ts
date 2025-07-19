@@ -7,5 +7,8 @@ import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
   imports: [IonApp, IonRouterOutlet],
 })
 export class AppComponent {
-  constructor() {}
+  constructor() {
+    // Configurações para melhorar a interatividade
+    // O modo iOS já está configurado no ionic.config.json
+  }
 }

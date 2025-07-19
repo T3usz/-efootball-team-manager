@@ -1,325 +1,321 @@
-.login-content {
-  --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  
+ion-content {
+  --background: var(--app-background-light);
+}
+
+.login-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+.login-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px var(--app-shadow-light);
+  padding: 32px 24px;
+  margin: 0 auto;
+  max-width: 400px;
+  width: 100%;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.login-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--app-text-primary);
+  margin-bottom: 8px;
+}
+
+.login-subtitle {
+  font-size: 16px;
+  color: var(--app-text-secondary);
+  margin: 0;
+}
+
+.login-form {
+  margin-bottom: 24px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+ion-item {
+  --border-radius: 12px;
+  --background: white;
+  --border-color: var(--app-border-medium);
+  --border-width: 2px;
+  border-radius: 12px;
+  border: 2px solid var(--app-border-medium);
+  margin-bottom: 16px;
+  transition: all 0.3s ease;
+}
+
+ion-item:hover {
+  border-color: var(--app-primary);
+  box-shadow: 0 2px 8px var(--app-shadow-primary);
+}
+
+ion-item:focus-within {
+  border-color: var(--app-primary);
+  box-shadow: 0 0 0 3px var(--app-shadow-primary);
+  transform: scale(1.02);
+}
+
+ion-item.item-has-error {
+  --background: #fff5f5;
+  --border-color: var(--app-error);
+  border: 2px solid var(--app-error);
+  animation: shake 0.5s ease-in-out;
+}
+
+ion-label {
+  font-weight: 600;
+  color: var(--app-text-primary);
+  font-size: 14px;
+}
+
+ion-input {
+  --color: var(--app-text-primary);
+  --placeholder-color: var(--app-text-secondary);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+ion-input input {
+  color: var(--app-text-primary) !important;
+  background: white !important;
+}
+
+.error-message {
+  color: var(--app-error);
+  font-size: 13px;
+  margin: 8px 0 0 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.error-message::before {
+  content: "⚠";
+  font-size: 14px;
+}
+
+.login-button {
+  --border-radius: 12px;
+  --background: linear-gradient(135deg, var(--app-primary), var(--app-primary-dark));
+  --color: white;
+  height: 56px;
+  font-weight: 700;
+  font-size: 16px;
+  box-shadow: 0 6px 20px rgba(108, 92, 231, 0.3);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+}
+
+.login-button:not(.button-disabled):hover {
+  --background: linear-gradient(135deg, var(--app-primary-dark), #3a2bb8);
+  box-shadow: 0 8px 25px rgba(108, 92, 231, 0.4);
+  transform: translateY(-2px);
+}
+
+.login-button:not(.button-disabled):active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+}
+
+.forgot-password {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.forgot-password a {
+  color: var(--app-primary);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.forgot-password a:hover {
+  color: var(--app-primary-dark);
+  text-decoration: underline;
+}
+
+.register-link {
+  text-align: center;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--app-border-light);
+}
+
+.register-link p {
+  color: var(--app-text-secondary);
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.register-button {
+  --border-radius: 12px;
+  --border-color: var(--app-border-medium);
+  --color: var(--app-text-secondary);
+  height: 48px;
+  font-weight: 600;
+  font-size: 14px;
+  background: white;
+  border: 2px solid var(--app-border-medium);
+  transition: all 0.3s ease;
+}
+
+.register-button:hover {
+  --background: var(--app-background-light);
+  --border-color: var(--app-text-secondary);
+  --color: var(--app-text-primary);
+}
+
+// Animações
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.login-container {
+  animation: fadeIn 0.5s ease-out;
+}
+
+// Estados de loading
+.login-button:disabled {
+  opacity: 0.7;
+  transform: none;
+}
+
+// Melhorias de acessibilidade
+ion-item:focus-visible {
+  outline: 2px solid var(--app-primary);
+  outline-offset: 2px;
+}
+
+.login-button:focus-visible,
+.register-button:focus-visible {
+  outline: 2px solid var(--app-primary);
+  outline-offset: 2px;
+}
+
+// Responsividade
+@media (max-width: 480px) {
   .login-container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 20px;
-    
-    .welcome-section {
-      text-align: center;
-      margin-bottom: 32px;
-      
-      .logo-container {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(10px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 24px auto;
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        
-        .logo-icon {
-          font-size: 40px;
-          color: white;
-        }
-      }
-      
-      .welcome-title {
-        color: white;
-        font-size: 28px;
-        font-weight: 700;
-        margin: 0 0 8px 0;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-      }
-      
-      .welcome-subtitle {
-        color: rgba(255, 255, 255, 0.9);
-        font-size: 16px;
-        margin: 0;
-        font-weight: 400;
-      }
-    }
-    
-    .login-card {
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(10px);
-      background: rgba(255, 255, 255, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      
-      ion-card-content {
-        padding: 32px 24px;
-        
-        .form-item {
-          --background: #f8f9fa;
-          --border-radius: 12px;
-          --padding-start: 16px;
-          --padding-end: 16px;
-          --inner-padding-end: 8px;
-          margin-bottom: 8px;
-          border-radius: 12px;
-          
-          &.item-has-error {
-            --background: #fef2f2;
-            --border-color: var(--ion-color-danger);
-            border: 1px solid var(--ion-color-danger);
-          }
-          
-          .field-icon {
-            color: var(--ion-color-medium);
-            margin-right: 12px;
-            font-size: 20px;
-          }
-          
-          ion-label {
-            font-weight: 600;
-            color: var(--ion-color-dark);
-            font-size: 14px;
-          }
-          
-          ion-input {
-            --color: var(--ion-color-dark);
-            --placeholder-color: var(--ion-color-medium);
-            font-size: 16px;
-          }
-          
-          .password-toggle {
-            --color: var(--ion-color-medium);
-            --padding-start: 8px;
-            --padding-end: 8px;
-            margin: 0;
-          }
-        }
-        
-        .error-message {
-          color: var(--ion-color-danger);
-          font-size: 12px;
-          margin: 4px 16px 16px 16px;
-          font-weight: 500;
-        }
-        
-        .form-options {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin: 24px 0;
-          
-          .remember-me {
-            --background: transparent;
-            --padding-start: 0;
-            --inner-padding-end: 0;
-            flex: 1;
-            
-            ion-checkbox {
-              margin-right: 8px;
-              --size: 18px;
-              --border-radius: 4px;
-            }
-            
-            ion-label {
-              font-size: 14px;
-              color: var(--ion-color-medium);
-            }
-          }
-          
-          .forgot-password-btn {
-            --color: var(--ion-color-primary);
-            font-size: 14px;
-            font-weight: 500;
-            text-decoration: none;
-          }
-        }
-        
-        .login-btn {
-          --border-radius: 12px;
-          --background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-primary-shade));
-          --color: white;
-          height: 50px;
-          font-weight: 600;
-          font-size: 16px;
-          margin: 24px 0 16px 0;
-          
-          &:not(.button-disabled):hover {
-            --background: linear-gradient(135deg, var(--ion-color-primary-shade), var(--ion-color-primary-tint));
-          }
-        }
-        
-        .divider {
-          position: relative;
-          text-align: center;
-          margin: 24px 0;
-          
-          &::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: var(--ion-color-light);
-          }
-          
-          .divider-text {
-            background: white;
-            padding: 0 16px;
-            color: var(--ion-color-medium);
-            font-size: 14px;
-            font-weight: 500;
-          }
-        }
-        
-        .google-btn {
-          --border-radius: 12px;
-          --border-color: var(--ion-color-light);
-          --color: var(--ion-color-dark);
-          height: 50px;
-          font-weight: 500;
-          font-size: 16px;
-          margin-bottom: 16px;
-          
-          ion-icon {
-            font-size: 20px;
-            margin-right: 8px;
-          }
-        }
-        
-        .register-section {
-          text-align: center;
-          margin-top: 24px;
-          
-          .register-text {
-            color: var(--ion-color-medium);
-            font-size: 14px;
-            margin: 0;
-            
-            .register-btn {
-              --color: var(--ion-color-primary);
-              font-weight: 600;
-              text-decoration: none;
-              display: inline;
-              vertical-align: baseline;
-            }
-          }
-        }
-      }
-    }
+    padding: 16px;
+  }
+  
+  .login-card {
+    padding: 24px 20px;
+  }
+  
+  .login-title {
+    font-size: 24px;
+  }
+  
+  .login-button {
+    height: 52px;
+    font-size: 15px;
+  }
+  
+  .register-button {
+    height: 44px;
+    font-size: 13px;
   }
 }
 
-// Responsive adjustments
-@media (max-width: 576px) {
-  .login-content {
-    .login-container {
-      padding: 16px;
-      
-      .welcome-section {
-        margin-bottom: 24px;
-        
-        .logo-container {
-          width: 70px;
-          height: 70px;
-          
-          .logo-icon {
-            font-size: 35px;
-          }
-        }
-        
-        .welcome-title {
-          font-size: 24px;
-        }
-        
-        .welcome-subtitle {
-          font-size: 14px;
-        }
-      }
-      
-      .login-card {
-        ion-card-content {
-          padding: 24px 20px;
-          
-          .form-options {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 12px;
-            
-            .forgot-password-btn {
-              align-self: flex-end;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-// iOS specific styles
+// Estilos específicos para iOS
 .ios {
-  .login-content {
-    .login-container {
-      .login-card {
-        border-radius: 20px;
-        
-        .form-item {
-          --border-radius: 12px;
-        }
-        
-        .login-btn,
-        .google-btn {
-          --border-radius: 12px;
-        }
-      }
+  ion-item {
+    --border-radius: 12px;
+    
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+  
+  .login-button {
+    --border-radius: 12px;
+    
+    &:active {
+      transform: scale(0.98);
     }
   }
 }
 
-// Dark mode support
+// Dark mode
 @media (prefers-color-scheme: dark) {
-  .login-content {
-    --background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
-    
-    .login-card {
-      background: rgba(45, 55, 72, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      
-      .form-item {
-        --background: #2d3748;
-        --color: white;
-        
-        &.item-has-error {
-          --background: #742a2a;
-        }
-        
-        ion-label {
-          --color: #e2e8f0;
-        }
-      }
-      
-      .divider {
-        &::before {
-          background: #4a5568;
-        }
-        
-        .divider-text {
-          background: #2d3748;
-          color: #a0aec0;
-        }
-      }
-      
-      .google-btn {
-        --border-color: #4a5568;
-        --color: #e2e8f0;
-      }
-      
-      .register-text {
-        color: #a0aec0;
-      }
-    }
+  ion-content {
+    --background: var(--app-background-dark);
+  }
+  
+  .login-card {
+    background: var(--app-card-dark);
+  }
+  
+  ion-item {
+    --background: var(--app-card-dark);
+    --border-color: #444444;
+    border-color: #444444;
+  }
+  
+  ion-item:hover {
+    border-color: var(--app-primary);
+  }
+  
+  ion-item:focus-within {
+    border-color: var(--app-primary);
+  }
+  
+  ion-label {
+    color: #ffffff;
+  }
+  
+  ion-input {
+    --color: #ffffff;
+    --placeholder-color: #bdc3c7;
+  }
+  
+  ion-input input {
+    color: #ffffff !important;
+    background: var(--app-card-dark) !important;
+  }
+  
+  .error-message {
+    color: #ff6b6b;
+  }
+  
+  .register-button {
+    background: var(--app-card-dark);
+    --color: #bdc3c7;
+  }
+  
+  .register-button:hover {
+    --background: #3a3a3a;
+  }
+  
+  .register-link {
+    border-top-color: #444444;
+  }
+  
+  .register-link p {
+    color: #bdc3c7;
   }
 }
 

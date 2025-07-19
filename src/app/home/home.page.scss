@@ -1,316 +1,318 @@
 ion-content {
-  --background: #f2f2f7;
+  --background: var(--app-background-light);
 }
 
-// Loading skeleton
-.loading-container {
-  .team-card {
-    margin: 16px;
-    border-radius: 12px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
+.home-container {
+  padding: 20px;
 }
 
-// Alerts section
-.alerts-section {
-  margin-top: 8px;
+.welcome-section {
+  text-align: center;
+  margin-bottom: 32px;
+  padding: 24px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px var(--app-shadow-light);
 }
 
-// Team card
-.team-card {
-  margin: 16px;
-  border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  
-  .team-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    
-    .team-info {
-      flex: 1;
-      
-      h1 {
-        margin: 0 0 8px 0;
-        font-size: 24px;
-        font-weight: 600;
-        color: var(--ion-color-primary);
-      }
-      
-      .admin-info {
-        margin: 4px 0;
-        font-size: 16px;
-        color: var(--ion-color-medium);
-        font-weight: 500;
-      }
-      
-      .modality {
-        margin: 4px 0 0 0;
-        font-size: 14px;
-        color: var(--ion-color-medium);
-        text-transform: uppercase;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-      }
-    }
-    
-    .edit-button {
-      --border-radius: 8px;
-      height: 40px;
-    }
-  }
+.welcome-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--app-text-primary);
+  margin-bottom: 8px;
 }
 
-// Section titles
-.section-title {
-  margin: 24px 16px 12px 16px;
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--ion-color-dark);
+.welcome-subtitle {
+  font-size: 16px;
+  color: var(--app-text-secondary);
+  margin: 0;
 }
 
-// Stats grid
 .stats-grid {
-  padding: 0 8px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
 }
 
-// Top player card
-.top-player-card {
-  margin: 16px;
+.stat-card {
+  background: white;
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  
-  ion-card-header {
-    padding-bottom: 8px;
-    
-    ion-card-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--ion-color-primary);
-    }
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 10px var(--app-shadow-light);
+  transition: all 0.3s ease;
+  border: 1px solid var(--app-border-light);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px var(--app-shadow-medium);
+}
+
+.stat-icon {
+  font-size: 32px;
+  color: var(--app-primary);
+  margin-bottom: 12px;
+}
+
+.stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--app-text-primary);
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: var(--app-text-secondary);
+  font-weight: 500;
+}
+
+.quick-actions {
+  margin-bottom: 32px;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--app-text-primary);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-title ion-icon {
+  color: var(--app-primary);
+  font-size: 24px;
+}
+
+.action-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.action-button {
+  --border-radius: 12px;
+  --background: white;
+  --color: var(--app-text-primary);
+  height: 80px;
+  font-weight: 600;
+  font-size: 14px;
+  box-shadow: 0 2px 8px var(--app-shadow-light);
+  border: 1px solid var(--app-border-light);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.action-button:hover {
+  --background: var(--app-background-light);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--app-shadow-medium);
+}
+
+.action-button ion-icon {
+  font-size: 24px;
+  color: var(--app-primary);
+}
+
+.recent-activity {
+  background: white;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 20px var(--app-shadow-light);
+}
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--app-border-light);
+}
+
+.activity-item:last-child {
+  border-bottom: none;
+}
+
+.activity-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--app-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  color: white;
+  font-size: 18px;
+}
+
+.activity-content {
+  flex: 1;
+}
+
+.activity-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--app-text-primary);
+  margin-bottom: 2px;
+}
+
+.activity-subtitle {
+  font-size: 12px;
+  color: var(--app-text-secondary);
+}
+
+.activity-time {
+  font-size: 12px;
+  color: var(--app-text-secondary);
+  font-weight: 500;
+}
+
+// Animações
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
-  .player-highlight {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    
-    .player-avatar {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-primary-shade));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      
-      ion-icon {
-        font-size: 32px;
-        color: white;
-      }
-    }
-    
-    .player-info {
-      flex: 1;
-      
-      h3 {
-        margin: 0 0 4px 0;
-        font-size: 18px;
-        font-weight: 600;
-        color: var(--ion-color-dark);
-      }
-      
-      .player-nickname {
-        margin: 0 0 2px 0;
-        font-size: 14px;
-        color: var(--ion-color-medium);
-        font-weight: 500;
-      }
-      
-      .player-position {
-        margin: 0;
-        font-size: 12px;
-        color: var(--ion-color-light);
-        text-transform: uppercase;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-      }
-    }
-    
-    .player-performance {
-      text-align: center;
-      
-      .performance-badge {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, var(--ion-color-success), var(--ion-color-success-shade));
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 8px;
-        
-        .performance-value {
-          font-size: 16px;
-          font-weight: 700;
-          color: white;
-          line-height: 1;
-        }
-        
-        .performance-label {
-          font-size: 8px;
-          color: white;
-          opacity: 0.9;
-          text-transform: uppercase;
-          font-weight: 600;
-          letter-spacing: 0.3px;
-        }
-      }
-      
-      .matches-info {
-        margin: 0;
-        font-size: 11px;
-        color: var(--ion-color-medium);
-        font-weight: 500;
-      }
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-// Actions grid
-.actions-grid {
-  padding: 0 8px;
-  margin-bottom: 20px;
-  
-  .action-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 16px 8px;
-    margin: 8px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    
-    &:active {
-      transform: scale(0.95);
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-    }
-    
-    .action-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-primary-shade));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 8px;
-      
-      ion-icon {
-        font-size: 24px;
-        color: white;
-      }
-    }
-    
-    .action-label {
-      margin: 0;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--ion-color-dark);
-      text-align: center;
-      line-height: 1.2;
-    }
-  }
+.welcome-section,
+.stats-grid,
+.quick-actions,
+.recent-activity {
+  animation: fadeInUp 0.6s ease-out;
 }
 
-// Notification badge in header
-ion-header {
-  ion-toolbar {
-    ion-buttons {
-      ion-button[color="danger"] {
-        position: relative;
-        
-        &::after {
-          content: '';
-          position: absolute;
-          top: 8px;
-          right: 8px;
-          width: 8px;
-          height: 8px;
-          background: var(--ion-color-danger);
-          border-radius: 50%;
-          border: 2px solid white;
-        }
-      }
-    }
-  }
+.stats-grid {
+  animation-delay: 0.1s;
 }
 
-// Responsive adjustments
-@media (max-width: 576px) {
-  .team-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    
-    .edit-button {
-      align-self: stretch;
-    }
+.quick-actions {
+  animation-delay: 0.2s;
+}
+
+.recent-activity {
+  animation-delay: 0.3s;
+}
+
+// Responsividade
+@media (max-width: 768px) {
+  .home-container {
+    padding: 16px;
   }
   
-  .player-highlight {
-    flex-direction: column;
-    text-align: center;
+  .welcome-section {
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+  
+  .welcome-title {
+    font-size: 20px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
     gap: 12px;
-    
-    .player-performance {
-      .performance-badge {
-        margin: 0 auto 8px auto;
-      }
-    }
+    margin-bottom: 24px;
   }
   
-  .actions-grid {
-    .action-item {
-      padding: 12px 6px;
-      margin: 6px;
-      
-      .action-icon {
-        width: 40px;
-        height: 40px;
-        
-        ion-icon {
-          font-size: 20px;
-        }
-      }
-      
-      .action-label {
-        font-size: 11px;
-      }
-    }
+  .stat-card {
+    padding: 16px;
+  }
+  
+  .action-buttons {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .action-button {
+    height: 70px;
+    font-size: 13px;
+  }
+  
+  .recent-activity {
+    padding: 20px;
   }
 }
 
-// iOS specific styles
-.ios {
-  .team-card,
-  .top-player-card,
-  .action-item {
-    border-radius: 12px;
+@media (max-width: 480px) {
+  .home-container {
+    padding: 12px;
   }
   
-  .action-item:active {
-    transform: scale(0.95);
+  .stats-grid {
+    grid-template-columns: 1fr;
   }
   
-  .player-avatar,
-  .performance-badge {
-    border-radius: 50%;
+  .action-buttons {
+    grid-template-columns: 1fr;
+  }
+  
+  .action-button {
+    height: 60px;
+    font-size: 12px;
+  }
+  
+  .action-button ion-icon {
+    font-size: 20px;
+  }
+}
+
+// Dark mode
+@media (prefers-color-scheme: dark) {
+  ion-content {
+    --background: var(--app-background-dark);
+  }
+  
+  .welcome-section,
+  .stat-card,
+  .action-button,
+  .recent-activity {
+    background: var(--app-card-dark);
+    border-color: #444444;
+  }
+  
+  .welcome-title,
+  .section-title {
+    color: #ffffff;
+  }
+  
+  .welcome-subtitle,
+  .stat-label,
+  .activity-subtitle,
+  .activity-time {
+    color: #bdc3c7;
+  }
+  
+  .stat-value {
+    color: #ffffff;
+  }
+  
+  .action-button {
+    --color: #ffffff;
+  }
+  
+  .action-button:hover {
+    --background: #3a3a3a;
+  }
+  
+  .activity-item {
+    border-bottom-color: #444444;
+  }
+  
+  .activity-title {
+    color: #ffffff;
   }
 }
 

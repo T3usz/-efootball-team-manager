@@ -1,22 +1,18 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControl } from '@angular/forms';
+import { 
+  CommonModule 
+} from '@angular/common';
+import { FormsModule, FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import {
-  IonContent,
   IonHeader,
-  IonTitle,
   IonToolbar,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardTitle,
+  IonTitle,
+  IonContent,
   IonItem,
   IonLabel,
   IonInput,
   IonButton,
-  IonIcon,
-  IonText,
   IonSpinner,
   IonToast,
   IonCheckbox,
@@ -24,7 +20,8 @@ import {
   IonRow,
   IonCol,
   ToastController,
-  LoadingController
+  LoadingController,
+  IonIcon
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { 
@@ -36,7 +33,8 @@ import {
   arrowForward,
   person,
   checkmarkCircle,
-  arrowBack
+  arrowBack,
+  alertCircle
 } from 'ionicons/icons';
 import { AuthService } from '../../services/auth.service';
 
@@ -46,27 +44,17 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./register.page.scss'],
   imports: [
     CommonModule,
+    FormsModule,
     ReactiveFormsModule,
-    IonContent,
     IonHeader,
-    IonTitle,
     IonToolbar,
-    IonCard,
-    IonCardContent,
-    IonCardHeader,
-    IonCardTitle,
+    IonTitle,
+    IonContent,
     IonItem,
     IonLabel,
     IonInput,
     IonButton,
-    IonIcon,
-    IonText,
-    IonSpinner,
-    IonToast,
-    IonCheckbox,
-    IonGrid,
-    IonRow,
-    IonCol
+    IonIcon
   ]
 })
 export class RegisterPage implements OnInit {

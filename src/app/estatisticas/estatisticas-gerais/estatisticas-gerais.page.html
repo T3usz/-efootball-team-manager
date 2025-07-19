@@ -59,29 +59,79 @@
 
     <ion-card class="performance-card">
       <ion-card-header>
-        <ion-card-title>Aproveitamento</ion-card-title>
+        <ion-card-title>Aproveitamento do Time</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <div class="performance-display">
-          <div class="performance-circle">
-            <span class="performance-value">{{ teamStats?.winRate || 0 }}%</span>
+          <div class="chart-container">
+            <div class="circular-progress">
+              <svg class="progress-ring" width="120" height="120">
+                <circle
+                  class="progress-ring-circle-bg"
+                  stroke="#e9ecef"
+                  stroke-width="8"
+                  fill="transparent"
+                  r="52"
+                  cx="60"
+                  cy="60"
+                />
+                <circle
+                  class="progress-ring-circle"
+                  stroke="url(#gradient)"
+                  stroke-width="8"
+                  fill="transparent"
+                  r="52"
+                  cx="60"
+                  cy="60"
+                  [style.stroke-dasharray]="(2 * Math.PI * 52)"
+                  [style.stroke-dashoffset]="(2 * Math.PI * 52) - ((teamStats?.winRate || 0) / 100) * (2 * Math.PI * 52)"
+                />
+                <defs>
+                  <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#007bff;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#0056b3;stop-opacity:1" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div class="progress-content">
+                <div class="progress-value">{{ teamStats?.winRate || 0 }}%</div>
+                <div class="progress-label">APROVEITAMENTO</div>
+              </div>
+            </div>
           </div>
-          <div class="performance-breakdown">
-            <div class="breakdown-item">
-              <span class="breakdown-label">Vitórias:</span>
-              <span class="breakdown-value">{{ teamStats?.victories || 0 }}</span>
+          
+          <div class="stats-breakdown">
+            <div class="stat-row">
+              <div class="stat-dot success"></div>
+              <div class="stat-info">
+                <span class="stat-label">Vitórias</span>
+                <span class="stat-value">{{ teamStats?.victories || 0 }}</span>
+              </div>
             </div>
-            <div class="breakdown-item">
-              <span class="breakdown-label">Empates:</span>
-              <span class="breakdown-value">{{ teamStats?.draws || 0 }}</span>
+            <div class="stat-row">
+              <div class="stat-dot warning"></div>
+              <div class="stat-info">
+                <span class="stat-label">Empates</span>
+                <span class="stat-value">{{ teamStats?.draws || 0 }}</span>
+              </div>
             </div>
-            <div class="breakdown-item">
-              <span class="breakdown-label">Derrotas:</span>
-              <span class="breakdown-value">{{ teamStats?.defeats || 0 }}</span>
+            <div class="stat-row">
+              <div class="stat-dot danger"></div>
+              <div class="stat-info">
+                <span class="stat-label">Derrotas</span>
+                <span class="stat-value">{{ teamStats?.defeats || 0 }}</span>
+              </div>
             </div>
-            <div class="breakdown-item">
-              <span class="breakdown-label">W.O:</span>
-              <span class="breakdown-value">{{ teamStats?.walkOvers || 0 }}</span>
+            <div class="stat-row">
+              <div class="stat-dot medium"></div>
+              <div class="stat-info">
+                <span class="stat-label">W.O</span>
+                <span class="stat-value">{{ teamStats?.walkOvers || 0 }}</span>
+              </div>
+            </div>
+            <div class="total-matches">
+              <span class="total-label">Total de Partidas</span>
+              <span class="total-value">{{ teamStats?.totalMatches || 0 }}</span>
             </div>
           </div>
         </div>
@@ -110,7 +160,7 @@
             </ion-avatar>
             <ion-label>
               <h2>{{ player.name }}</h2>
-              <p>{{ player.nickname }} • {{ player.position }}</p>
+              <p>{{ getPositionLabel(player.position) }} • #{{ player.number || 'N/A' }}</p>
               <p class="player-stats">
                 {{ player.stats.victories }}V • 
                 {{ player.stats.draws }}E • 

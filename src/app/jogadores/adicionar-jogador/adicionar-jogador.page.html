@@ -1,0 +1,146 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="/tabs/jogadores" text="Voltar"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Adicionar Jogador</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onCancel()" fill="clear">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="jogadorForm" (ngSubmit)="onSubmit()">
+    <div class="form-container">
+
+      <!-- Informações Básicas -->
+      <ion-card class="form-card">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="person" color="primary"></ion-icon>
+            Informações Básicas
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+
+          <ion-item [class.item-has-error]="isFieldInvalid('name')" class="form-item">
+            <ion-label position="stacked">Nome Completo *</ion-label>
+            <ion-input formControlName="name" type="text" clear-input placeholder="Digite o nome completo"></ion-input>
+          </ion-item>
+          <div class="error-message" *ngIf="isFieldInvalid('name')">
+            {{ getFieldError('name') }}
+          </div>
+
+          <ion-item class="form-item">
+            <ion-label position="stacked">Apelido (opcional)</ion-label>
+            <ion-input formControlName="nickname" type="text" clear-input placeholder="Digite o apelido"></ion-input>
+          </ion-item>
+
+          <ion-item [class.item-has-error]="isFieldInvalid('age')" class="form-item">
+            <ion-label position="stacked">Idade *</ion-label>
+            <ion-input formControlName="age" type="number" min="10" max="80" placeholder="Digite a idade"></ion-input>
+          </ion-item>
+          <div class="error-message" *ngIf="isFieldInvalid('age')">
+            {{ getFieldError('age') }}
+          </div>
+
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Informações Técnicas -->
+      <ion-card class="form-card">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="trophy" color="primary"></ion-icon>
+            Informações Técnicas
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+
+          <ion-item [class.item-has-error]="isFieldInvalid('position')" class="form-item">
+            <ion-label position="stacked">Posição *</ion-label>
+            <ion-select formControlName="position" interface="popover" placeholder="Selecione a posição">
+              <ion-select-option *ngFor="let position of positions" [value]="position">
+                {{ getPositionLabel(position) }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+          <div class="error-message" *ngIf="isFieldInvalid('position')">
+            {{ getFieldError('position') }}
+          </div>
+
+          <ion-item class="form-item">
+            <ion-label position="stacked">Número da Camisa (opcional)</ion-label>
+            <ion-input formControlName="number" type="number" min="1" max="99" placeholder="Digite o número"></ion-input>
+          </ion-item>
+
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Observações -->
+      <ion-card class="form-card">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="document-text" color="primary"></ion-icon>
+            Observações
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+
+          <ion-item class="form-item">
+            <ion-label position="stacked">Observações (opcional)</ion-label>
+            <ion-textarea formControlName="observations" rows="4" auto-grow="true" placeholder="Adicione observações sobre o jogador"></ion-textarea>
+          </ion-item>
+
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Status -->
+      <ion-card class="form-card">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="settings" color="primary"></ion-icon>
+            Status
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+
+          <ion-item lines="none" class="toggle-item">
+            <ion-label>Jogador Ativo</ion-label>
+            <ion-toggle [(ngModel)]="isActive" slot="end" [ngModelOptions]="{standalone: true}"></ion-toggle>
+          </ion-item>
+          <p class="status-description">
+            Jogadores ativos aparecem nas listas e podem participar de partidas.
+          </p>
+
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Botões de Ação -->
+      <div class="action-buttons">
+        <ion-button 
+          expand="block" 
+          type="submit" 
+          [disabled]="isLoading" 
+          class="save-button">
+          <ion-icon name="save" slot="start"></ion-icon>
+          {{ isLoading ? 'Salvando...' : 'Salvar Jogador' }}
+        </ion-button>
+
+        <ion-button 
+          expand="block" 
+          fill="outline" 
+          (click)="onCancel()" 
+          [disabled]="isLoading" 
+          class="cancel-button">
+          <ion-icon name="close" slot="start"></ion-icon>
+          Cancelar
+        </ion-button>
+      </div>
+
+    </div>
+  </form>
+</ion-content>

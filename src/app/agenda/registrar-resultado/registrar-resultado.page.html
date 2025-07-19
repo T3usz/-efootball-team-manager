@@ -1,0 +1,234 @@
+<ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="/tabs/home" text="Voltar"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Registrar Resultado</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="page-content">
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-container">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Carregando jogadores...</p>
+    </div>
+
+    <!-- Error State -->
+    <div *ngIf="error" class="error-container">
+      <ion-icon name="warning" color="danger"></ion-icon>
+      <p>{{ error }}</p>
+      <ion-button fill="outline" (click)="subscribeToJogadores()">
+        Tentar Novamente
+      </ion-button>
+    </div>
+
+    <!-- Main Content -->
+    <div *ngIf="!isLoading && !error">
+      
+      <!-- Player Selection Card -->
+      <ion-card class="selection-card">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="person" color="primary"></ion-icon>
+            Selecionar Jogador
+          </ion-card-title>
+        </ion-card-header>
+        
+        <ion-card-content>
+          <ion-item>
+            <ion-label position="stacked">Jogador</ion-label>
+            <ion-select 
+              [(ngModel)]="selectedPlayerId" 
+              placeholder="Escolha um jogador"
+              interface="popover"
+              class="player-selector">
+              <ion-select-option 
+                *ngFor="let player of getJogadoresOrdenados()" 
+                [value]="player.id">
+                <div class="player-option">
+                  <ion-avatar slot="start">
+                    <ion-icon name="person"></ion-icon>
+                  </ion-avatar>
+                  <div class="player-info">
+                    <div class="player-name">{{ player.name }}</div>
+                    <div class="player-details">
+                      <ion-badge [color]="getPositionColor(player.position)">
+                        {{ player.position }}
+                      </ion-badge>
+                      <span *ngIf="player.number" class="player-number">
+                        #{{ player.number }}
+                      </span>
+                    </div>
+                    <div class="player-stats">
+                      {{ getPlayerStats(player) }}
+                    </div>
+                  </div>
+                </div>
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <!-- Selected Player Preview -->
+          <div *ngIf="getSelectedPlayer()" class="selected-player-preview">
+            <ion-item>
+              <ion-avatar slot="start">
+                <ion-icon name="person"></ion-icon>
+              </ion-avatar>
+              <ion-label>
+                <h2>{{ getSelectedPlayer()?.name }}</h2>
+                <p>
+                  <ion-badge [color]="getPositionColor(getSelectedPlayer()?.position || 'GK')">
+                    {{ getSelectedPlayer()?.position }}
+                  </ion-badge>
+                  <span *ngIf="getSelectedPlayer()?.number">
+                    #{{ getSelectedPlayer()?.number }}
+                  </span>
+                </p>
+                <p class="player-stats-text">
+                  {{ getPlayerStats(getSelectedPlayer()!) }}
+                </p>
+              </ion-label>
+            </ion-item>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Result Selection Card -->
+      <ion-card class="selection-card">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="trophy" color="primary"></ion-icon>
+            Resultado da Partida
+          </ion-card-title>
+        </ion-card-header>
+        
+        <ion-card-content>
+          <ion-item>
+            <ion-label position="stacked">Resultado</ion-label>
+            <ion-select 
+              [(ngModel)]="selectedResult" 
+              placeholder="Escolha o resultado"
+              interface="popover"
+              class="result-selector">
+              <ion-select-option value="victory">
+                <div class="result-option">
+                  <ion-icon name="trophy" color="success"></ion-icon>
+                  <span>Vitória</span>
+                </div>
+              </ion-select-option>
+              <ion-select-option value="defeat">
+                <div class="result-option">
+                  <ion-icon name="close-circle" color="danger"></ion-icon>
+                  <span>Derrota</span>
+                </div>
+              </ion-select-option>
+              <ion-select-option value="draw">
+                <div class="result-option">
+                  <ion-icon name="remove-circle" color="warning"></ion-icon>
+                  <span>Empate</span>
+                </div>
+              </ion-select-option>
+              <ion-select-option value="walkover">
+                <div class="result-option">
+                  <ion-icon name="warning" color="medium"></ion-icon>
+                  <span>Walk Over (WO)</span>
+                </div>
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <!-- Result Preview -->
+          <div class="result-preview">
+            <ion-chip [color]="getResultColor(selectedResult)" class="result-chip">
+              <ion-icon [name]="getResultIcon(selectedResult)"></ion-icon>
+              <ion-label>{{ getResultLabel(selectedResult) }}</ion-label>
+            </ion-chip>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Match Details Card -->
+      <ion-card class="selection-card">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="calendar" color="primary"></ion-icon>
+            Detalhes da Partida
+          </ion-card-title>
+        </ion-card-header>
+        
+        <ion-card-content>
+          <ion-item>
+            <ion-label position="stacked">Data da Partida</ion-label>
+            <ion-input 
+              type="date" 
+              [(ngModel)]="matchDate"
+              placeholder="Data da partida">
+            </ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Observações (Opcional)</ion-label>
+            <ion-textarea 
+              [(ngModel)]="matchNotes"
+              placeholder="Adicione observações sobre a partida..."
+              rows="3">
+            </ion-textarea>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <ion-button 
+          expand="block" 
+          (click)="registrarResultado()"
+          [disabled]="!selectedPlayerId || isSubmitting"
+          class="register-button">
+          <ion-icon name="save" slot="start"></ion-icon>
+          {{ isSubmitting ? 'Registrando...' : 'Registrar Resultado' }}
+        </ion-button>
+
+        <ion-button 
+          expand="block" 
+          fill="outline"
+          (click)="voltar()"
+          class="cancel-button">
+          <ion-icon name="arrow-back" slot="start"></ion-icon>
+          Cancelar
+        </ion-button>
+      </div>
+
+      <!-- Quick Stats -->
+      <ion-card *ngIf="jogadoresAtivos.length > 0" class="stats-card">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-icon name="stats-chart" color="primary"></ion-icon>
+            Resumo da Equipe
+          </ion-card-title>
+        </ion-card-header>
+        
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="6">
+                <div class="stat-item">
+                  <div class="stat-value">{{ jogadoresAtivos.length }}</div>
+                  <div class="stat-label">Jogadores Ativos</div>
+                </div>
+              </ion-col>
+              <ion-col size="6">
+                <div class="stat-item">
+                  <div class="stat-value">{{ getJogadoresComPartidas() }}</div>
+                  <div class="stat-label">Com Partidas</div>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+    </div>
+  </div>
+</ion-content> 

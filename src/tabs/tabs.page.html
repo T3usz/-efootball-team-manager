@@ -1,18 +1,25 @@
 <ion-tabs>
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="home" href="/tabs/home">
+    <ion-tab-button tab="home">
       <ion-icon aria-hidden="true" name="home"></ion-icon>
       <ion-label>Home</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="jogadores" href="/tabs/jogadores">
+    <ion-tab-button tab="jogadores">
       <ion-icon aria-hidden="true" name="people"></ion-icon>
       <ion-label>Jogadores</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="estatisticas" href="/tabs/estatisticas">
+    <ion-tab-button tab="estatisticas">
       <ion-icon aria-hidden="true" name="stats-chart"></ion-icon>
       <ion-label>Estatísticas</ion-label>
     </ion-tab-button>
+
+    <ion-tab-button tab="configuracoes">
+      <ion-icon aria-hidden="true" name="settings"></ion-icon>
+      <ion-label>Configurações</ion-label>
+    </ion-tab-button>
   </ion-tab-bar>
+  
+  <ion-router-outlet></ion-router-outlet>
 </ion-tabs>

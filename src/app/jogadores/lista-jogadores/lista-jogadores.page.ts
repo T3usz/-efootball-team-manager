@@ -7,14 +7,7 @@ import {
   IonHeader,
   IonTitle,
   IonToolbar,
-  IonSearchbar,
-  IonSegment,
-  IonSegmentButton,
   IonLabel,
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardTitle,
   IonItem,
   IonAvatar,
   IonButton,
@@ -23,17 +16,7 @@ import {
   IonFab,
   IonFabButton,
   IonList,
-  IonItemSliding,
-  IonItemOptions,
-  IonItemOption,
-  IonRefresher,
-  IonRefresherContent,
-  IonSpinner,
-  IonText,
-  IonGrid,
-  IonRow,
-  IonCol,
-  IonChip,
+  IonButtons,
   AlertController,
   ToastController,
   ActionSheetController
@@ -45,7 +28,6 @@ import {
   person, 
   trophy, 
   warning,
-  edit,
   trash,
   eye,
   filter,
@@ -55,7 +37,7 @@ import {
   ellipsisVertical
 } from 'ionicons/icons';
 import { Subscription } from 'rxjs';
-import { Player, Position } from '../../shared/models/interfaces';
+import { Player, Position } from '../../models/players.model';
 import { JogadoresService } from '../../services/jogadores.service';
 
 @Component({
@@ -69,14 +51,7 @@ import { JogadoresService } from '../../services/jogadores.service';
     IonHeader,
     IonTitle,
     IonToolbar,
-    IonSearchbar,
-    IonSegment,
-    IonSegmentButton,
     IonLabel,
-    IonCard,
-    IonCardContent,
-    IonCardHeader,
-    IonCardTitle,
     IonItem,
     IonAvatar,
     IonButton,
@@ -85,17 +60,7 @@ import { JogadoresService } from '../../services/jogadores.service';
     IonFab,
     IonFabButton,
     IonList,
-    IonItemSliding,
-    IonItemOptions,
-    IonItemOption,
-    IonRefresher,
-    IonRefresherContent,
-    IonSpinner,
-    IonText,
-    IonGrid,
-    IonRow,
-    IonCol,
-    IonChip
+    IonButtons,
   ]
 })
 export class ListaJogadoresPage implements OnInit, OnDestroy {
@@ -129,7 +94,6 @@ export class ListaJogadoresPage implements OnInit, OnDestroy {
       person, 
       trophy, 
       warning,
-      edit,
       trash,
       eye,
       filter,
@@ -238,32 +202,38 @@ export class ListaJogadoresPage implements OnInit, OnDestroy {
         {
           text: 'Ver Detalhes',
           icon: 'eye',
-          handler: () => this.verDetalhes(jogador)
+          handler: () => this.verDetalhes(jogador),
+          cssClass: 'quick-action-btn'
         },
         {
           text: 'Editar',
           icon: 'edit',
-          handler: () => this.editarJogador(jogador)
+          handler: () => this.editarJogador(jogador),
+          cssClass: 'quick-action-btn'
         },
         {
           text: 'Estatísticas',
           icon: 'stats-chart',
-          handler: () => this.verEstatisticas(jogador)
+          handler: () => this.verEstatisticas(jogador),
+          cssClass: 'quick-action-btn'
         },
         {
           text: jogador.isActive ? 'Desativar' : 'Ativar',
           icon: jogador.isActive ? 'close-circle' : 'checkmark-circle',
-          handler: () => this.toggleStatus(jogador)
+          handler: () => this.toggleStatus(jogador),
+          cssClass: 'quick-action-btn'
         },
         {
           text: 'Remover',
           icon: 'trash',
           role: 'destructive',
-          handler: () => this.confirmarRemocao(jogador)
+          handler: () => this.confirmarRemocao(jogador),
+          cssClass: 'quick-action-btn quick-action-btn-danger'
         },
         {
           text: 'Cancelar',
-          role: 'cancel'
+          role: 'cancel',
+          cssClass: 'quick-action-btn quick-action-btn-cancel'
         }
       ]
     });
@@ -334,28 +304,28 @@ export class ListaJogadoresPage implements OnInit, OnDestroy {
         {
           text: 'Goleiro',
           handler: () => {
-            this.selectedPosition = 'Goleiro';
+            this.selectedPosition = 'GK';
             this.applyFilters();
           }
         },
         {
           text: 'Zagueiro',
           handler: () => {
-            this.selectedPosition = 'Zagueiro';
+            this.selectedPosition = 'CB';
             this.applyFilters();
           }
         },
         {
           text: 'Meio-campo',
           handler: () => {
-            this.selectedPosition = 'Meio-campo';
+            this.selectedPosition = 'CM';
             this.applyFilters();
           }
         },
         {
           text: 'Atacante',
           handler: () => {
-            this.selectedPosition = 'Atacante';
+            this.selectedPosition = 'ST';
             this.applyFilters();
           }
         },
@@ -370,11 +340,18 @@ export class ListaJogadoresPage implements OnInit, OnDestroy {
   }
 
   getPositionColor(position: Position): string {
-    const colors = {
-      'Goleiro': 'warning',
-      'Zagueiro': 'success',
-      'Meio-campo': 'primary',
-      'Atacante': 'danger'
+    const colors: Record<Position, string> = {
+      GK: 'warning',
+      CB: 'success',
+      LB: 'success',
+      RB: 'success',
+      CM: 'primary',
+      LM: 'primary',
+      RM: 'primary',
+      CAM: 'primary',
+      ST: 'danger',
+      LW: 'danger',
+      RW: 'danger'
     };
     return colors[position] || 'medium';
   }
@@ -401,6 +378,11 @@ export class ListaJogadoresPage implements OnInit, OnDestroy {
       color
     });
     await toast.present();
+  }
+
+  testClick() {
+    console.log('Botão clicado!');
+    alert('Botão funcionando!');
   }
 }
 
