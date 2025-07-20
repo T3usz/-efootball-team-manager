@@ -4,35 +4,51 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="email" formControlName="email"></ion-input>
-    </ion-item>
-    <div class="error-message" *ngIf="isFieldInvalid('email')">
-      {{ getFieldError('email') }}
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <ion-icon name="football" class="login-logo" color="primary"></ion-icon>
+        <div class="login-title">Bem-vindo de volta!</div>
+        <div class="login-subtitle">Acesse sua conta para gerenciar seu time.</div>
+      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <ion-item [class.item-has-error]="isFieldInvalid('email')">
+          <ion-icon name="mail" slot="start"></ion-icon>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="email" formControlName="email" autocomplete="username"></ion-input>
+        </ion-item>
+        <div class="error-message" *ngIf="isFieldInvalid('email')">
+          {{ getFieldError('email') }}
+        </div>
+        <ion-item [class.item-has-error]="isFieldInvalid('password')">
+          <ion-icon name="lock-closed" slot="start"></ion-icon>
+          <ion-label position="floating">Senha</ion-label>
+          <ion-input [type]="showPassword ? 'text' : 'password'" formControlName="password" autocomplete="current-password"></ion-input>
+          <ion-button fill="clear" slot="end" (click)="togglePasswordVisibility()" type="button" tabindex="-1">
+            <ion-icon [name]="showPassword ? 'eye-off' : 'eye'"></ion-icon>
+          </ion-button>
+        </ion-item>
+        <div class="error-message" *ngIf="isFieldInvalid('password')">
+          {{ getFieldError('password') }}
+        </div>
+        <ion-item lines="none" class="remember-me-row">
+          <ion-checkbox formControlName="rememberMe" slot="start"></ion-checkbox>
+          <ion-label>Lembrar de mim</ion-label>
+        </ion-item>
+        <ion-button expand="block" type="submit" class="login-button" [disabled]="isLoading">Entrar</ion-button>
+        <ion-button expand="block" fill="outline" class="google-button" (click)="signInWithGoogle()" [disabled]="isLoading" type="button">
+          <ion-icon name="logo-google" slot="start"></ion-icon>
+          Entrar com Google
+        </ion-button>
+        <div class="forgot-password">
+          <a (click)="navigateToForgotPassword()">Esqueceu a senha?</a>
+        </div>
+        <div class="register-link">
+          <p>Não tem uma conta?</p>
+          <ion-button fill="clear" class="register-button" (click)="navigateToRegister()" type="button">Criar conta</ion-button>
+        </div>
+      </form>
     </div>
-    <ion-item>
-      <ion-label position="floating">Senha</ion-label>
-      <ion-input [type]="showPassword ? 'text' : 'password'" formControlName="password"></ion-input>
-      <ion-button fill="clear" slot="end" (click)="togglePasswordVisibility()" type="button">
-        <ion-icon [name]="showPassword ? 'eye-off' : 'eye'"></ion-icon>
-      </ion-button>
-    </ion-item>
-    <div class="error-message" *ngIf="isFieldInvalid('password')">
-      {{ getFieldError('password') }}
-    </div>
-    <ion-item lines="none">
-      <ion-checkbox formControlName="rememberMe" slot="start"></ion-checkbox>
-      <ion-label>Lembrar de mim</ion-label>
-    </ion-item>
-    <ion-button expand="block" type="submit" [disabled]="isLoading">Entrar</ion-button>
-    <ion-button expand="block" fill="outline" (click)="signInWithGoogle()" [disabled]="isLoading" type="button">
-      <ion-icon name="logo-google" slot="start"></ion-icon>
-      Entrar com Google
-    </ion-button>
-    <ion-button fill="clear" size="small" (click)="navigateToForgotPassword()" type="button">Esqueceu a senha?</ion-button>
-    <ion-button fill="clear" size="small" (click)="navigateToRegister()" type="button">Criar conta</ion-button>
-  </form>
+  </div>
 </ion-content>
 

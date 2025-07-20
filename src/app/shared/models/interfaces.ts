@@ -13,7 +13,7 @@ export interface Team {
   name: string;
   adminId: string;
   adminName: string;
-  modality: 'eFootball';
+  modality: 'Futebol';
   createdAt: Date;
   updatedAt: Date;
   stats: TeamStats;

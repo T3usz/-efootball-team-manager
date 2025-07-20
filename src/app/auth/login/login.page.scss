@@ -133,18 +133,51 @@ ion-input input {
   box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
 }
 
-.forgot-password {
-  text-align: center;
-  margin-bottom: 24px;
+.login-logo {
+  font-size: 56px;
+  margin-bottom: 12px;
+  color: var(--app-primary);
+  filter: drop-shadow(0 2px 8px rgba(108, 92, 231, 0.10));
 }
 
+.google-button {
+  --background: #fff;
+  --color: #444;
+  --border-radius: 12px;
+  --border-color: #e0e0e0;
+  --box-shadow: 0 2px 8px rgba(66, 133, 244, 0.08);
+  border: 1.5px solid #e0e0e0;
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.2px;
+  transition: box-shadow 0.2s;
+}
+.google-button ion-icon {
+  color: #ea4335;
+  font-size: 20px;
+}
+.google-button:hover {
+  --background: #f5f5f5;
+  box-shadow: 0 4px 16px rgba(66, 133, 244, 0.12);
+}
+
+.remember-me-row {
+  margin-bottom: 8px;
+}
+
+.forgot-password {
+  text-align: right;
+  margin: 0 0 8px 0;
+}
 .forgot-password a {
   color: var(--app-primary);
-  text-decoration: none;
   font-weight: 600;
   font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.2s;
 }
-
 .forgot-password a:hover {
   color: var(--app-primary-dark);
   text-decoration: underline;
@@ -152,14 +185,13 @@ ion-input input {
 
 .register-link {
   text-align: center;
-  margin-top: 24px;
-  padding-top: 24px;
+  margin-top: 18px;
+  padding-top: 18px;
   border-top: 1px solid var(--app-border-light);
 }
-
 .register-link p {
   color: var(--app-text-secondary);
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   font-size: 14px;
 }
 
@@ -237,6 +269,19 @@ ion-item:focus-visible {
   .register-button {
     height: 44px;
     font-size: 13px;
+  }
+}
+
+// Responsividade extra
+@media (max-width: 400px) {
+  .login-card {
+    padding: 16px 6px;
+  }
+  .login-title {
+    font-size: 20px;
+  }
+  .login-logo {
+    font-size: 38px;
   }
 }
 

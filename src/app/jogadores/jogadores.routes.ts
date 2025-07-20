@@ -13,5 +13,9 @@ export const jogadoresRoutes: Routes = [
   {
     path: 'editar/:id',
     loadComponent: () => import('./editar-jogador/editar-jogador.page').then(m => m.EditarJogadorPage)
+  },
+  {
+    path: 'editar-estatisticas/:id',
+    loadComponent: () => import('./editar-estatisticas/editar-estatisticas.page').then(m => m.EditarEstatisticasPage)
   }
 ]; 

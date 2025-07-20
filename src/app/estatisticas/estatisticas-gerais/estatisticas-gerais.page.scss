@@ -2,6 +2,33 @@ ion-content {
   --background: var(--app-bg-light);
 }
 
+// Loading container
+.loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 300px;
+  
+  .loading-content {
+    text-align: center;
+    
+    ion-spinner {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+      --color: var(--app-primary);
+    }
+    
+    p {
+      color: var(--app-text-placeholder);
+      font-size: 16px;
+      font-weight: 500;
+      margin: 0;
+    }
+  }
+}
+
 .stats-segment {
   margin: 16px;
   --background: var(--app-bg-light);

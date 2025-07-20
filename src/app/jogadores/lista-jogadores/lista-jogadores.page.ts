@@ -19,7 +19,8 @@ import {
   IonButtons,
   AlertController,
   ToastController,
-  ActionSheetController
+  ActionSheetController,
+  IonSkeletonText
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { 
@@ -31,6 +32,7 @@ import {
   trash,
   eye,
   filter,
+  funnel,
   statsChart,
   checkmarkCircle,
   closeCircle,
@@ -61,6 +63,7 @@ import { JogadoresService } from '../../services/jogadores.service';
     IonFabButton,
     IonList,
     IonButtons,
+    IonSkeletonText
   ]
 })
 export class ListaJogadoresPage implements OnInit, OnDestroy {
@@ -97,6 +100,7 @@ export class ListaJogadoresPage implements OnInit, OnDestroy {
       trash,
       eye,
       filter,
+      funnel,
       statsChart,
       checkmarkCircle,
       closeCircle,
@@ -124,6 +128,8 @@ export class ListaJogadoresPage implements OnInit, OnDestroy {
       })
     );
   }
+
+
 
   private updateStatistics() {
     this.totalJogadores = this.jogadoresService.getTotalJogadores();
@@ -188,7 +194,7 @@ export class ListaJogadoresPage implements OnInit, OnDestroy {
   }
 
   async verDetalhes(jogador: Player) {
-    this.router.navigate(['/jogadores/detalhes', jogador.id]);
+    this.router.navigate(['/jogadores/editar-estatisticas', jogador.id]);
   }
 
   async editarJogador(jogador: Player) {

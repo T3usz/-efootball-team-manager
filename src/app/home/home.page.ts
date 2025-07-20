@@ -35,7 +35,30 @@ import {
   notificationsOutline,
   trendingUpOutline,
   trendingDownOutline,
-  person
+  person,
+  warning,
+  warningOutline,
+  informationCircle,
+  informationCircleOutline,
+  checkmarkCircle,
+  checkmarkCircleOutline,
+  alertCircle,
+  alertCircleOutline,
+  addCircle,
+  cloudDownloadOutline,
+  calendarOutline,
+  trophyOutline,
+  statsChartOutline,
+  peopleOutline,
+  settingsOutline,
+  personCircleOutline,
+  createOutline,
+  removeCircle,
+  closeCircle,
+  refreshCircle,
+  notificationsCircle,
+  trendingUp,
+  trendingDown
 } from 'ionicons/icons';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -82,12 +105,12 @@ export class HomePage implements OnInit, OnDestroy {
   isLoading = true;
   
   actions = [
-    { icon: 'people', label: 'Jogadores', route: '/tabs/jogadores', color: 'primary' },
-    { icon: 'stats-chart', label: 'Estatísticas', route: '/tabs/estatisticas', color: 'success' },
-    { icon: 'trophy', label: 'Ranking', route: '/ranking', color: 'warning' },
-    { icon: 'calendar', label: 'Agenda', route: '/agenda', color: 'tertiary' },
-    { icon: 'cloud-download', label: 'Backup', route: '/backup', color: 'medium' },
-    { icon: 'add-circle', label: 'Registrar Resultado', route: '/agenda/registrar-resultado', color: 'secondary' }
+    { icon: 'people', label: 'Jogadores', description: 'Gerenciar jogadores', route: '/tabs/jogadores', color: 'primary' },
+    { icon: 'stats-chart', label: 'Estatísticas', description: 'Ver estatísticas', route: '/tabs/estatisticas', color: 'success' },
+    { icon: 'trophy', label: 'Ranking', description: 'Ver ranking', route: '/ranking', color: 'warning' },
+    { icon: 'calendar', label: 'Agenda', description: 'Gerenciar agenda', route: '/agenda', color: 'tertiary' },
+    { icon: 'cloud-download', label: 'Backup', description: 'Fazer backup', route: '/backup', color: 'medium' },
+    { icon: 'add-circle', label: 'Registrar Resultado', description: 'Registrar resultado', route: '/agenda/registrar-resultado', color: 'secondary' }
   ];
 
   private subscription = new Subscription();
@@ -110,7 +133,30 @@ export class HomePage implements OnInit, OnDestroy {
       notificationsOutline,
       trendingUpOutline,
       trendingDownOutline,
-      person
+      person,
+      warning,
+      warningOutline,
+      informationCircle,
+      informationCircleOutline,
+      checkmarkCircle,
+      checkmarkCircleOutline,
+      alertCircle,
+      alertCircleOutline,
+      addCircle,
+      cloudDownloadOutline,
+      calendarOutline,
+      trophyOutline,
+      statsChartOutline,
+      peopleOutline,
+      settingsOutline,
+      personCircleOutline,
+      createOutline,
+      removeCircle,
+      closeCircle,
+      refreshCircle,
+      notificationsCircle,
+      trendingUp,
+      trendingDown
     });
   }
 
@@ -146,7 +192,7 @@ export class HomePage implements OnInit, OnDestroy {
             name: 'Time Principal',
             adminId: 'admin-1',
             adminName: 'Administrador',
-            modality: 'eFootball',
+            modality: 'Futebol',
             createdAt: new Date(),
             updatedAt: new Date(),
             stats: this.estatisticasService.teamStats || {

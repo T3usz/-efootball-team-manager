@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { 
@@ -19,7 +19,9 @@ import {
   IonIcon,
   IonBadge,
   IonButtons,
-  IonButton
+  IonButton,
+  IonSpinner,
+  IonSkeletonText
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { statsChart, trophy, person, add, barChart } from 'ionicons/icons';
@@ -54,15 +56,19 @@ import { EstatisticasService } from '../../services/estatisticas.service';
     IonIcon,
     IonBadge,
     IonButtons,
-    IonButton
+    IonButton,
+    IonSpinner,
+    IonSkeletonText
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EstatisticasGeraisPage implements OnInit, OnDestroy {
   selectedSegment: string = 'team';
   teamStats: TeamStats | null = null;
   players: Player[] = [];
   Math = Math; // Adicionar Math para uso no template
-  isLoading = false;
+  isLoading = true; // Começar como true para mostrar loading imediato
+  hasInitialData = false; // Flag para controlar se já recebeu dados iniciais
 
   private subscription = new Subscription();
 
@@ -88,6 +94,11 @@ export class EstatisticasGeraisPage implements OnInit, OnDestroy {
       this.estatisticasService.estatisticasState$.subscribe(state => {
         this.isLoading = state.isLoading;
         this.teamStats = state.teamStats;
+        
+        // Marcar que recebeu dados iniciais
+        if (!this.hasInitialData && (state.teamStats || !state.isLoading)) {
+          this.hasInitialData = true;
+        }
       })
     );
 
@@ -95,9 +106,21 @@ export class EstatisticasGeraisPage implements OnInit, OnDestroy {
     this.subscription.add(
       this.jogadoresService.jogadoresState$.subscribe(state => {
         this.players = state.jogadores;
+        
+        // Se recebeu jogadores e ainda está carregando, pode parar o loading
+        if (this.isLoading && state.jogadores.length > 0 && this.hasInitialData) {
+          this.isLoading = false;
+        }
+        
+        // Se não há jogadores e não está carregando, parar o loading
+        if (state.jogadores.length === 0 && !state.isLoading && !state.error) {
+          this.isLoading = false;
+        }
       })
     );
   }
+
+
 
   segmentChanged(event: any) {
     this.selectedSegment = event.detail.value;
@@ -132,6 +155,23 @@ export class EstatisticasGeraisPage implements OnInit, OnDestroy {
       RW: 'Ponta Direita'
     };
     return labels[position] || position;
+  }
+
+  getStrokeDasharray(): string {
+    if (!this.teamStats) return '0, 339.292';
+    const circumference = 2 * Math.PI * 54; // r = 54
+    const progress = (this.teamStats.winRate / 100) * circumference;
+    return `${progress}, ${circumference}`;
+  }
+
+  getCircleColor(): string {
+    if (!this.teamStats) return '#6c5ce7';
+    const winRate = this.teamStats.winRate;
+    
+    if (winRate >= 80) return '#00d2c1'; // success
+    if (winRate >= 60) return '#ffa726'; // warning
+    if (winRate >= 40) return '#6c5ce7'; // primary
+    return '#d63031'; // danger
   }
 }
 

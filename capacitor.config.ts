@@ -2,15 +2,14 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.efootball.teammanager',
-  appName: 'eFootball Team Manager',
+  appName: 'eStats',
   webDir: 'www',
   server: {
     androidScheme: 'https'
   },
   ios: {
     contentInset: 'automatic',
-    scrollEnabled: true,
-    bounce: true
+    scrollEnabled: true
   },
   plugins: {
     SplashScreen: {

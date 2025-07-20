@@ -8,7 +8,11 @@ import {
   checkmarkCircleOutline, 
   alertCircleOutline,
   closeOutline,
-  chevronForwardOutline
+  chevronForwardOutline,
+  warning,
+  informationCircle,
+  checkmarkCircle,
+  alertCircle
 } from 'ionicons/icons';
 import { Alert, AlertSeverity, AlertType } from '../models/interfaces';
 
@@ -227,7 +231,11 @@ export class AlertCardComponent {
       checkmarkCircleOutline, 
       alertCircleOutline,
       closeOutline,
-      chevronForwardOutline
+      chevronForwardOutline,
+      warning,
+      informationCircle,
+      checkmarkCircle,
+      alertCircle
     });
   }
 

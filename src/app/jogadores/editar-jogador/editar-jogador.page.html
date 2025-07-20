@@ -13,7 +13,7 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="jogadorForm" (ngSubmit)="onSubmit()">
+  <form *ngIf="jogadorForm" [formGroup]="jogadorForm" (ngSubmit)="onSubmit()">
     <div class="form-container">
 
       <!-- Informações Básicas -->

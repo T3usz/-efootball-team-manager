@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonCard, IonCardContent, IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
@@ -20,7 +20,7 @@ import {
   standalone: true,
   imports: [CommonModule, IonCard, IonCardContent, IonIcon],
   template: `
-    <ion-card [class]="'stat-card ' + color">
+    <ion-card [class]="'stat-card ' + color" (click)="onClick()" [class.clickable]="clickable">
       <ion-card-content>
         <div class="stat-container">
           <div class="stat-icon-wrapper">
@@ -80,10 +80,73 @@ import {
         color: var(--ion-color-dark);
         border: 1px solid #e0e0e0;
       }
+      
+      &.clickable {
+        cursor: pointer;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+        
+        &:active {
+          transform: translateY(0);
+        }
+      }
     }
     
     ion-card-content {
       padding: 20px;
+    }
+    
+    // Responsividade para mobile
+    @media (max-width: 768px) {
+      ion-card-content {
+        padding: 16px;
+      }
+      
+      .stat-value {
+        font-size: 18px;
+      }
+      
+      .stat-label {
+        font-size: 10px;
+      }
+      
+      .stat-icon {
+        font-size: 18px;
+      }
+      
+      .stat-icon-wrapper {
+        width: 36px;
+        height: 36px;
+        margin-right: 10px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      ion-card-content {
+        padding: 10px;
+      }
+      
+      .stat-value {
+        font-size: 16px;
+      }
+      
+      .stat-label {
+        font-size: 9px;
+      }
+      
+      .stat-icon {
+        font-size: 16px;
+      }
+      
+      .stat-icon-wrapper {
+        width: 32px;
+        height: 32px;
+        margin-right: 8px;
+      }
     }
     
     .stat-container {
@@ -93,19 +156,19 @@ import {
     }
     
     .stat-icon-wrapper {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
       background: rgba(255, 255, 255, 0.2);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-right: 16px;
+      margin-right: 12px;
       flex-shrink: 0;
     }
     
     .stat-icon {
-      font-size: 24px;
+      font-size: 20px;
       opacity: 0.9;
     }
     
@@ -115,14 +178,14 @@ import {
     
     .stat-value {
       margin: 0 0 4px 0;
-      font-size: 28px;
+      font-size: 20px;
       font-weight: 700;
       line-height: 1;
     }
     
     .stat-label {
       margin: 0 0 2px 0;
-      font-size: 14px;
+      font-size: 12px;
       opacity: 0.9;
       font-weight: 600;
       text-transform: uppercase;
@@ -198,10 +261,12 @@ export class CardEstatisticaComponent {
   @Input() label: string = '';
   @Input() subtitle?: string;
   @Input() color: string = 'primary';
+  @Input() clickable: boolean = false;
   @Input() trend?: {
     direction: 'up' | 'down' | 'neutral';
     value: number;
   };
+  @Output() cardClick = new EventEmitter<void>();
 
   constructor() {
     addIcons({ 
@@ -225,6 +290,12 @@ export class CardEstatisticaComponent {
       case 'up': return 'arrow-up';
       case 'down': return 'arrow-down';
       default: return 'remove';
+    }
+  }
+
+  onClick(): void {
+    if (this.clickable) {
+      this.cardClick.emit();
     }
   }
 }

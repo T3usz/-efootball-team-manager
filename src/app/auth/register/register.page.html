@@ -1,53 +1,150 @@
-<ion-header>
+<ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Registrar</ion-title>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Criar Conta</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <ion-item>
-      <ion-label position="floating">Nome</ion-label>
-      <ion-input type="text" formControlName="name"></ion-input>
-    </ion-item>
-    <div class="error-message" *ngIf="isFieldInvalid('name')">
-      {{ getFieldError('name') }}
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="register-container">
+    <!-- Header -->
+    <div class="register-header">
+      <h1>Criar Nova Conta</h1>
+      <p>Preencha os dados abaixo para criar sua conta</p>
     </div>
-    <ion-item>
-      <ion-label position="floating">Email</ion-label>
-      <ion-input type="email" formControlName="email"></ion-input>
-    </ion-item>
-    <div class="error-message" *ngIf="isFieldInvalid('email')">
-      {{ getFieldError('email') }}
-    </div>
-    <ion-item>
-      <ion-label position="floating">Senha</ion-label>
-      <ion-input [type]="showPassword ? 'text' : 'password'" formControlName="password"></ion-input>
-      <ion-button fill="clear" slot="end" (click)="togglePasswordVisibility()" type="button">
-        <ion-icon [name]="showPassword ? 'eye-off' : 'eye'"></ion-icon>
+
+    <!-- Registration Form -->
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="register-form">
+      <!-- Name Field -->
+      <ion-item class="form-item" [class.error]="isFieldInvalid('name')">
+        <ion-icon name="person" slot="start" class="input-icon"></ion-icon>
+        <ion-label position="floating">Nome Completo</ion-label>
+        <ion-input 
+          type="text" 
+          formControlName="name"
+          placeholder="Digite seu nome completo">
+        </ion-input>
+      </ion-item>
+      <div class="error-message" *ngIf="isFieldInvalid('name')">
+        <ion-icon name="alert-circle"></ion-icon>
+        {{ getFieldError('name') }}
+      </div>
+
+      <!-- Email Field -->
+      <ion-item class="form-item" [class.error]="isFieldInvalid('email')">
+        <ion-icon name="mail" slot="start" class="input-icon"></ion-icon>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input 
+          type="email" 
+          formControlName="email"
+          placeholder="Digite seu email">
+        </ion-input>
+      </ion-item>
+      <div class="error-message" *ngIf="isFieldInvalid('email')">
+        <ion-icon name="alert-circle"></ion-icon>
+        {{ getFieldError('email') }}
+      </div>
+
+      <!-- Password Field -->
+      <ion-item class="form-item" [class.error]="isFieldInvalid('password')">
+        <ion-icon name="lock-closed" slot="start" class="input-icon"></ion-icon>
+        <ion-label position="floating">Senha</ion-label>
+        <ion-input 
+          [type]="showPassword ? 'text' : 'password'" 
+          formControlName="password"
+          placeholder="Digite sua senha">
+        </ion-input>
+        <ion-button 
+          fill="clear" 
+          slot="end" 
+          (click)="togglePasswordVisibility()" 
+          type="button"
+          class="visibility-button">
+          <ion-icon [name]="showPassword ? 'eye-off' : 'eye'"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <div class="error-message" *ngIf="isFieldInvalid('password')">
+        <ion-icon name="alert-circle"></ion-icon>
+        {{ getFieldError('password') }}
+      </div>
+
+      <!-- Confirm Password Field -->
+      <ion-item class="form-item" [class.error]="isFieldInvalid('confirmPassword') || isFormInvalid('passwordMismatch')">
+        <ion-icon name="lock-closed" slot="start" class="input-icon"></ion-icon>
+        <ion-label position="floating">Confirmar Senha</ion-label>
+        <ion-input 
+          [type]="showConfirmPassword ? 'text' : 'password'" 
+          formControlName="confirmPassword"
+          placeholder="Confirme sua senha">
+        </ion-input>
+        <ion-button 
+          fill="clear" 
+          slot="end" 
+          (click)="toggleConfirmPasswordVisibility()" 
+          type="button"
+          class="visibility-button">
+          <ion-icon [name]="showConfirmPassword ? 'eye-off' : 'eye'"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <div class="error-message" *ngIf="isFieldInvalid('confirmPassword') || isFormInvalid('passwordMismatch')">
+        <ion-icon name="alert-circle"></ion-icon>
+        {{ getFieldError('confirmPassword') }}
+      </div>
+
+      <!-- Terms Checkbox -->
+      <ion-item lines="none" class="terms-item">
+        <ion-checkbox 
+          formControlName="acceptTerms" 
+          slot="start"
+          [class.error]="isFieldInvalid('acceptTerms')">
+        </ion-checkbox>
+        <ion-label class="terms-label">
+          Eu aceito os <a href="/termos" target="_blank">termos de uso</a> e 
+          <a href="/privacidade" target="_blank">política de privacidade</a>
+        </ion-label>
+      </ion-item>
+      <div class="error-message" *ngIf="isFieldInvalid('acceptTerms')">
+        <ion-icon name="alert-circle"></ion-icon>
+        {{ getFieldError('acceptTerms') }}
+      </div>
+
+      <!-- Submit Button -->
+      <ion-button 
+        expand="block" 
+        type="submit" 
+        [disabled]="isLoading || registerForm.invalid"
+        class="submit-button">
+        <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
+        <span *ngIf="!isLoading">Criar Conta</span>
       </ion-button>
-    </ion-item>
-    <div class="error-message" *ngIf="isFieldInvalid('password')">
-      {{ getFieldError('password') }}
-    </div>
-    <ion-item>
-      <ion-label position="floating">Confirmar Senha</ion-label>
-      <ion-input [type]="showConfirmPassword ? 'text' : 'password'" formControlName="confirmPassword"></ion-input>
-      <ion-button fill="clear" slot="end" (click)="toggleConfirmPasswordVisibility()" type="button">
-        <ion-icon [name]="showConfirmPassword ? 'eye-off' : 'eye'"></ion-icon>
+
+      <!-- Divider -->
+      <div class="divider">
+        <span>ou</span>
+      </div>
+
+      <!-- Google Sign Up -->
+      <ion-button 
+        expand="block" 
+        fill="outline" 
+        (click)="signUpWithGoogle()"
+        [disabled]="isLoading"
+        class="google-button">
+        <ion-icon name="logo-google" slot="start"></ion-icon>
+        Continuar com Google
       </ion-button>
-    </ion-item>
-    <div class="error-message" *ngIf="isFieldInvalid('confirmPassword') || isFormInvalid('passwordMismatch')">
-      {{ getFieldError('confirmPassword') }}
-    </div>
-    <ion-item lines="none">
-      <ion-checkbox formControlName="acceptTerms" slot="start"></ion-checkbox>
-      <ion-label>Eu aceito os termos de uso</ion-label>
-    </ion-item>
-    <div class="error-message" *ngIf="isFieldInvalid('acceptTerms')">
-      {{ getFieldError('acceptTerms') }}
-    </div>
-    <ion-button expand="block" type="submit" [disabled]="isLoading">Registrar</ion-button>
-    <ion-button fill="clear" size="small" (click)="navigateToLogin()" type="button">Já tem conta? Entrar</ion-button>
-  </form>
+
+      <!-- Login Link -->
+      <div class="login-link">
+        <p>Já tem uma conta? 
+          <a (click)="navigateToLogin()">Fazer login</a>
+        </p>
+      </div>
+    </form>
+  </div>
 </ion-content>
 

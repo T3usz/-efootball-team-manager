@@ -1,4 +1,4 @@
-import { Injectable, inject, signal } from '@angular/core';
+import { Injectable, inject, signal, runInInjectionContext, Injector } from '@angular/core';
 import { 
   Firestore, 
   collection, 
@@ -32,6 +32,7 @@ export interface JogadoresState {
 export class JogadoresService {
   private firestore = inject(Firestore);
   private authService = inject(AuthService);
+  private injector = inject(Injector);
 
   // Reactive state management
   private jogadoresState = signal<JogadoresState>({
@@ -70,40 +71,42 @@ export class JogadoresService {
 
     this.updateJogadoresState({ isLoading: true, error: null });
 
-    const jogadoresRef = collection(this.firestore, 'users', userId, 'jogadores');
-    const q = query(jogadoresRef, orderBy('name'));
+    runInInjectionContext(this.injector, () => {
+      const jogadoresRef = collection(this.firestore, 'users', userId, 'jogadores');
+      const q = query(jogadoresRef, orderBy('name'));
 
-    this.unsubscribe = onSnapshot(q, 
-      (snapshot) => {
-        const jogadores: Player[] = [];
-        snapshot.forEach((doc) => {
-          const data = doc.data();
-          jogadores.push({
-            id: doc.id,
-            name: data['name'],
-            position: data['position'],
-            number: data['number'],
-            stats: data['stats'] || this.getDefaultStats(),
-            isActive: data['isActive'] ?? true,
-            createdAt: data['createdAt']?.toDate() || new Date(),
-            updatedAt: data['updatedAt']?.toDate() || new Date()
+      this.unsubscribe = onSnapshot(q, 
+        (snapshot) => {
+          const jogadores: Player[] = [];
+          snapshot.forEach((doc) => {
+            const data = doc.data();
+            jogadores.push({
+              id: doc.id,
+              name: data['name'],
+              position: data['position'],
+              number: data['number'],
+              stats: data['stats'] || this.getDefaultStats(),
+              isActive: data['isActive'] ?? true,
+              createdAt: data['createdAt']?.toDate() || new Date(),
+              updatedAt: data['updatedAt']?.toDate() || new Date()
+            });
           });
-        });
 
-        this.updateJogadoresState({
-          jogadores,
-          isLoading: false,
-          error: null
-        });
-      },
-      (error) => {
-        console.error('Error listening to jogadores:', error);
-        this.updateJogadoresState({
-          isLoading: false,
-          error: 'Erro ao carregar jogadores'
-        });
-      }
-    );
+          this.updateJogadoresState({
+            jogadores,
+            isLoading: false,
+            error: null
+          });
+        },
+        (error) => {
+          console.error('Error listening to jogadores:', error);
+          this.updateJogadoresState({
+            isLoading: false,
+            error: 'Erro ao carregar jogadores'
+          });
+        }
+      );
+    });
   }
 
   private clearJogadores() {

@@ -173,12 +173,10 @@ export class EditarJogadorPage implements OnInit {
     if (!this.jogadorForm) return '';
     const field = this.jogadorForm.get(fieldName);
     if (!field || !field.errors) return '';
-
     if (field.errors['required']) return 'Este campo é obrigatório';
     if (field.errors['minlength']) return `Mínimo de ${field.errors['minlength'].requiredLength} caracteres`;
     if (field.errors['min']) return `Valor mínimo é ${field.errors['min'].min}`;
     if (field.errors['max']) return `Valor máximo é ${field.errors['max'].max}`;
-
     return 'Campo inválido';
   }
 

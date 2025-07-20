@@ -1,0 +1,145 @@
+.privacy-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.privacy-content {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+  h1 {
+    color: #2d3748;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  section {
+    margin-bottom: 32px;
+
+    h2 {
+      color: #4a5568;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    p {
+      color: #4a5568;
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    ul {
+      margin: 16px 0;
+      padding-left: 24px;
+
+      li {
+        color: #4a5568;
+        font-size: 16px;
+        line-height: 1.6;
+        margin-bottom: 8px;
+
+        strong {
+          color: #2d3748;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  .privacy-footer {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid #e2e8f0;
+    text-align: center;
+
+    p {
+      color: #718096;
+      font-size: 14px;
+      margin: 0;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .privacy-container {
+    padding: 16px;
+  }
+
+  .privacy-content {
+    padding: 24px;
+
+    h1 {
+      font-size: 24px;
+    }
+
+    section h2 {
+      font-size: 18px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .privacy-container {
+    padding: 12px;
+  }
+
+  .privacy-content {
+    padding: 20px;
+
+    h1 {
+      font-size: 22px;
+    }
+
+    section {
+      h2 {
+        font-size: 17px;
+      }
+
+      p, ul li {
+        font-size: 15px;
+      }
+    }
+  }
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+  .privacy-content {
+    background: #1a202c;
+    color: white;
+
+    h1 {
+      color: #e2e8f0;
+    }
+
+    section {
+      h2 {
+        color: #e2e8f0;
+      }
+
+      p, ul li {
+        color: #cbd5e0;
+      }
+
+      ul li strong {
+        color: #e2e8f0;
+      }
+    }
+
+    .privacy-footer {
+      border-top-color: #4a5568;
+
+      p {
+        color: #a0aec0;
+      }
+    }
+  }
+} 

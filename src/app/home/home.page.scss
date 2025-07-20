@@ -1,9 +1,26 @@
 ion-content {
   --background: var(--app-background-light);
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 20px;
+}
+
+.page-title {
+  padding: 16px 20px 8px 20px;
+  
+  h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ion-color-dark);
+  }
 }
 
 .home-container {
   padding: 20px;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .welcome-section {
@@ -175,6 +192,46 @@ ion-content {
   font-weight: 500;
 }
 
+.actions-grid {
+  margin-bottom: 32px;
+  padding: 0 8px;
+}
+
+// Responsividade específica para mobile
+@media (max-width: 768px) {
+  .actions-grid {
+    padding: 0 4px;
+    margin-bottom: 24px;
+  }
+  
+  .section-title {
+    font-size: 18px;
+    margin-bottom: 12px;
+    padding: 0 4px;
+  }
+  
+  .stats-grid {
+    padding: 0 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .actions-grid {
+    padding: 0 2px;
+    margin-bottom: 20px;
+  }
+  
+  .section-title {
+    font-size: 16px;
+    margin-bottom: 10px;
+    padding: 0 2px;
+  }
+  
+  .stats-grid {
+    padding: 0 2px;
+  }
+}
+
 // Animações
 @keyframes fadeInUp {
   from {
@@ -210,6 +267,7 @@ ion-content {
 @media (max-width: 768px) {
   .home-container {
     padding: 16px;
+    overflow-x: hidden;
   }
   
   .welcome-section {
@@ -241,6 +299,14 @@ ion-content {
     font-size: 13px;
   }
   
+  .team-card {
+    margin: 0 4px 16px 4px;
+  }
+  
+  .top-player-card {
+    margin: 0 4px 16px 4px;
+  }
+  
   .recent-activity {
     padding: 20px;
   }
@@ -249,6 +315,7 @@ ion-content {
 @media (max-width: 480px) {
   .home-container {
     padding: 12px;
+    overflow-x: hidden;
   }
   
   .stats-grid {
@@ -267,6 +334,18 @@ ion-content {
   .action-button ion-icon {
     font-size: 20px;
   }
+  
+  .team-card {
+    margin: 0 2px 12px 2px;
+  }
+  
+  .top-player-card {
+    margin: 0 2px 12px 2px;
+  }
+  
+  .recent-activity {
+    padding: 20px;
+  }
 }
 
 // Dark mode
@@ -283,6 +362,11 @@ ion-content {
     border-color: #444444;
   }
   
+  .action-item {
+    background: var(--app-card-dark);
+    border-color: #444444;
+  }
+  
   .welcome-title,
   .section-title {
     color: #ffffff;
@@ -293,6 +377,10 @@ ion-content {
   .activity-subtitle,
   .activity-time {
     color: #bdc3c7;
+  }
+  
+  .action-label {
+    color: #ffffff;
   }
   
   .stat-value {
@@ -315,4 +403,10 @@ ion-content {
     color: #ffffff;
   }
 }
+
+
+
+
+
+
 

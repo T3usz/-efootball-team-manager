@@ -1,0 +1,21 @@
+.not-found-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 32px 16px;
+}
+
+h1 {
+  font-size: 5rem;
+  color: var(--app-primary);
+  margin-bottom: 12px;
+}
+
+p {
+  font-size: 1.3rem;
+  color: var(--app-text-secondary);
+  margin-bottom: 32px;
+} 

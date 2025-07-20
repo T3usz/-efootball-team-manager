@@ -14,14 +14,11 @@ import {
   IonInput,
   IonButton,
   IonSpinner,
-  IonToast,
   IonCheckbox,
-  IonGrid,
-  IonRow,
-  IonCol,
   ToastController,
   LoadingController,
-  IonIcon
+  IonIcon,
+  IonButtons
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { 
@@ -54,7 +51,10 @@ import { AuthService } from '../../services/auth.service';
     IonLabel,
     IonInput,
     IonButton,
-    IonIcon
+    IonIcon,
+    IonSpinner,
+    IonCheckbox,
+    IonButtons
   ]
 })
 export class RegisterPage implements OnInit {
@@ -182,6 +182,10 @@ export class RegisterPage implements OnInit {
     this.router.navigate(['/auth/login'], {
       queryParams: { returnUrl: this.returnUrl }
     });
+  }
+
+  goBack() {
+    this.router.navigate(['/auth/login']);
   }
 
   // Form validation helpers

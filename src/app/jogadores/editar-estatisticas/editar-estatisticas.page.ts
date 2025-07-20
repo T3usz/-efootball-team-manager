@@ -168,14 +168,15 @@ export class EditarEstatisticasPage implements OnInit {
   }
 
   getTotalMatches(): number {
+    if (!this.estatisticasForm) return 0;
     const formValue = this.estatisticasForm.value;
     return formValue.victories + formValue.defeats + formValue.draws;
   }
 
   getWinRate(): number {
+    if (!this.estatisticasForm) return 0;
     const totalMatches = this.getTotalMatches();
     if (totalMatches === 0) return 0;
-    
     const formValue = this.estatisticasForm.value;
     return Math.round((formValue.victories / totalMatches) * 100);
   }

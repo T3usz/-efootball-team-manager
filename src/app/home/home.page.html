@@ -1,23 +1,22 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>eFootball Team Manager</ion-title>
-    <ion-buttons slot="end">
-      <ion-button *ngIf="hasAlerts()" fill="clear" color="danger">
-        <ion-icon name="notifications-outline"></ion-icon>
-      </ion-button>
-      <ion-button fill="clear" (click)="openProfile()">
-        <ion-icon name="person-circle"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+  <ion-header [translucent]="true" class="ion-no-border">
     <ion-toolbar>
-      <ion-title size="large">Home</ion-title>
+      <ion-title>eStats</ion-title>
+      <ion-buttons slot="end">
+        <ion-button *ngIf="hasAlerts()" fill="clear" color="danger">
+          <ion-icon name="notifications-outline"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" (click)="openProfile()">
+          <ion-icon name="person-circle"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
+
+  <!-- Page title -->
+  <div class="page-title">
+    <h1>Home</h1>
+  </div>
 
   <!-- Loading skeleton -->
   <div *ngIf="isLoading" class="loading-container">
@@ -112,13 +111,14 @@
     <div class="section-title">Ações Rápidas</div>
     <ion-grid class="actions-grid">
       <ion-row>
-        <ion-col size="4" *ngFor="let action of actions">
-          <div class="action-item" (click)="navigateTo(action.route)">
-            <div class="action-icon" [style.background]="'var(--ion-color-' + action.color + ')'">
-              <ion-icon [name]="action.icon"></ion-icon>
-            </div>
-            <p class="action-label">{{ action.label }}</p>
-          </div>
+        <ion-col size="6" size-md="4" *ngFor="let action of actions">
+          <app-card-estatistica
+            [icon]="action.icon"
+            [value]="action.label"
+            [color]="action.color"
+            [clickable]="true"
+            (cardClick)="navigateTo(action.route)">
+          </app-card-estatistica>
         </ion-col>
       </ion-row>
     </ion-grid>

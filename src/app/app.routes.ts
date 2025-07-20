@@ -4,8 +4,12 @@ import { AuthGuard } from './guards/auth.guard';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '/tabs/home',
+    redirectTo: '/intro',
     pathMatch: 'full',
+  },
+  {
+    path: 'intro',
+    loadComponent: () => import('./intro/intro.page').then(m => m.IntroPage),
   },
   {
     path: 'auth',
@@ -41,4 +45,16 @@ export const routes: Routes = [
     loadComponent: () => import('./agenda/registrar-resultado/registrar-resultado.page').then((m) => m.RegistrarResultadoPage),
     canActivate: [AuthGuard],
   },
+  {
+    path: 'privacidade',
+    loadComponent: () => import('./not-found/privacy.page').then(m => m.PrivacyPage)
+  },
+  {
+    path: 'termos',
+    loadComponent: () => import('./not-found/terms.page').then(m => m.TermsPage)
+  },
+  {
+    path: '**',
+    loadComponent: () => import('./not-found/not-found.page').then(m => m.NotFoundPage)
+  }
 ];

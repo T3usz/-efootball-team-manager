@@ -19,39 +19,77 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-list *ngIf="jogadoresFiltrados.length > 0; else emptyState">
+  <!-- Loading skeleton -->
+  <ion-list *ngIf="isLoading">
+    <ion-item *ngFor="let i of [1,2,3,4,5]" class="player-item">
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated style="width: 48px; height: 48px;"></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <h2><ion-skeleton-text animated style="width: 80px; height: 18px;"></ion-skeleton-text></h2>
+        <p><ion-skeleton-text animated style="width: 60px; height: 14px;"></ion-skeleton-text></p>
+        <p class="stats-info"><ion-skeleton-text animated style="width: 100px; height: 14px;"></ion-skeleton-text></p>
+      </ion-label>
+      <ion-badge slot="end">
+        <ion-skeleton-text animated style="width: 32px; height: 18px;"></ion-skeleton-text>
+      </ion-badge>
+    </ion-item>
+  </ion-list>
+
+  <!-- Lista real de jogadores -->
+  <ion-list *ngIf="!isLoading && jogadoresFiltrados.length > 0">
     <ion-item 
       *ngFor="let jogador of jogadoresFiltrados" 
       button 
-      (click)="editarJogador(jogador)"
+      (click)="verDetalhes(jogador)"
       class="player-item">
       <ion-avatar slot="start">
         <ion-icon name="person" size="large"></ion-icon>
       </ion-avatar>
       <ion-label>
         <h2>{{ jogador.name }}</h2>
-        <p>{{ jogador.position }}</p>
-        <p class="stats-info">{{ jogador.stats.winRate }}% aproveitamento • {{ jogador.stats.totalMatches }} jogos</p>
+        <p>{{ jogador.position }} • #{{ jogador.number || 'N/A' }}</p>
+        <p class="stats-info">
+          {{ jogador.stats.victories }}V • 
+          {{ jogador.stats.draws }}E • 
+          {{ jogador.stats.defeats }}D
+        </p>
       </ion-label>
-      <ion-badge 
-        slot="end" 
-        [color]="getWinRateColor(jogador.stats.winRate)">
-        {{ jogador.stats.winRate }}%
-      </ion-badge>
+      <div slot="end" class="player-actions">
+        <ion-badge [color]="getStatusColor(jogador.isActive)">
+          {{ jogador.stats.winRate }}%
+        </ion-badge>
+        <ion-button 
+          fill="clear" 
+          size="small"
+          (click)="mostrarOpcoes(jogador)">
+          <ion-icon name="ellipsis-vertical"></ion-icon>
+        </ion-button>
+      </div>
     </ion-item>
   </ion-list>
 
-  <ng-template #emptyState>
-    <div class="empty-state">
-      <ion-icon name="person" size="large"></ion-icon>
-      <h2>Nenhum jogador cadastrado</h2>
-      <p>Adicione jogadores ao seu time para começar a gerenciar estatísticas</p>
-      <ion-button (click)="adicionarJogador()" expand="block">
-        <ion-icon name="add" slot="start"></ion-icon>
-        Adicionar Primeiro Jogador
-      </ion-button>
-    </div>
-  </ng-template>
+  <!-- Empty state -->
+  <div *ngIf="!isLoading && jogadoresFiltrados.length === 0" class="empty-state">
+    <ion-icon name="person" size="large"></ion-icon>
+    <h2>Nenhum jogador cadastrado</h2>
+    <p>Adicione jogadores ao seu time para começar a gerenciar estatísticas</p>
+    <ion-button (click)="adicionarJogador()" expand="block">
+      <ion-icon name="add" slot="start"></ion-icon>
+      Adicionar Primeiro Jogador
+    </ion-button>
+  </div>
+
+  <!-- Error state -->
+  <div *ngIf="error" class="error-state">
+    <ion-icon name="warning" size="large"></ion-icon>
+    <h2>Erro ao carregar jogadores</h2>
+    <p>{{ error }}</p>
+    <ion-button (click)="onRefresh($event)" expand="block">
+      <ion-icon name="refresh" slot="start"></ion-icon>
+      Tentar Novamente
+    </ion-button>
+  </div>
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button (click)="adicionarJogador()">

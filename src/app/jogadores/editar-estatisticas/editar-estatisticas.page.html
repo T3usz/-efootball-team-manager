@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="estatisticasForm" (ngSubmit)="onSubmit()">
+  <form *ngIf="estatisticasForm" [formGroup]="estatisticasForm" (ngSubmit)="onSubmit()">
     <div class="form-container">
 
       <!-- Informações do Jogador -->
