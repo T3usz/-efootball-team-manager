@@ -213,9 +213,7 @@ export class HomePage implements OnInit, OnDestroy {
     return this.alerts.length > 0;
   }
 
-  getQuickStats() {
-    return this.estatisticasService.getQuickStats();
-  }
+
 
   editTeam() {
     this.router.navigate(['/editar-time']);
