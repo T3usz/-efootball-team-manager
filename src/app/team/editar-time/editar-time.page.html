@@ -1,0 +1,148 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Editar Time</ion-title>
+    <ion-buttons slot="end">
+      <ion-button 
+        fill="clear" 
+        (click)="onSubmit()" 
+        [disabled]="!teamForm.valid || isLoading">
+        <ion-icon name="save"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="edit-team-container">
+    <div class="edit-team-header">
+      <ion-icon name="people" class="team-icon" color="primary"></ion-icon>
+      <h1>Configurações do Time</h1>
+      <p>Personalize as informações do seu time</p>
+    </div>
+
+    <form [formGroup]="teamForm" (ngSubmit)="onSubmit()" class="edit-team-form">
+      <ion-card class="team-info-card">
+        <ion-card-header>
+          <ion-card-title>Informações Básicas</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item [class.item-has-error]="isFieldInvalid('name')">
+            <ion-icon name="people" slot="start"></ion-icon>
+            <ion-label position="floating">Nome do Time</ion-label>
+            <ion-input type="text" formControlName="name" placeholder="Ex: Santos FC"></ion-input>
+          </ion-item>
+          <div class="error-message" *ngIf="isFieldInvalid('name')">
+            {{ getFieldError('name') }}
+          </div>
+
+          <ion-item [class.item-has-error]="isFieldInvalid('adminName')">
+            <ion-icon name="person" slot="start"></ion-icon>
+            <ion-label position="floating">Nome do Administrador</ion-label>
+            <ion-input type="text" formControlName="adminName" placeholder="Seu nome"></ion-input>
+          </ion-item>
+          <div class="error-message" *ngIf="isFieldInvalid('adminName')">
+            {{ getFieldError('adminName') }}
+          </div>
+
+          <ion-item [class.item-has-error]="isFieldInvalid('modality')">
+            <ion-icon name="football" slot="start"></ion-icon>
+            <ion-label>Modalidade</ion-label>
+            <ion-select formControlName="modality" placeholder="Selecione a modalidade">
+              <ion-select-option *ngFor="let modality of modalities" [value]="modality.value">
+                {{ modality.label }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+          <div class="error-message" *ngIf="isFieldInvalid('modality')">
+            {{ getFieldError('modality') }}
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="team-customization-card">
+        <ion-card-header>
+          <ion-card-title>Personalização</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item>
+            <ion-icon name="color-palette" slot="start"></ion-icon>
+            <ion-label position="floating">Cores do Time</ion-label>
+            <ion-input type="text" formControlName="colors" placeholder="Ex: Preto e Branco"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="image" slot="start"></ion-icon>
+            <ion-label position="floating">Logo/URL da Imagem</ion-label>
+            <ion-input type="url" formControlName="logo" placeholder="https://exemplo.com/logo.png"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-icon name="document-text" slot="start"></ion-icon>
+            <ion-label position="floating">Descrição do Time</ion-label>
+            <ion-textarea 
+              formControlName="description" 
+              placeholder="Conte um pouco sobre o seu time..."
+              rows="3">
+            </ion-textarea>
+          </ion-item>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card class="team-stats-card" *ngIf="team">
+        <ion-card-header>
+          <ion-card-title>Estatísticas do Time</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <span class="stat-value">{{ team.stats.totalMatches }}</span>
+              <span class="stat-label">Jogos</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value">{{ team.stats.victories }}</span>
+              <span class="stat-label">Vitórias</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value">{{ team.stats.draws }}</span>
+              <span class="stat-label">Empates</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value">{{ team.stats.defeats }}</span>
+              <span class="stat-label">Derrotas</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-value">{{ team.stats.winRate }}%</span>
+              <span class="stat-label">Aproveitamento</span>
+            </div>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+      <div class="form-actions">
+        <ion-button 
+          expand="block" 
+          type="submit" 
+          class="save-button" 
+          [disabled]="!teamForm.valid || isLoading">
+          <ion-icon name="save" slot="start"></ion-icon>
+          {{ isLoading ? 'Salvando...' : 'Salvar Alterações' }}
+        </ion-button>
+        
+        <ion-button 
+          expand="block" 
+          fill="outline" 
+          class="cancel-button" 
+          (click)="goBack()" 
+          [disabled]="isLoading">
+          <ion-icon name="arrow-back" slot="start"></ion-icon>
+          Cancelar
+        </ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content> 

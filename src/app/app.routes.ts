@@ -54,6 +54,10 @@ export const routes: Routes = [
     loadComponent: () => import('./legal/terms.page').then(m => m.TermsPage)
   },
   {
+    path: 'editar-time',
+    loadComponent: () => import('./team/editar-time/editar-time.page').then(m => m.EditarTimePage)
+  },
+  {
     path: '**',
     loadComponent: () => import('./not-found/not-found.page').then(m => m.NotFoundPage)
   }

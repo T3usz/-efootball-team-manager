@@ -1,0 +1,23 @@
+{
+	"appId": "com.efootball.teammanager",
+	"appName": "eStats",
+	"webDir": "www",
+	"server": {
+		"androidScheme": "https"
+	},
+	"ios": {
+		"contentInset": "automatic",
+		"scrollEnabled": true
+	},
+	"plugins": {
+		"SplashScreen": {
+			"launchShowDuration": 2000,
+			"backgroundColor": "#1976d2",
+			"showSpinner": false
+		},
+		"StatusBar": {
+			"style": "dark",
+			"backgroundColor": "#1976d2"
+		}
+	}
+}

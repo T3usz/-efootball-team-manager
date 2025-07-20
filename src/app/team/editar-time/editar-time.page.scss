@@ -1,0 +1,213 @@
+// Edit Team Page Styles
+.edit-team-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.edit-team-header {
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--ion-color-dark);
+
+  .team-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    margin-top: 0;
+  }
+
+  p {
+    font-size: 16px;
+    opacity: 0.7;
+    margin: 0;
+  }
+}
+
+.edit-team-form {
+  .team-info-card,
+  .team-customization-card,
+  .team-stats-card {
+    margin-bottom: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+    ion-card-header {
+      background: var(--ion-color-light);
+      border-radius: 16px 16px 0 0;
+
+      ion-card-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--ion-color-dark);
+      }
+    }
+
+    ion-card-content {
+      padding: 20px;
+    }
+  }
+
+  .form-item {
+    --background: #f8f9fa;
+    --border-radius: 12px;
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --padding-top: 12px;
+    --padding-bottom: 12px;
+    margin-bottom: 16px;
+
+    ion-icon {
+      color: var(--ion-color-medium);
+      margin-right: 12px;
+    }
+
+    ion-label {
+      font-weight: 500;
+      color: var(--ion-color-dark);
+    }
+
+    ion-input,
+    ion-select,
+    ion-textarea {
+      --placeholder-color: var(--ion-color-medium);
+      --placeholder-opacity: 0.7;
+    }
+  }
+
+  .error-message {
+    color: var(--ion-color-danger);
+    font-size: 12px;
+    margin: 4px 0 16px 16px;
+    display: flex;
+    align-items: center;
+
+    &::before {
+      content: "⚠";
+      margin-right: 4px;
+    }
+  }
+
+  .item-has-error {
+    --border-color: var(--ion-color-danger);
+    --highlight-color: var(--ion-color-danger);
+  }
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+
+  .stat-item {
+    text-align: center;
+    padding: 12px;
+    background: var(--ion-color-light);
+    border-radius: 12px;
+
+    .stat-value {
+      display: block;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--ion-color-primary);
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      display: block;
+      font-size: 12px;
+      color: var(--ion-color-medium);
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+  }
+}
+
+.form-actions {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .save-button {
+    --background: var(--ion-color-primary);
+    --color: white;
+    --border-radius: 12px;
+    --padding-top: 16px;
+    --padding-bottom: 16px;
+    font-weight: 600;
+    font-size: 16px;
+
+    &:disabled {
+      --background: var(--ion-color-medium);
+      --color: var(--ion-color-light);
+    }
+  }
+
+  .cancel-button {
+    --border-radius: 12px;
+    --padding-top: 16px;
+    --padding-bottom: 16px;
+    font-weight: 600;
+    font-size: 16px;
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .edit-team-container {
+    padding: 16px;
+  }
+
+  .edit-team-header {
+    h1 {
+      font-size: 24px;
+    }
+
+    p {
+      font-size: 14px;
+    }
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+
+    .stat-item {
+      padding: 8px;
+
+      .stat-value {
+        font-size: 20px;
+      }
+
+      .stat-label {
+        font-size: 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .edit-team-container {
+    padding: 12px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .form-actions {
+    .save-button,
+    .cancel-button {
+      font-size: 14px;
+      --padding-top: 14px;
+      --padding-bottom: 14px;
+    }
+  }
+} 

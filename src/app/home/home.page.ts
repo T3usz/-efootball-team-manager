@@ -218,8 +218,7 @@ export class HomePage implements OnInit, OnDestroy {
   }
 
   editTeam() {
-    // TODO: Implement team editing
-    console.log('Edit team');
+    this.router.navigate(['/editar-time']);
   }
 
   openProfile() {
