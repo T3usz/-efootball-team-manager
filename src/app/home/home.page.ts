@@ -68,6 +68,7 @@ import { CardEstatisticaComponent } from '../shared/components/card-estatistica.
 import { AlertCardComponent } from '../shared/components/alert-card.component';
 import { EstatisticasService } from '../services/estatisticas.service';
 import { JogadoresService } from '../services/jogadores.service';
+import { TeamService } from '../services/team.service';
 
 @Component({
   selector: 'app-home',
@@ -98,6 +99,7 @@ export class HomePage implements OnInit, OnDestroy {
   private router = inject(Router);
   private estatisticasService = inject(EstatisticasService);
   private jogadoresService = inject(JogadoresService);
+  private teamService = inject(TeamService);
   
   team: Team | null = null;
   statsSummary: StatsSummary | null = null;
@@ -182,29 +184,10 @@ export class HomePage implements OnInit, OnDestroy {
       })
     );
 
-    // Subscribe to jogadores state for team info
+    // Subscribe to team state
     this.subscription.add(
-      this.jogadoresService.jogadoresState$.subscribe(state => {
-        if (state.jogadores.length > 0) {
-          // Create team info based on jogadores data
-          this.team = {
-            id: '1',
-            name: 'Time Principal',
-            adminId: 'admin-1',
-            adminName: 'Administrador',
-            modality: 'Futebol',
-            createdAt: new Date(),
-            updatedAt: new Date(),
-            stats: this.estatisticasService.teamStats || {
-              victories: 0,
-              draws: 0,
-              defeats: 0,
-              walkOvers: 0,
-              totalMatches: 0,
-              winRate: 0
-            }
-          };
-        }
+      this.teamService.teamState$.subscribe(state => {
+        this.team = state.team;
       })
     );
   }
@@ -224,9 +207,12 @@ export class HomePage implements OnInit, OnDestroy {
     console.log('Open profile');
   }
 
+  openNotifications() {
+    this.router.navigate(['/notificacoes']);
+  }
+
   onAlertDismiss(alert: Alert) {
-    // TODO: Implement alert dismissal
-    console.log('Dismiss alert:', alert.id);
+    this.estatisticasService.dismissAlert(alert.id);
   }
 
   onAlertAction(alert: Alert) {

@@ -58,6 +58,10 @@ export const routes: Routes = [
     loadComponent: () => import('./team/editar-time/editar-time.page').then(m => m.EditarTimePage)
   },
   {
+    path: 'notificacoes',
+    loadComponent: () => import('./notificacoes/notificacoes.page').then(m => m.NotificacoesPage)
+  },
+  {
     path: '**',
     loadComponent: () => import('./not-found/not-found.page').then(m => m.NotFoundPage)
   }

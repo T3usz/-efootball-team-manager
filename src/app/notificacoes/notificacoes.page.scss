@@ -1,0 +1,165 @@
+// Notifications Page Styles
+.notifications-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.notifications-header {
+  margin-bottom: 20px;
+  
+  .header-stats {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    
+    .stat-item {
+      text-align: center;
+      padding: 16px;
+      background: var(--ion-color-light);
+      border-radius: 12px;
+      min-width: 80px;
+      
+      .stat-value {
+        display: block;
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--ion-color-primary);
+        margin-bottom: 4px;
+      }
+      
+      .stat-label {
+        display: block;
+        font-size: 12px;
+        color: var(--ion-color-medium);
+        text-transform: uppercase;
+        font-weight: 500;
+      }
+      
+      &.unread .stat-value {
+        color: var(--ion-color-danger);
+      }
+    }
+  }
+}
+
+.filter-segment {
+  margin-bottom: 20px;
+  
+  ion-segment-button {
+    --color: var(--ion-color-medium);
+    --color-checked: var(--ion-color-primary);
+    --indicator-color: var(--ion-color-primary);
+    
+    ion-badge {
+      margin-left: 8px;
+      font-size: 10px;
+    }
+  }
+}
+
+.notifications-list {
+  margin-bottom: 20px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--ion-color-medium);
+  
+  .empty-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+  }
+  
+  h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--ion-color-dark);
+  }
+  
+  p {
+    font-size: 16px;
+    margin: 0;
+    opacity: 0.7;
+  }
+}
+
+.quick-actions {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  
+  .action-button {
+    --border-radius: 12px;
+    --padding-top: 16px;
+    --padding-bottom: 16px;
+    font-weight: 600;
+    font-size: 16px;
+    
+    ion-icon {
+      margin-right: 8px;
+    }
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .notifications-header {
+    .header-stats {
+      gap: 12px;
+      
+      .stat-item {
+        padding: 12px;
+        min-width: 60px;
+        
+        .stat-value {
+          font-size: 20px;
+        }
+        
+        .stat-label {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+  
+  .empty-state {
+    padding: 40px 16px;
+    
+    .empty-icon {
+      font-size: 48px;
+    }
+    
+    h3 {
+      font-size: 18px;
+    }
+    
+    p {
+      font-size: 14px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .notifications-header {
+    .header-stats {
+      flex-direction: column;
+      gap: 8px;
+      
+      .stat-item {
+        min-width: auto;
+      }
+    }
+  }
+  
+  .quick-actions {
+    .action-button {
+      font-size: 14px;
+      --padding-top: 14px;
+      --padding-bottom: 14px;
+    }
+  }
+} 

@@ -1,0 +1,97 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Notificações</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="markAllAsRead()" *ngIf="getUnreadCount() > 0">
+        <ion-icon name="checkmark-circle"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" (click)="clearAllRead()" *ngIf="getDismissedCount() > 0">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="notifications-container">
+    <!-- Header with stats -->
+    <div class="notifications-header">
+      <div class="header-stats">
+        <div class="stat-item">
+          <span class="stat-value">{{ alerts.length }}</span>
+          <span class="stat-label">Total</span>
+        </div>
+        <div class="stat-item unread">
+          <span class="stat-value">{{ getUnreadCount() }}</span>
+          <span class="stat-label">Não lidas</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filter segments -->
+    <ion-segment value="all" (ionChange)="onSegmentChange($event)" class="filter-segment">
+      <ion-segment-button value="all">
+        <ion-label>Todas</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="unread">
+        <ion-label>Não lidas</ion-label>
+        <ion-badge *ngIf="getUnreadCount() > 0" color="danger">{{ getUnreadCount() }}</ion-badge>
+      </ion-segment-button>
+      <ion-segment-button value="read">
+        <ion-label>Lidas</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <!-- Notifications list -->
+    <div class="notifications-list" *ngIf="filteredAlerts.length > 0">
+      <app-alert-card 
+        *ngFor="let alert of filteredAlerts" 
+        [alert]="alert"
+        (dismiss)="onAlertDismiss($event)"
+        (action)="onAlertAction($event)">
+      </app-alert-card>
+    </div>
+
+    <!-- Empty state -->
+    <div class="empty-state" *ngIf="filteredAlerts.length === 0">
+      <ion-icon name="notifications-outline" class="empty-icon"></ion-icon>
+      <h3>Nenhuma notificação</h3>
+      <p *ngIf="selectedFilter === 'all'">Você não tem notificações no momento.</p>
+      <p *ngIf="selectedFilter === 'unread'">Todas as notificações foram lidas.</p>
+      <p *ngIf="selectedFilter === 'read'">Nenhuma notificação lida encontrada.</p>
+    </div>
+
+    <!-- Quick actions -->
+    <div class="quick-actions" *ngIf="alerts.length > 0">
+      <ion-button 
+        expand="block" 
+        fill="outline" 
+        (click)="markAllAsRead()" 
+        *ngIf="getUnreadCount() > 0"
+        class="action-button">
+        <ion-icon name="checkmark-circle" slot="start"></ion-icon>
+        Marcar todas como lidas
+      </ion-button>
+      
+      <ion-button 
+        expand="block" 
+        fill="outline" 
+        color="danger"
+        (click)="clearAllRead()" 
+        *ngIf="getDismissedCount() > 0"
+        class="action-button">
+        <ion-icon name="trash" slot="start"></ion-icon>
+        Limpar notificações lidas
+      </ion-button>
+    </div>
+  </div>
+</ion-content> 

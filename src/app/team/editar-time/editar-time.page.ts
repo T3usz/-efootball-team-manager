@@ -29,12 +29,14 @@ import {
   arrowBack,
   save,
   trash,
-  colorPalette,
+  camera,
   image,
   checkmarkCircle,
   alertCircle
 } from 'ionicons/icons';
 import { Team } from '../../shared/models/interfaces';
+import { TeamService } from '../../services/team.service';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 @Component({
   selector: 'app-editar-time',
@@ -69,24 +71,20 @@ export class EditarTimePage implements OnInit {
   private router = inject(Router);
   private toastController = inject(ToastController);
   private loadingController = inject(LoadingController);
+  private teamService = inject(TeamService);
 
   teamForm!: FormGroup;
   isLoading = false;
   team: Team | null = null;
 
-  modalities = [
-    { value: 'Futebol', label: 'Futebol' },
-    { value: 'Futebol Society', label: 'Futebol Society' },
-    { value: 'Futebol de Salão', label: 'Futebol de Salão' },
-    { value: 'Futebol de Campo', label: 'Futebol de Campo' }
-  ];
+
 
   constructor() {
     addIcons({ 
       arrowBack,
       save,
       trash,
-      colorPalette,
+      camera,
       image,
       checkmarkCircle,
       alertCircle
@@ -102,41 +100,21 @@ export class EditarTimePage implements OnInit {
     this.teamForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       adminName: ['', [Validators.required, Validators.minLength(2)]],
-      modality: ['Futebol', [Validators.required]],
-      description: [''],
-      colors: [''],
       logo: ['']
     });
   }
 
   private loadTeamData() {
     // Carregar dados do time atual
-    this.team = {
-      id: '1',
-      name: 'Time Principal',
-      adminId: 'admin-1',
-      adminName: 'Administrador',
-      modality: 'Futebol',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      stats: {
-        totalMatches: 0,
-        victories: 0,
-        draws: 0,
-        defeats: 0,
-        walkOvers: 0,
-        winRate: 0
-      }
-    };
+    this.team = this.teamService.currentTeam;
 
-    this.teamForm.patchValue({
-      name: this.team.name,
-      adminName: this.team.adminName,
-      modality: this.team.modality,
-      description: '',
-      colors: '',
-      logo: ''
-    });
+    if (this.team) {
+      this.teamForm.patchValue({
+        name: this.team.name,
+        adminName: this.team.adminName,
+        logo: this.team.logo || ''
+      });
+    }
   }
 
   async onSubmit() {
@@ -155,10 +133,11 @@ export class EditarTimePage implements OnInit {
         
         // Atualizar dados do time
         if (this.team) {
-          this.team.name = this.teamForm.value.name;
-          this.team.adminName = this.teamForm.value.adminName;
-          this.team.modality = this.teamForm.value.modality;
-          this.team.updatedAt = new Date();
+          this.teamService.updateTeam({
+            name: this.teamForm.value.name,
+            adminName: this.teamForm.value.adminName,
+            logo: this.teamForm.value.logo
+          });
         }
 
         await loading.dismiss();
@@ -178,6 +157,44 @@ export class EditarTimePage implements OnInit {
 
   goBack() {
     this.router.navigate(['/tabs/home']);
+  }
+
+  async takePhoto() {
+    try {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: true,
+        resultType: CameraResultType.DataUrl,
+        source: CameraSource.Camera
+      });
+
+      if (image.dataUrl) {
+        this.teamForm.patchValue({
+          logo: image.dataUrl
+        });
+      }
+    } catch (error) {
+      console.error('Erro ao tirar foto:', error);
+    }
+  }
+
+  async selectFromGallery() {
+    try {
+      const image = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: true,
+        resultType: CameraResultType.DataUrl,
+        source: CameraSource.Photos
+      });
+
+      if (image.dataUrl) {
+        this.teamForm.patchValue({
+          logo: image.dataUrl
+        });
+      }
+    } catch (error) {
+      console.error('Erro ao selecionar foto:', error);
+    }
   }
 
   // Form validation helpers

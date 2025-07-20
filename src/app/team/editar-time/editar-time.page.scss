@@ -80,6 +80,38 @@
     }
   }
 
+  .logo-preview {
+    text-align: center;
+    margin-bottom: 20px;
+    
+    .team-logo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--ion-color-primary);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  .logo-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    
+    .action-button {
+      --border-radius: 12px;
+      --padding-top: 16px;
+      --padding-bottom: 16px;
+      font-weight: 600;
+      font-size: 16px;
+      
+      ion-icon {
+        margin-right: 8px;
+      }
+    }
+  }
+
   .error-message {
     color: var(--ion-color-danger);
     font-size: 12px;

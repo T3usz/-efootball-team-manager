@@ -13,7 +13,7 @@ export interface Team {
   name: string;
   adminId: string;
   adminName: string;
-  modality: 'Futebol';
+  logo?: string; // URL da imagem do escudo
   createdAt: Date;
   updatedAt: Date;
   stats: TeamStats;

@@ -404,6 +404,58 @@ ion-content {
   }
 }
 
+// Team card styles
+.team-card {
+  margin: 16px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+
+  .team-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    .team-logo {
+      flex-shrink: 0;
+      
+      .team-logo-img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--ion-color-primary);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    .team-info {
+      flex: 1;
+
+      h1 {
+        font-size: 24px;
+        font-weight: 700;
+        margin: 0 0 8px 0;
+        color: var(--ion-color-dark);
+      }
+
+      .admin-info {
+        font-size: 14px;
+        color: var(--ion-color-medium);
+        margin: 0;
+      }
+    }
+
+    .edit-button {
+      --border-radius: 8px;
+      --padding-start: 12px;
+      --padding-end: 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+  }
+}
+
 
 
 

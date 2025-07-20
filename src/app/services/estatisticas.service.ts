@@ -270,4 +270,13 @@ export class EstatisticasService {
       this.unsubscribe();
     }
   }
+
+  dismissAlert(alertId: string): void {
+    const currentState = this.estatisticasState();
+    const updatedAlerts = currentState.alerts.map(alert => 
+      alert.id === alertId ? { ...alert, dismissed: true } : alert
+    );
+    
+    this.updateEstatisticasState({ alerts: updatedAlerts });
+  }
 } 
