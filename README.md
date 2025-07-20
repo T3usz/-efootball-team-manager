@@ -4,7 +4,7 @@ Um aplicativo móvel completo para gerenciamento de times de eFootball, desenvol
 
 ## 📱 Sobre o Projeto
 
-O **eFootball Team Manager** é uma solução completa para gerenciar times de eFootball, oferecendo funcionalidades avançadas de autenticação, gerenciamento de jogadores, estatísticas detalhadas e análise de performance.
+O **eFootball Team Manager** é uma solução completa para gerenciar times de eFootball, oferecendo funcionalidades avançadas de autenticação, gerenciamento de jogadores, estatísticas detalhadas, agenda de eventos e análise de performance.
 
 ### ✨ Principais Funcionalidades
 
@@ -12,8 +12,12 @@ O **eFootball Team Manager** é uma solução completa para gerenciar times de e
 - 👥 **Gerenciamento de Jogadores**: CRUD completo com estatísticas individuais
 - 📊 **Dashboard Interativo**: Gráficos animados e estatísticas em tempo real
 - 📈 **Análise de Performance**: Aproveitamento do time e ranking de jogadores
+- 📅 **Agenda de Eventos**: Gerenciamento de jogos, treinos e campeonatos
 - 🔔 **Sistema de Alertas**: Notificações para W.O e quedas de performance
+- 🏆 **Gerenciamento de Time**: Edição de informações do time e logo
 - 📱 **Interface Mobile**: Design iOS-style otimizado para dispositivos móveis
+- 💾 **Backup e Exportação**: Sistema de backup de dados
+- ⚙️ **Configurações Avançadas**: Termos de uso e política de privacidade
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -32,6 +36,7 @@ O **eFootball Team Manager** é uma solução completa para gerenciar times de e
 ### Mobile
 - **Capacitor 7** - Bridge para funcionalidades nativas
 - **Android SDK** - Build para Android
+- **Camera Plugin** - Captura de fotos para logo do time
 
 ### Ferramentas de Desenvolvimento
 - **Angular CLI** - CLI do Angular
@@ -118,12 +123,18 @@ ionic capacitor run android --external
 efootball-team-manager/
 ├── src/
 │   ├── app/
+│   │   ├── agenda/               # Agenda de eventos e jogos
 │   │   ├── auth/                 # Autenticação
+│   │   ├── backup-exportacao/    # Sistema de backup
+│   │   ├── configuracoes/        # Configurações do app
+│   │   ├── estatisticas/         # Estatísticas e gráficos
 │   │   ├── home/                 # Dashboard principal
 │   │   ├── jogadores/            # Gerenciamento de jogadores
-│   │   ├── estatisticas/         # Estatísticas e gráficos
+│   │   ├── legal/                # Termos e política de privacidade
+│   │   ├── notificacoes/         # Sistema de notificações
 │   │   ├── services/             # Serviços (Firebase, etc.)
 │   │   ├── shared/               # Componentes compartilhados
+│   │   ├── team/                 # Gerenciamento do time
 │   │   └── guards/               # Guards de rota
 │   ├── assets/                   # Recursos estáticos
 │   ├── environments/             # Configurações de ambiente

@@ -1,376 +1,311 @@
 # Manual do Usuário - eFootball Team Manager
 
-Guia completo para utilização do aplicativo eFootball Team Manager.
+## 📱 Introdução
 
-## 📱 Índice
+Bem-vindo ao **eFootball Team Manager**! Este aplicativo foi desenvolvido para ajudar você a gerenciar seu time de eFootball de forma completa e profissional.
 
-1. [Primeiros Passos](#primeiros-passos)
-2. [Autenticação](#autenticação)
-3. [Dashboard Principal](#dashboard-principal)
-4. [Gerenciamento de Jogadores](#gerenciamento-de-jogadores)
-5. [Estatísticas](#estatísticas)
-6. [Funcionalidades Avançadas](#funcionalidades-avançadas)
-7. [Dicas e Truques](#dicas-e-truques)
+### 🎯 Objetivo
+O app permite gerenciar jogadores, acompanhar estatísticas, organizar eventos e manter seu time sempre atualizado.
 
 ---
 
 ## 🚀 Primeiros Passos
 
-### Instalação do App
+### 1. Criando sua Conta
+1. Abra o aplicativo
+2. Na tela de introdução, toque em "Começar"
+3. Escolha "Criar Conta"
+4. Preencha:
+   - **Nome completo**
+   - **Email** (será usado para login)
+   - **Senha** (mínimo 6 caracteres)
+5. Toque em "Registrar"
 
-1. **Baixe o APK** do aplicativo
-2. **Instale no dispositivo** Android
-3. **Permita instalação** de fontes desconhecidas (se necessário)
-4. **Abra o aplicativo**
+### 2. Fazendo Login
+1. Na tela de login, digite seu **email** e **senha**
+2. Opcional: Marque "Lembrar login" para não precisar digitar sempre
+3. Toque em "Entrar"
 
-### Primeiro Acesso
-
-1. **Tela de Boas-vindas** será exibida
-2. **Toque em "Começar"**
-3. **Escolha seu método de login**:
-   - Email/Senha
-   - Google
-
----
-
-## 🔐 Autenticação
-
-### Login com Email/Senha
-
-1. **Na tela de login**, digite seu email
-2. **Digite sua senha**
-3. **Toque em "Entrar"**
-4. **Aguarde a verificação**
-
-### Login com Google
-
-1. **Toque no botão "Entrar com Google"**
-2. **Selecione sua conta Google**
-3. **Autorize o acesso** (primeira vez)
-4. **Aguarde o redirecionamento**
-
-### Recuperação de Senha
-
-1. **Na tela de login**, toque em "Esqueci minha senha"
-2. **Digite seu email**
-3. **Toque em "Enviar"**
-4. **Verifique seu email** e siga as instruções
-
-### Registro de Nova Conta
-
-1. **Toque em "Criar conta"**
-2. **Preencha os dados**:
-   - Nome completo
-   - Email
-   - Senha
-   - Confirmação de senha
-3. **Toque em "Registrar"**
-4. **Verifique seu email** (se necessário)
+### 3. Configurando seu Time
+1. Na primeira vez, você será direcionado para configurar seu time
+2. Preencha:
+   - **Nome do time**
+   - **Nome do administrador**
+3. Opcional: Adicione um **logo** do time (foto)
+4. Toque em "Salvar"
 
 ---
 
-## 🏠 Dashboard Principal
+## 🏠 Dashboard Principal (Home)
 
 ### Visão Geral
-
-O **Dashboard** é sua tela principal, mostrando:
-
-- **Informações do Time**
-- **Estatísticas Rápidas**
-- **Gráfico de Aproveitamento**
-- **Alertas Importantes**
-- **Ações Rápidas**
-
-### Navegação por Tabs
-
-**Três abas principais** na parte inferior:
-
-1. **🏠 Home** - Dashboard principal
-2. **👥 Jogadores** - Gerenciamento de jogadores
-3. **📊 Estatísticas** - Análises detalhadas
-
-### Informações do Time
-
-**Card principal** mostra:
-- **Nome do time**
-- **Administrador**
-- **Modalidade**
-- **Botão "Editar"**
-
-### Estatísticas Rápidas
-
-**Grid de cards** com:
-- **Total de Jogadores**
-- **Jogadores Ativos**
-- **Aproveitamento Geral**
-- **Partidas Realizadas**
-
-### Gráfico de Aproveitamento
-
-**Gráfico circular animado** mostrando:
-- **Porcentagem de aproveitamento**
-- **Breakdown de resultados**:
-  - 🟢 Vitórias
-  - 🟡 Empates
-  - 🔴 Derrotas
-  - ⚪ W.O
-
-### Sistema de Alertas
-
-**Cards de alerta** para:
-- **W.O consecutivos** de jogadores
-- **Quedas de performance** do time
-- **Ações necessárias**
+A tela inicial mostra:
+- **Informações do time** (nome, logo, administrador)
+- **Ações rápidas** (6 botões coloridos)
+- **Alertas** (notificações importantes)
+- **Destaque do jogador** (melhor performance)
 
 ### Ações Rápidas
+1. **👥 Jogadores** - Gerenciar elenco
+2. **📊 Estatísticas** - Ver performance
+3. **🏆 Ranking** - Ver posições
+4. **📅 Agenda** - Organizar eventos
+5. **💾 Backup** - Fazer backup
+6. **➕ Registrar Resultado** - Adicionar partidas
 
-**Grid de botões** para navegação:
-- **👥 Jogadores**
-- **📊 Estatísticas**
-- **🏆 Ranking**
-- **📅 Agenda**
-- **☁️ Backup**
-- **⚙️ Configurações**
+### Alertas
+- **Vermelhos**: Problemas urgentes (W.O, quedas)
+- **Amarelos**: Avisos importantes
+- **Azuis**: Informações gerais
 
 ---
 
 ## 👥 Gerenciamento de Jogadores
 
-### Lista de Jogadores
+### Adicionando um Jogador
+1. Toque em "Jogadores" na home
+2. Toque no botão "➕" (canto superior direito)
+3. Preencha:
+   - **Nome completo**
+   - **Posição** (GK, CB, CM, ST, etc.)
+   - **Email** (opcional)
+4. Toque em "Salvar"
 
-**Tela principal** com:
-- **Lista de todos os jogadores**
-- **Filtros por status** (Todos/Ativos/Inativos/Alertas)
-- **Busca por nome/posição**
-- **Botão "+" para adicionar**
+### Editando um Jogador
+1. Na lista de jogadores, toque no jogador
+2. Toque no ícone "✏️" (editar)
+3. Modifique os dados
+4. Toque em "Salvar"
 
-### Filtros Disponíveis
+### Estatísticas do Jogador
+1. Toque no jogador na lista
+2. Vá para "Estatísticas"
+3. Adicione:
+   - **Jogos disputados**
+   - **Vitórias**
+   - **Empates**
+   - **Derrotas**
+4. O app calcula automaticamente o aproveitamento
 
-**Segmentos superiores**:
-- **Todos** - Mostra todos os jogadores
-- **Ativos** - Apenas jogadores ativos
-- **Inativos** - Jogadores desativados
-- **Alertas** - Jogadores com W.O ≥ 3
-
-### Busca de Jogadores
-
-**Campo de busca** permite filtrar por:
-- **Nome do jogador**
-- **Posição**
-- **Número da camisa**
-
-### Adicionar Novo Jogador
-
-1. **Toque no botão "+"**
-2. **Preencha os dados**:
-   - Nome completo
-   - Apelido (opcional)
-   - Idade
-   - Posição
-   - Número da camisa
-   - Observações
-3. **Toque em "Salvar"**
-
-### Editar Jogador
-
-1. **Toque no jogador** na lista
-2. **Toque em "Editar"**
-3. **Modifique os dados**
-4. **Toque em "Salvar"**
-
-### Ações por Jogador
-
-**Menu de opções** (três pontos):
-- **Ver Detalhes**
-- **Editar**
-- **Estatísticas**
-- **Ativar/Desativar**
-- **Remover**
-
-### Posições Disponíveis
-
-**Sistema de posições**:
-- **GK** - Goleiro
-- **CB** - Zagueiro Central
-- **LB/RB** - Lateral Esquerdo/Direito
-- **CM** - Meio-campo
-- **LM/RM** - Meia Lateral
-- **CAM** - Meia Atacante
-- **ST** - Atacante
-- **LW/RW** - Ponta Esquerda/Direita
-
-### Status do Jogador
-
-**Indicadores visuais**:
-- **🟢 Ativo** - Jogador disponível
-- **🔴 Inativo** - Jogador desativado
-- **⚠️ Alerta** - W.O consecutivos
+### Removendo um Jogador
+1. Na lista, deslize o jogador para a esquerda
+2. Toque em "🗑️" (excluir)
+3. Confirme a exclusão
 
 ---
 
-## 📊 Estatísticas
+## 📊 Sistema de Estatísticas
 
-### Visão Geral das Estatísticas
+### Estatísticas Gerais
+- **Aproveitamento do time**: Percentual de vitórias
+- **Total de jogos**: Soma de todas as partidas
+- **Ranking**: Ordem por performance
 
-**Duas abas principais**:
-- **Time** - Estatísticas gerais
-- **Jogadores** - Ranking individual
+### Gráficos
+- **Gráfico circular**: Distribuição de resultados
+- **Barras**: Performance por jogador
+- **Linha**: Evolução ao longo do tempo
 
-### Estatísticas do Time
-
-**Card principal** com:
-- **Gráfico circular** de aproveitamento
-- **Breakdown detalhado**:
-  - Vitórias (verde)
-  - Empates (amarelo)
-  - Derrotas (vermelho)
-  - W.O (cinza)
-- **Total de partidas**
-
-### Gráfico de Aproveitamento
-
-**Gráfico animado** mostrando:
-- **Porcentagem visual** no círculo
-- **Cores semânticas** para cada resultado
-- **Animações suaves** ao carregar
-
-### Ranking de Jogadores
-
-**Lista ordenada** por performance:
-- **Posição** no ranking
-- **Avatar** do jogador
-- **Nome e apelido**
-- **Posição** no campo
-- **Estatísticas** (V/E/D)
-- **Aproveitamento** em badge
-- **Total de jogos**
-
-### Filtros de Estatísticas
-
-**Segmentos** para alternar entre:
-- **Time** - Estatísticas gerais
-- **Jogadores** - Ranking individual
-
-### Detalhes do Jogador
-
-**Ao tocar em um jogador**:
-- **Estatísticas individuais**
-- **Histórico de partidas**
-- **Performance por período**
-- **Gráficos de evolução**
+### Filtros
+- **Por período**: Últimos 7, 30, 90 dias
+- **Por jogador**: Estatísticas individuais
+- **Por posição**: Performance por função
 
 ---
 
-## ⚙️ Funcionalidades Avançadas
+## 📅 Agenda de Eventos
 
-### Sistema de Alertas
+### Adicionando um Evento
+1. Toque em "Agenda" na home
+2. Toque no botão "➕" (canto inferior direito)
+3. Preencha:
+   - **Título** (ex: "Jogo contra Time X")
+   - **Descrição** (opcional)
+   - **Data e hora**
+   - **Tipo**: Jogo, Treino, Campeonato, Reunião
+   - **Lembrete** (minutos antes)
+4. Toque em "Salvar"
 
-**Alertas automáticos** para:
-- **W.O consecutivos** (≥3)
-- **Quedas de performance** do time
-- **Jogadores inativos** por muito tempo
+### Tipos de Eventos
+- **⚽ Jogos**: Partidas oficiais
+- **💪 Treinos**: Sessões de treino
+- **🏆 Campeonatos**: Torneios e competições
+- **👥 Reuniões**: Briefings e reuniões
+- **📝 Outros**: Eventos gerais
 
-### Gestão de Alertas
+### Lembretes
+- **30 minutos**: Padrão para jogos
+- **15 minutos**: Para treinos
+- **60 minutos**: Para campeonatos importantes
+- **Personalizado**: Você escolhe
 
-**Para cada alerta**:
-- **Visualizar detalhes**
-- **Marcar como resolvido**
-- **Navegar para o jogador**
-- **Ignorar temporariamente**
+### Editando Eventos
+1. Na lista de eventos, deslize para a esquerda
+2. Toque em "✏️" (editar)
+3. Modifique os dados
+4. Toque em "Salvar"
 
-### Backup e Exportação
+### Excluindo Eventos
+1. Deslize o evento para a esquerda
+2. Toque em "🗑️" (excluir)
+3. Confirme a exclusão
 
-**Funcionalidades de backup**:
-- **Exportar dados** do time
-- **Backup automático** no Firebase
-- **Restaurar dados** de backup
-
-### Configurações
-
-**Opções disponíveis**:
-- **Perfil do usuário**
-- **Configurações do time**
-- **Preferências de notificação**
-- **Tema do aplicativo**
-- **Sobre o aplicativo**
+### Filtros da Agenda
+- **Todos**: Todos os eventos
+- **Jogos**: Apenas partidas
+- **Campeonatos**: Apenas torneios
+- **Treinos**: Apenas sessões
 
 ---
 
-## 💡 Dicas e Truques
+## 🏆 Gerenciamento do Time
 
-### Navegação Rápida
+### Editando Informações
+1. Na home, toque em "Editar" (botão do time)
+2. Modifique:
+   - **Nome do time**
+   - **Nome do administrador**
+   - **Logo** (foto do time)
+3. Toque em "Salvar"
 
-- **Swipe** entre as abas para navegação rápida
-- **Pull-to-refresh** para atualizar dados
-- **Toque longo** em jogadores para menu rápido
+### Adicionando Logo
+1. Toque em "Adicionar Logo"
+2. Escolha:
+   - **Câmera**: Tirar foto agora
+   - **Galeria**: Escolher foto existente
+3. Ajuste a foto se necessário
+4. Toque em "Confirmar"
 
-### Gestão Eficiente
+---
 
-- **Use filtros** para encontrar jogadores rapidamente
-- **Monitore alertas** regularmente
-- **Atualize estatísticas** após cada partida
+## 🔔 Sistema de Notificações
 
-### Performance
+### Visualizando Notificações
+1. Na home, toque no ícone "🔔" (canto superior direito)
+2. Veja todas as notificações
+3. Use os filtros para organizar
 
-- **Mantenha o app atualizado**
-- **Conecte-se à internet** para sincronização
-- **Feche o app** corretamente para salvar dados
+### Tipos de Notificações
+- **⚠️ Alertas**: Problemas urgentes
+- **📊 Estatísticas**: Mudanças de performance
+- **📅 Eventos**: Lembretes da agenda
+- **👥 Jogadores**: Atualizações do elenco
 
-### Backup Regular
+### Dismiss de Notificações
+1. Toque na notificação
+2. Toque em "Dismiss" para remover
+3. Ou deslize para a esquerda
 
-- **Faça backup** antes de atualizações
-- **Exporte dados** periodicamente
-- **Mantenha cópias** de segurança
+---
+
+## ⚙️ Configurações
+
+### Acessando Configurações
+1. Vá para a aba "Configurações"
+2. Ou use o menu lateral
+
+### Opções Disponíveis
+- **Termos de Uso**: Leia os termos
+- **Política de Privacidade**: Informações sobre dados
+- **Sobre o App**: Versão e informações
+- **Sair**: Fazer logout
+
+---
+
+## 💾 Backup e Exportação
+
+### Fazendo Backup
+1. Toque em "Backup" na home
+2. Escolha o tipo de backup:
+   - **Dados completos**: Time + jogadores + estatísticas
+   - **Apenas jogadores**: Lista do elenco
+   - **Apenas estatísticas**: Performance
+3. Toque em "Exportar"
+
+### Restaurando Backup
+1. Toque em "Restaurar"
+2. Escolha o arquivo de backup
+3. Confirme a restauração
+
+---
+
+## 🔐 Segurança e Privacidade
+
+### Dados Armazenados
+- **Local**: No seu dispositivo
+- **Nuvem**: Firebase (apenas dados essenciais)
+- **Backup**: Você controla
+
+### Conta Google
+- **Login**: Usa sua conta Google
+- **Dados**: Não compartilhados
+- **Segurança**: Protegido pelo Google
+
+### Logout
+1. Vá em "Configurações"
+2. Toque em "Sair"
+3. Confirme o logout
 
 ---
 
 ## 🆘 Solução de Problemas
 
-### Problemas Comuns
+### App não abre
+1. Feche completamente o app
+2. Abra novamente
+3. Se persistir, reinstale
 
-**App não carrega**:
-- Verifique a conexão com a internet
-- Reinicie o aplicativo
-- Limpe o cache do dispositivo
+### Login não funciona
+1. Verifique a conexão com internet
+2. Confirme email e senha
+3. Tente "Esqueci minha senha"
 
-**Login não funciona**:
-- Verifique email/senha
-- Tente login com Google
-- Use recuperação de senha
+### Dados não salvam
+1. Verifique o espaço no dispositivo
+2. Reinicie o app
+3. Faça logout e login novamente
 
-**Dados não sincronizam**:
-- Verifique conexão com Firebase
-- Faça logout e login novamente
-- Sincronize manualmente
+### Agenda não funciona
+1. Verifique as permissões
+2. Limpe o cache do app
+3. Reinstale se necessário
 
-**Gráficos não aparecem**:
-- Aguarde o carregamento completo
-- Toque para atualizar
-- Verifique dados de entrada
+---
 
-### Contato para Suporte
+## 📞 Suporte
 
-- **Email**: suporte@efootball-team-manager.com
+### Contato
+- **Email**: suporte@efootballmanager.com
 - **WhatsApp**: (11) 99999-9999
-- **Telegram**: @efootball_support
+- **Horário**: Segunda a sexta, 9h às 18h
+
+### FAQ
+- **Como adicionar jogadores?** Veja seção "Gerenciamento de Jogadores"
+- **Como configurar lembretes?** Veja seção "Agenda de Eventos"
+- **Como fazer backup?** Veja seção "Backup e Exportação"
 
 ---
 
-## 📱 Compatibilidade
+## 🎯 Dicas de Uso
 
-### Dispositivos Suportados
+### Organização
+- **Mantenha dados atualizados** regularmente
+- **Use a agenda** para não esquecer eventos
+- **Configure lembretes** importantes
+- **Faça backup** periodicamente
 
-- **Android 6.0+** (API 23)
-- **RAM mínima**: 2GB
-- **Armazenamento**: 50MB livres
-- **Conexão**: Internet para sincronização
+### Performance
+- **Adicione estatísticas** após cada jogo
+- **Monitore quedas** de performance
+- **Analise gráficos** para melhorias
+- **Mantenha ranking** atualizado
 
-### Otimizações
-
-- **Modo escuro** disponível
-- **Interface adaptativa** para diferentes telas
-- **Animações suaves** para melhor experiência
+### Time
+- **Atualize logo** do time
+- **Mantenha elenco** atualizado
+- **Configure administrador** corretamente
+- **Use cores** para identificar ações
 
 ---
 
-**🎮 Aproveite o gerenciamento do seu time de eFootball!** 
+**Desenvolvido com ❤️ para a comunidade de eFootball** 🏆 

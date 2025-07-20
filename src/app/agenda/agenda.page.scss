@@ -1,0 +1,165 @@
+.eventos-container {
+  padding: 16px;
+}
+
+.evento-item {
+  margin-bottom: 8px;
+  border-radius: 12px;
+  --border-radius: 12px;
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  
+  ion-icon {
+    font-size: 24px;
+    margin-right: 12px;
+  }
+  
+  ion-label {
+    h2 {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 4px;
+    }
+    
+    p {
+      font-size: 14px;
+      color: var(--ion-color-medium);
+      margin: 2px 0;
+      
+      &.data-evento {
+        color: var(--ion-color-dark);
+        font-weight: 500;
+        
+        ion-icon {
+          margin-right: 4px;
+          font-size: 14px;
+        }
+      }
+      
+      &.lembrete-info {
+        color: var(--ion-color-primary);
+        font-size: 12px;
+        
+        ion-icon {
+          margin-right: 4px;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+  
+  .tipo-badge {
+    font-size: 10px;
+    padding: 4px 8px;
+    border-radius: 12px;
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  
+  .empty-icon {
+    font-size: 64px;
+    color: var(--ion-color-medium);
+    margin-bottom: 16px;
+  }
+  
+  h3 {
+    color: var(--ion-color-dark);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  
+  p {
+    color: var(--ion-color-medium);
+    margin-bottom: 24px;
+  }
+}
+
+.loading-state {
+  text-align: center;
+  padding: 60px 20px;
+  
+  ion-spinner {
+    margin-bottom: 16px;
+  }
+  
+  p {
+    color: var(--ion-color-medium);
+  }
+}
+
+ion-segment {
+  --background: var(--ion-color-light);
+  border-radius: 8px;
+  
+  ion-segment-button {
+    --color: var(--ion-color-medium);
+    --color-checked: var(--ion-color-primary);
+    --indicator-color: var(--ion-color-primary);
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+}
+
+ion-card {
+  margin: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+ion-fab-button {
+  --background: var(--ion-color-primary);
+  --color: white;
+  box-shadow: 0 4px 12px rgba(var(--ion-color-primary-rgb), 0.3);
+}
+
+// Cores específicas para tipos de evento
+.evento-item[color="primary"] {
+  --background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-primary-shade));
+  color: white;
+  
+  ion-label p {
+    color: rgba(255, 255, 255, 0.8);
+  }
+}
+
+.evento-item[color="success"] {
+  --background: linear-gradient(135deg, var(--ion-color-success), var(--ion-color-success-shade));
+  color: white;
+  
+  ion-label p {
+    color: rgba(255, 255, 255, 0.8);
+  }
+}
+
+.evento-item[color="warning"] {
+  --background: linear-gradient(135deg, var(--ion-color-warning), var(--ion-color-warning-shade));
+  color: white;
+  
+  ion-label p {
+    color: rgba(255, 255, 255, 0.8);
+  }
+}
+
+.evento-item[color="secondary"] {
+  --background: linear-gradient(135deg, var(--ion-color-secondary), var(--ion-color-secondary-shade));
+  color: white;
+  
+  ion-label p {
+    color: rgba(255, 255, 255, 0.8);
+  }
+}
+
+.evento-item[color="medium"] {
+  --background: linear-gradient(135deg, var(--ion-color-medium), var(--ion-color-medium-shade));
+  color: white;
+  
+  ion-label p {
+    color: rgba(255, 255, 255, 0.8);
+  }
+} 

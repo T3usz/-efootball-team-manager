@@ -1,0 +1,111 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Agenda</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="adicionarEvento()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Agenda</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Filtros -->
+  <ion-card>
+    <ion-card-content>
+      <ion-segment [(ngModel)]="filtroTipo" (ionChange)="filtrarEventos()">
+        <ion-segment-button value="todos">
+          <ion-label>Todos</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="jogo">
+          <ion-label>Jogos</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="campeonato">
+          <ion-label>Campeonatos</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="treino">
+          <ion-label>Treinos</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Lista de Eventos -->
+  <div class="eventos-container">
+    <ion-list *ngIf="!carregando && eventosFiltrados.length > 0">
+      <ion-item-sliding *ngFor="let evento of eventosFiltrados">
+        <ion-item [color]="getCorPorTipo(evento.tipo)" class="evento-item">
+          <ion-icon 
+            [name]="getIconePorTipo(evento.tipo)" 
+            slot="start"
+            [color]="getCorPorTipo(evento.tipo)">
+          </ion-icon>
+          
+          <ion-label>
+            <h2>{{ evento.titulo }}</h2>
+            <p *ngIf="evento.descricao">{{ evento.descricao }}</p>
+            <p class="data-evento">
+              <ion-icon name="time-outline"></ion-icon>
+              {{ formatarData(evento.data) }}
+            </p>
+            <p class="lembrete-info" *ngIf="evento.lembrete > 0">
+              <ion-icon name="notifications-outline"></ion-icon>
+              Lembrete: {{ evento.lembrete }} min antes
+            </p>
+          </ion-label>
+
+          <ion-badge 
+            slot="end" 
+            [color]="getCorPorTipo(evento.tipo)"
+            class="tipo-badge">
+            {{ evento.tipo | titlecase }}
+          </ion-badge>
+        </ion-item>
+
+        <ion-item-options side="end">
+          <ion-item-option color="primary" (click)="editarEvento(evento)">
+            <ion-icon name="create" slot="icon-only"></ion-icon>
+          </ion-item-option>
+          <ion-item-option color="danger" (click)="excluirEvento(evento)">
+            <ion-icon name="trash" slot="icon-only"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+
+    <!-- Estado vazio -->
+    <div *ngIf="!carregando && eventosFiltrados.length === 0" class="empty-state">
+      <ion-icon name="calendar-outline" class="empty-icon"></ion-icon>
+      <h3>Nenhum evento encontrado</h3>
+      <p>Adicione eventos para começar a organizar sua agenda!</p>
+      <ion-button (click)="adicionarEvento()" color="primary">
+        <ion-icon name="add" slot="start"></ion-icon>
+        Adicionar Evento
+      </ion-button>
+    </div>
+
+    <!-- Loading -->
+    <div *ngIf="carregando" class="loading-state">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Carregando eventos...</p>
+    </div>
+  </div>
+
+  <!-- Botão flutuante para adicionar -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="adicionarEvento()" color="primary">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content> 

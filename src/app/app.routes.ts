@@ -62,6 +62,10 @@ export const routes: Routes = [
     loadComponent: () => import('./notificacoes/notificacoes.page').then(m => m.NotificacoesPage)
   },
   {
+    path: 'agenda',
+    loadComponent: () => import('./agenda/agenda.page').then(m => m.AgendaPage)
+  },
+  {
     path: '**',
     loadComponent: () => import('./not-found/not-found.page').then(m => m.NotFoundPage)
   }

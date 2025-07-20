@@ -70,7 +70,7 @@ export class FirebaseService {
   }
 
   // CRUD Operations
-  async createDocument<T>(collectionRef: CollectionReference, data: T): Promise<string> {
+  async createDocument<T extends { [x: string]: any }>(collectionRef: CollectionReference, data: T): Promise<string> {
     try {
       const docRef = await addDoc(collectionRef, data);
       return docRef.id;
