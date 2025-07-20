@@ -34,6 +34,6 @@ export class TermsPage {
   }
 
   goBack() {
-    this.router.navigate(['/auth/register']);
+    this.router.navigate(['/tabs/configuracoes']);
   }
 } 

@@ -131,7 +131,7 @@ export class AuthService {
     }
   }
 
-  async signIn(email: string, password: string): Promise<void> {
+  async signIn(email: string, password: string, rememberMe: boolean = false): Promise<void> {
     try {
       this.updateAuthState({ ...this.authState(), isLoading: true });
       
@@ -142,6 +142,13 @@ export class AuthService {
       await this.updateLastLogin(user.uid);
       
       const appUser = await this.loadUserProfile(user.uid);
+
+      // Save credentials if remember me is checked
+      if (rememberMe) {
+        this.saveCredentials(email, password);
+      } else {
+        this.clearSavedCredentials();
+      }
 
       this.updateAuthState({
         user,
@@ -344,6 +351,44 @@ export class AuthService {
 
   isPasswordValid(password: string): boolean {
     return password.length >= 6;
+  }
+
+  // Remember login functionality
+  private saveCredentials(email: string, password: string): void {
+    try {
+      localStorage.setItem('rememberedEmail', email);
+      localStorage.setItem('rememberedPassword', password);
+    } catch (error) {
+      console.error('Erro ao salvar credenciais:', error);
+    }
+  }
+
+  private clearSavedCredentials(): void {
+    try {
+      localStorage.removeItem('rememberedEmail');
+      localStorage.removeItem('rememberedPassword');
+    } catch (error) {
+      console.error('Erro ao limpar credenciais:', error);
+    }
+  }
+
+  getSavedCredentials(): { email: string; password: string } | null {
+    try {
+      const email = localStorage.getItem('rememberedEmail');
+      const password = localStorage.getItem('rememberedPassword');
+      
+      if (email && password) {
+        return { email, password };
+      }
+      return null;
+    } catch (error) {
+      console.error('Erro ao carregar credenciais:', error);
+      return null;
+    }
+  }
+
+  hasSavedCredentials(): boolean {
+    return this.getSavedCredentials() !== null;
   }
 }
 

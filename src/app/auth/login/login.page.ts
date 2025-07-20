@@ -81,6 +81,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.initializeForm();
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/tabs/home';
+    this.loadSavedCredentials();
   }
 
   private initializeForm() {
@@ -93,7 +94,7 @@ export class LoginPage implements OnInit {
 
   async onSubmit() {
     if (this.loginForm.valid && !this.isLoading) {
-      const { email, password } = this.loginForm.value;
+      const { email, password, rememberMe } = this.loginForm.value;
       
       const loading = await this.loadingController.create({
         message: 'Entrando...',
@@ -103,7 +104,7 @@ export class LoginPage implements OnInit {
 
       try {
         this.isLoading = true;
-        await this.authService.signIn(email, password);
+        await this.authService.signIn(email, password, rememberMe);
         
         await loading.dismiss();
         await this.showSuccessToast('Login realizado com sucesso!');
@@ -159,6 +160,17 @@ export class LoginPage implements OnInit {
 
   navigateToForgotPassword() {
     this.router.navigate(['/auth/forgot-password']);
+  }
+
+  private loadSavedCredentials() {
+    const savedCredentials = this.authService.getSavedCredentials();
+    if (savedCredentials) {
+      this.loginForm.patchValue({
+        email: savedCredentials.email,
+        password: savedCredentials.password,
+        rememberMe: true
+      });
+    }
   }
 
   // Form validation helpers
