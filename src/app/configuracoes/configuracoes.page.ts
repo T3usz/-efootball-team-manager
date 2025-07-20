@@ -40,7 +40,8 @@ import {
   logOut,
   chevronForward,
   checkmark,
-  close
+  close,
+  documentText
 } from 'ionicons/icons';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -117,7 +118,8 @@ export class ConfiguracoesPage implements OnInit, OnDestroy {
       logOut,
       chevronForward,
       checkmark,
-      close
+      close,
+      documentText
     });
   }
 
@@ -187,7 +189,11 @@ export class ConfiguracoesPage implements OnInit, OnDestroy {
   }
 
   async openPrivacy() {
-    this.router.navigate(['/configuracoes/privacidade']);
+    this.router.navigate(['/privacy']);
+  }
+
+  async openTerms() {
+    this.router.navigate(['/terms']);
   }
 
   async openHelp() {
