@@ -75,6 +75,21 @@ import {
         color: white;
       }
       
+      &.secondary {
+        --background: linear-gradient(135deg, var(--ion-color-secondary), var(--ion-color-secondary-shade));
+        color: white;
+      }
+      
+      &.tertiary {
+        --background: linear-gradient(135deg, var(--ion-color-tertiary), var(--ion-color-tertiary-shade));
+        color: white;
+      }
+      
+      &.medium {
+        --background: linear-gradient(135deg, var(--ion-color-medium), var(--ion-color-medium-shade));
+        color: white;
+      }
+      
       &.light {
         --background: white;
         color: var(--ion-color-dark);
